@@ -118,30 +118,8 @@
         .copyright { color: var(--primary); opacity: 0.4; font-size: 0.9rem; font-weight: 500; margin: 0; }
 
         /* BOTÃO FLUTUANTE DO WHATSAPP */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 65px;
-            height: 65px;
-            background-color: rgba(249, 115, 22, 0.7); 
-            color: #ffffff;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 10px 30px rgba(249, 115, 22, 0.15);
-            z-index: 1001;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .whatsapp-float:hover {
-            background-color: rgba(249, 115, 22, 1);
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(249, 115, 22, 0.3);
-        }
-
+        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; width: 65px; height: 65px; background-color: rgba(249, 115, 22, 0.7); color: #ffffff; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 30px rgba(249, 115, 22, 0.15); z-index: 1001; transition: all 0.3s ease; text-decoration: none; }
+        .whatsapp-float:hover { background-color: rgba(249, 115, 22, 1); transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 40px rgba(249, 115, 22, 0.3); }
         .whatsapp-float svg { width: 32px; height: 32px; fill: var(--primary); transition: all 0.3s ease; }
         .whatsapp-float:hover svg { fill: white; }
 
@@ -304,39 +282,78 @@
                     </ul>
                 </div>
 
-                <form class="pricing-form" action="https://formsubmit.co/contato@vulcra.com.br" method="POST">
-                    
-                    <input type="hidden" name="_captcha" value="false">
+                <form class="pricing-form" action="https://formsubmit.co/ajax/contato@vulcra.com.br" method="POST" id="form-orcamento">
                     
                     <input type="hidden" name="_subject" value="🚀 NOVO LEAD VULCRA - Formulário de Discovery!">
+                    <input type="text" name="_honey" style="display:none">
 
                     <div class="input-group">
                         <input type="text" name="nome" placeholder="Seu Nome completo" required>
                     </div>
-                    <div class="input-group">
-                        <input type="text" name="nome" placeholder="Seu Nome completo" required>
-                    </div>
+                    
                     <div class="input-group">
                         <input type="email" name="email" placeholder="Seu E-mail profissional" required>
                     </div>
+                    
                     <div class="input-group">
                         <input type="text" name="empresa" placeholder="Qual o nome da sua empresa?">
                     </div>
+
                     <div class="input-group">
                         <select name="orcamento" required>
                             <option value="" disabled selected>Expectativa de Investimento</option>
-                            <option value="Até 300">Até R$ 300</option>
-                            <option value="300 a 500">R$ 300 - R$ 500</option>
-                            <option value="500 a 700">R$ 500 - R$ 700</option>
-                            <option value="700 a 1k">R$ 700 - R$ 1000</option>
-                            <option value="Acima de 1k">Acima de R$ 1.000</option>
+                            <option value="Até R$ 300">Até R$ 300</option>
+                            <option value="R$ 300 a R$ 500">R$ 300 - R$ 500</option>
+                            <option value="R$ 500 a R$ 700">R$ 500 - R$ 700</option>
+                            <option value="R$ 700 a R$ 1000">R$ 700 - R$ 1000</option>
+                            <option value="Acima de R$ 1000">Acima de R$ 1.000</option>
                         </select>
                     </div>
+
                     <div class="input-group">
                         <textarea name="mensagem" placeholder="Descreva brevemente o seu projeto e os seus objetivos principais..." required></textarea>
                     </div>
-                    <button type="submit" class="btn-primary" style="width: 100%;">Solicitar Orçamento</button>
+                    
+                    <button type="submit" class="btn-primary" id="btn-enviar" style="width: 100%;">Solicitar Orçamento</button>
                 </form>
+
+                <script>
+                    document.getElementById("form-orcamento").addEventListener("submit", function(e) {
+                        e.preventDefault();
+                        
+                        var form = this;
+                        var btn = document.getElementById("btn-enviar");
+                        var textoOriginal = btn.innerText;
+                        
+                        btn.innerText = "Enviando...";
+                        btn.style.opacity = "0.7";
+                        
+                        fetch(form.action, {
+                            method: "POST",
+                            body: new FormData(form),
+                            headers: { 'Accept': 'application/json' }
+                        }).then(response => response.json())
+                          .then(data => {
+                              if(data.success) {
+                                  btn.innerText = "E-mail enviado com sucesso! ✓";
+                                  btn.style.backgroundColor = "#10B981"; // Verde Premium
+                                  btn.style.opacity = "1";
+                                  form.reset(); 
+                                  
+                                  setTimeout(() => {
+                                      btn.innerText = textoOriginal;
+                                      btn.style.backgroundColor = "var(--primary)";
+                                  }, 5000);
+                              } else {
+                                  btn.innerText = "Erro ao enviar. Tente no WhatsApp!";
+                                  btn.style.backgroundColor = "#EF4444"; 
+                              }
+                          }).catch(error => {
+                              btn.innerText = "Erro. Me chame no WhatsApp!";
+                              btn.style.backgroundColor = "#EF4444";
+                          });
+                    });
+                </script>
 
             </div>
         </div>

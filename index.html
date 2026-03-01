@@ -3,80 +3,367 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vulcra | Engenharia de Software e Conversão</title>
+    <title>VULCRA | Engenharia e Produto</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 124 106'><path d='M70 105.5L101 47.5L65.5 63L56.5 79L32 34L0 25.5L42.5 105.5H70Z' fill='%230F172A'/><path d='M53.5 61L65 37L79 31L68.5 53.5L103.5 37L123.5 0L58.5 29V0L39.5 34L53.5 61Z' fill='%23F97316'/></svg>">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
     
     <style>
-        body { 
-            background-color: #0F172A; 
-            color: #F8FAFC; 
-            font-family: 'Montserrat', sans-serif; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
-            margin: 0; 
-            text-align: center; 
+        :root {
+            --bg-color: #F8FAFC; 
+            --primary: #0F172A; 
+            --accent: #F97316; 
+            --dots: #94A3B8; 
         }
-        .container { 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            gap: 25px; 
-            padding: 20px;
-        }
-        .marca-oficial {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px; 
-        }
-        .nome-vulcra {
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: radial-gradient(var(--dots) 1px, transparent 1px);
+            background-size: 35px 35px; 
+            color: var(--primary);
             font-family: 'Montserrat', sans-serif;
-            font-size: 80px;
-            font-weight: 900;
-            color: #FFFFFF;
-            letter-spacing: 2px;
-            margin-top: 5px;
+            overflow-x: hidden;
+            position: relative; /* Para o botão flutuante se basear no corpo */
         }
-        p { 
-            color: #94A3B8; 
-            font-size: 1.1rem; 
-            max-width: 480px;
-            line-height: 1.6;
-            margin-top: 10px;
+
+        /* HEADER (Voltou a ser limpo e absoluto) */
+        header { display: flex; justify-content: space-between; align-items: center; padding: 25px 5%; width: 100%; position: absolute; top: 0; left: 0; z-index: 100; background-color: transparent; border-bottom: none; }
+        .logo-v svg { width: 45px; height: auto; }
+        .btn-outline { border: 1px solid rgba(15, 23, 42, 0.2); color: var(--primary); padding: 10px 24px; border-radius: 50px; text-decoration: none; font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: all 0.3s ease; background-color: var(--bg-color); }
+        .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* HERO */
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
+        .hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px; }
+        .hero p { font-size: 1.2rem; max-width: 500px; line-height: 1.6; margin-bottom: 40px; opacity: 0.8; }
+        .btn-primary { background-color: var(--primary); color: var(--accent); padding: 18px 45px; border-radius: 50px; text-decoration: none; font-weight: 900; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 10px 20px rgba(15, 23, 42, 0.1); border: none; cursor: pointer; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(15, 23, 42, 0.2); }
+
+        /* SOBRE MIM */
+        .about { min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 80px 5%; }
+        .about-container { max-width: 1100px; width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 60px; }
+        .about-text { flex: 1; text-align: left; }
+        .line-accent { width: 40px; height: 4px; background-color: var(--accent); margin-bottom: 20px; border-radius: 2px; }
+        .about-text h2 { font-size: 3rem; font-weight: 900; margin-bottom: 30px; letter-spacing: -1px; }
+        .about-text p { font-size: 1.15rem; line-height: 1.8; color: var(--primary); opacity: 0.85; margin-bottom: 20px; }
+        .transition-text { font-size: 1.3rem; font-weight: 900; color: var(--primary); margin-top: 30px; }
+        .about-image { flex: 1; display: flex; justify-content: center; }
+        .image-wrapper { width: 400px; height: 450px; background-color: rgba(249, 115, 22, 0.15); border-radius: 60% 40% 50% 50% / 50% 50% 60% 40%; overflow: hidden; display: flex; justify-content: center; align-items: flex-end; box-shadow: 0 20px 40px rgba(249, 115, 22, 0.05); }
+        .image-wrapper img { width: 100%; height: 100%; object-fit: cover; object-position: bottom; }
+
+        /* FEATURES GRID */
+        .features-grid { display: flex; justify-content: center; align-items: flex-start; padding: 40px 5% 100px 5%; }
+        .grid-container { max-width: 1100px; width: 100%; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 60px 40px; }
+        .feature-item { text-align: left; }
+        .feature-icon { width: 55px; height: 55px; background-color: rgba(15, 23, 42, 0.05); border-radius: 14px; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; color: var(--accent); }
+        .feature-icon svg { width: 28px; height: 28px; stroke-width: 2; }
+        .feature-item h3 { font-size: 1.3rem; font-weight: 700; color: var(--primary); margin-bottom: 10px; }
+        .feature-item p { font-size: 1rem; color: var(--primary); opacity: 0.7; line-height: 1.6; }
+
+        /* LATEST PROJECTS */
+        .projects { display: flex; justify-content: center; align-items: flex-start; padding: 80px 5% 40px 5%; }
+        .projects-container { max-width: 1100px; width: 100%; }
+        .section-header { margin-bottom: 60px; text-align: left; }
+        .section-header h2 { font-size: 3rem; font-weight: 900; margin-bottom: 20px; letter-spacing: -1px; color: var(--primary); }
+        .section-header p { font-size: 1.15rem; color: var(--primary); opacity: 0.7; max-width: 750px; line-height: 1.6; }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 50px; }
+        .project-card { text-align: left; }
+        .mockup-window { background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 15px 35px rgba(15, 23, 42, 0.05); margin-bottom: 30px; border: 1px solid rgba(15, 23, 42, 0.05); }
+        .mockup-topbar { background-color: var(--primary); padding: 12px 15px; display: flex; align-items: center; }
+        .mockup-topbar svg { width: 16px; height: 16px; color: white; }
+        .mockup-body { padding: 40px; display: flex; gap: 30px; background-color: #FAFAFA; }
+        .skeleton-left { flex: 1; display: flex; flex-direction: column; gap: 15px; }
+        .skeleton-line { height: 12px; background-color: rgba(15, 23, 42, 0.06); border-radius: 6px; }
+        .skeleton-line.short { width: 40%; }
+        .skeleton-line.medium { width: 80%; }
+        .skeleton-line.long { width: 100%; }
+        .skeleton-right { width: 120px; height: 120px; background-color: rgba(15, 23, 42, 0.06); border-radius: 8px; }
+        .project-card h3 { font-size: 1.4rem; font-weight: 700; color: var(--primary); margin-bottom: 15px; }
+        .project-card p { font-size: 1rem; color: var(--primary); opacity: 0.7; line-height: 1.6; margin-bottom: 25px; }
+        .btn-text { color: var(--accent); font-weight: 700; text-decoration: none; font-size: 1rem; display: inline-flex; align-items: center; gap: 8px; transition: opacity 0.3s ease; }
+        .btn-text:hover { opacity: 0.7; }
+
+        /* EXPECTATIVAS */
+        .expectations { display: flex; justify-content: center; align-items: flex-start; padding: 40px 5% 80px 5%; }
+        .expectations-container { max-width: 1100px; width: 100%; }
+        .expectations-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 50px 40px; margin-top: 50px; }
+
+        /* ORÇAMENTO */
+        .pricing { display: flex; justify-content: center; align-items: flex-start; padding: 80px 5% 60px 5%; }
+        .pricing-container { max-width: 1100px; width: 100%; }
+        .pricing-card { background-color: #ffffff; border-radius: 24px; padding: 60px; box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08); display: flex; gap: 60px; border: 1px solid rgba(15, 23, 42, 0.05); }
+        .pricing-info { flex: 1; }
+        .pricing-info .pre-title { color: var(--accent); font-weight: 700; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 15px; }
+        .pricing-info h3 { font-size: 3.5rem; font-weight: 900; color: var(--primary); margin-bottom: 30px; line-height: 1; }
+        .pricing-info p { font-size: 1.1rem; color: var(--primary); opacity: 0.8; line-height: 1.7; margin-bottom: 30px; }
+        .benefits-list { list-style: none; margin-bottom: 30px; }
+        .benefits-list li { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; font-weight: 500; color: var(--primary); opacity: 0.9; }
+        .benefits-list li svg { width: 20px; height: 20px; color: var(--accent); flex-shrink: 0; }
+        .pricing-form { flex: 1; display: flex; flex-direction: column; gap: 20px; }
+        .input-group { display: flex; flex-direction: column; }
+        .pricing-form input, .pricing-form textarea, .pricing-form select { width: 100%; padding: 18px 20px; border-radius: 12px; border: 1px solid rgba(15, 23, 42, 0.15); background-color: #FAFAFA; font-family: 'Montserrat', sans-serif; font-size: 1rem; color: var(--primary); transition: all 0.3s ease; outline: none; }
+        .pricing-form input::placeholder, .pricing-form textarea::placeholder { color: #94A3B8; }
+        .pricing-form input:focus, .pricing-form textarea:focus, .pricing-form select:focus { border-color: var(--accent); background-color: #ffffff; box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.1); }
+        .pricing-form textarea { resize: vertical; min-height: 150px; }
+
+        /* FOOTER */
+        footer { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px 5% 50px 5%; gap: 20px; }
+        .footer-contacts { display: flex; align-items: center; gap: 25px; }
+        .social-link { display: flex; align-items: center; gap: 10px; color: var(--primary); text-decoration: none; font-weight: 700; font-size: 1.1rem; opacity: 0.7; transition: all 0.3s ease; }
+        .social-link:hover { opacity: 1; color: var(--accent); transform: translateY(-2px); }
+        .social-link svg { width: 24px; height: 24px; }
+        .copyright { color: var(--primary); opacity: 0.4; font-size: 0.9rem; font-weight: 500; margin: 0; }
+
+        /* --- BOTÃO FLUTUANTE DO WHATSAPP (VULCRA EDITION) --- */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 65px;
+            height: 65px;
+            /* Laranja Vulcânico Translúcido (70% opacidade) */
+            background-color: rgba(249, 115, 22, 0.7); 
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(249, 115, 22, 0.15);
+            z-index: 1001; /* Garante que fique acima de tudo, inclusive header fixo se houver */
+            transition: all 0.3s ease;
+            text-decoration: none;
         }
-        .tag { 
-            background-color: rgba(249, 115, 22, 0.1);
-            color: #F97316; 
-            padding: 6px 16px;
-            border-radius: 20px;
-            border: 1px solid rgba(249, 115, 22, 0.3);
-            font-weight: 900; 
-            text-transform: uppercase; 
-            font-size: 0.75rem; 
-            letter-spacing: 2px; 
-            margin-bottom: 10px;
+
+        /* Solidifica ao passar o mouse */
+        .whatsapp-float:hover {
+            background-color: rgba(249, 115, 22, 1);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(249, 115, 22, 0.3);
+        }
+
+        /* O Logo do Zap em Azul Marinho Profundo */
+        .whatsapp-float svg {
+            width: 32px;
+            height: 32px;
+            fill: var(--primary); 
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover svg {
+            fill: white; /* Muda para branco no hover para melhor contraste no laranja sólido */
+        }
+
+        @media (max-width: 900px) {
+            .pricing-card { flex-direction: column; padding: 40px 30px; }
+            .pricing-info h3 { font-size: 2.5rem; }
+            .about-container { flex-direction: column; text-align: center; }
+            .about-text { align-items: center; display: flex; flex-direction: column; }
+            .image-wrapper { width: 300px; height: 350px; }
+            .feature-item { text-align: center; display: flex; flex-direction: column; align-items: center; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .mockup-body { flex-direction: column; }
+            .skeleton-right { width: 100%; height: 200px; }
+            .section-header { text-align: center; display: flex; flex-direction: column; align-items: center;}
+            .expectations-grid .feature-item { text-align: left; align-items: flex-start; }
+            .footer-contacts { flex-direction: column; gap: 15px; }
+            .whatsapp-float { width: 55px; height: 55px; bottom: 15px; right: 15px; }
+            .whatsapp-float svg { width: 28px; height: 28px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        
-        <div class="tag">Lançamento Oficial em Breve</div>
-        
-        <div class="marca-oficial">
-            <svg width="110" height="95" viewBox="0 0 124 106" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M70 105.5L101 47.5L65.5 63L56.5 79L32 34L0 25.5L42.5 105.5H70Z" fill="#FFFFFF"/>
+
+    <header>
+        <div class="logo-v">
+            <svg viewBox="0 0 124 106" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M70 105.5L101 47.5L65.5 63L56.5 79L32 34L0 25.5L42.5 105.5H70Z" fill="#0F172A"/>
                 <path d="M53.5 61L65 37L79 31L68.5 53.5L103.5 37L123.5 0L58.5 29V0L39.5 34L53.5 61Z" fill="#F97316"/>
             </svg>
-            <div class="nome-vulcra">VULCRA</div>
         </div>
+        <a href="#orcamento" class="btn-outline">Orçamento</a>
+    </header>
 
-        <p>A engenharia por trás do seu crescimento. Construímos páginas ultrarrápidas e sistemas que convertem.</p>
-        
-    </div>
+    <section class="hero">
+        <h1>Visão de negócios.<br>Execução técnica.</h1>
+        <p>A união entre estratégia executiva e código de alta performance para escalar o seu negócio digital.</p>
+        <a href="#orcamento" class="btn-primary">Como me contratar</a>
+    </section>
+
+    <section id="sobre" class="about">
+        <div class="about-container">
+            <div class="about-text">
+                <div class="line-accent"></div>
+                <h2>Sobre mim</h2>
+                <p>Sou Cientista da Computação e especialista em gestão de negócios e pessoas (MBA). Com mais de 11 anos de experiência como Product Manager e gestor de tecnologia, eu crio soluções focadas no que realmente importa: <strong>resultado e conversão</strong>.</p>
+                <p>Eu construo sistemas que escalam, processos que funcionam e páginas ultrarrápidas que transformam cliques em contratos assinados.</p>
+                <p class="transition-text">Eu construo sites que:</p>
+            </div>
+            <div class="about-image">
+                <div class="image-wrapper">
+                    <img src="perfil.png" alt="Bruno - VULCRA">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-grid">
+        <div class="grid-container">
+            <div class="feature-item">
+                <div class="feature-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg></div>
+                <h3>Visuais Impecáveis</h3><p>Design premium e minimalista com uma estética única que transmite autoridade imediata para a sua marca.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg></div>
+                <h3>Focam em Conversão</h3><p>Arquitetura de informação e copywriting pensados estrategicamente para guiar o usuário até a venda ou contato.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg></div>
+                <h3>100% Responsivos</h3><p>Experiência perfeita e fluida em qualquer dispositivo, do menor celular do mercado aos monitores ultrawide.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div>
+                <h3>Gestão Descomplicada</h3><p>Sistemas construídos com código limpo, permitindo customização rápida e manutenção sem dores de cabeça.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg></div>
+                <h3>Velocidade Extrema</h3><p>Infraestrutura de alta performance que carrega em milissegundos, ranqueando melhor no Google e evitando perdas.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg></div>
+                <h3>Infraestrutura Robusta</h3><p>Deploy direto nas melhores CDNs do mundo, garantindo que seu site nunca caia, mesmo com picos de tráfego.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects" id="portfolio">
+        <div class="projects-container">
+            <div class="section-header">
+                <div class="line-accent"></div>
+                <h2>Projetos recentes</h2>
+                <p>Em breve: uma seleção de interfaces de alta performance e sistemas robustos desenhados do absoluto zero. Acompanhe as novas implantações.</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="mockup-window">
+                        <div class="mockup-topbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></div>
+                        <div class="mockup-body"><div class="skeleton-left"><div class="skeleton-line short"></div><div class="skeleton-line long"></div><div class="skeleton-line medium"></div><div class="skeleton-line short" style="margin-top: 20px;"></div></div><div class="skeleton-right"></div></div>
+                    </div>
+                    <h3>Website One</h3><p>Espaço reservado para o projeto de Landing Page focada em conversão. Detalhes de arquitetura e design em breve.</p><a href="#" class="btn-text" onclick="event.preventDefault();">Live demo</a>
+                </div>
+                <div class="project-card">
+                    <div class="mockup-window">
+                        <div class="mockup-topbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></div>
+                        <div class="mockup-body"><div class="skeleton-left"><div class="skeleton-line short"></div><div class="skeleton-line long"></div><div class="skeleton-line medium"></div><div class="skeleton-line short" style="margin-top: 20px;"></div></div><div class="skeleton-right"></div></div>
+                    </div>
+                    <h3>Website Two</h3><p>Espaço reservado para o projeto de Sistema Web personalizado. Funcionalidades avançadas e fluxo de usuário em breve.</p><a href="#" class="btn-text" onclick="event.preventDefault();">Live demo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="expectations">
+        <div class="expectations-container">
+            <div class="section-header">
+                <div class="line-accent"></div>
+                <h2>O que esperar?</h2>
+                <p>Trabalhar com a VULCRA significa ter a tranquilidade de um processo guiado por um Product Manager experiente. Sem jargões confusos, sem prazos estourados.</p>
+            </div>
+            <div class="expectations-grid">
+                <div class="feature-item">
+                    <div class="feature-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg></div>
+                    <h3>Boa comunicação</h3><p>Transparência total do início ao fim. Você saberá exatamente em que etapa o seu projeto está, com atualizações claras e diretas.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg></div>
+                    <h3>Entrega no prazo</h3><p>Engenharia levada a sério. Cronogramas realistas e metas cumpridas à risca, para que o seu lançamento aconteça como planejado.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg></div>
+                    <h3>Design espetacular</h3><p>Interfaces premium que não apenas enchem os olhos, mas que são projetadas milimetricamente para converter visitantes em clientes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="orcamento">
+        <div class="pricing-container">
+            <div class="section-header">
+                <div class="line-accent"></div>
+                <h2>Discovery</h2>
+                <p>Para eu conseguir montar um orçamento personalizado e justo para o seu projeto (sem "chutes"), preciso consolidar essas informações. Preencha o briefing abaixo para desenharmos uma proposta que faça sentido para o seu objetivo.</p>
+            </div>
+
+            <div class="pricing-card">
+                
+                <div class="pricing-info">
+                    <span class="pre-title">Projetos Exclusivos</span>
+                    <h3>Sob medida</h3>
+                    <p>Cada linha de código e pixel é pensado exclusivamente para resolver o problema do seu negócio e maximizar a sua conversão.</p>
+                    
+                    <ul class="benefits-list">
+                        <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Reunião de alinhamento estratégico</li>
+                        <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Design focado em conversão</li>
+                        <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Código otimizado e ultra-rápido</li>
+                        <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Deploy em infraestrutura global</li>
+                    </ul>
+                </div>
+
+                <form class="pricing-form" action="" method="POST">
+                    <div class="input-group">
+                        <input type="text" name="nome" placeholder="Seu Nome completo" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <input type="email" name="email" placeholder="Seu E-mail profissional" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <input type="text" name="empresa" placeholder="Qual o nome da sua empresa?">
+                    </div>
+
+                    <div class="input-group">
+                        <select name="orcamento" required>
+                            <option value="" disabled selected>Expectativa de Investimento</option>
+                            <option value="Até R$300">Até R$300</option>
+                            <option value="R$300 - R$500">R$300 - R$500</option>
+                            <option value="R$500 - R$700">R$500 - R$700</option>
+                            <option value="R$700 - R$1000">R$700 - R$1000</option>
+                            <option value="Acima de R$1000">Acima de R$1000</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <textarea name="mensagem" placeholder="Descreva brevemente o seu projeto e os seus objetivos principais..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary" style="width: 100%;">Solicitar Orçamento</button>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-contacts">
+            <a href="#" target="_blank" class="social-link" title="Instagram em breve">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                Instagram
+            </a>
+            
+            <a href="https://wa.me/5531983679809" target="_blank" class="social-link" title="Falar no WhatsApp">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                +55 31 98367-9809
+            </a>
+        </div>
+        <p class="copyright">&copy; 2026 VULCRA - Todos os direitos reservados.</p>
+    </footer>
+
+    <a href="https://wa.me/5531983679809?text=Olá,%20acabei%20de%20ver%20o%20seu%20site%20e%20gostaria%20de%20informações%20sobre%20o%20que%20seria%20necessário%20para%20fazer%20o%20meu!" target="_blank" class="whatsapp-float" title="Fale comigo no WhatsApp">
+        <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.2-8.5-44.2-27.1-16.4-14.6-27.4-32.7-30.6-38.1-3.2-5.5-.3-8.5 2.5-11.2 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.2 3.7-5.5 5.6-9.2 1.9-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.7 23.5 9.2 31.6 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.5 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.7z"/></svg>
+    </a>
+
 </body>
 </html>

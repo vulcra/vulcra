@@ -4,19 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vulcra | Engenharia de Software e Conversão</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    
     <style>
-        body { background-color: #0f172a; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; text-align: center; }
-        .container { border-left: 4px solid #f97316; padding-left: 20px; }
-        h1 { font-size: 3rem; letter-spacing: -1px; margin: 0; }
-        p { color: #94a3b8; font-size: 1.2rem; }
-        .tag { color: #f97316; font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; }
+        body { 
+            background-color: #0F172A; /* Azul Marinho Profundo */
+            color: #F8FAFC; 
+            font-family: 'Montserrat', sans-serif; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            text-align: center; 
+        }
+        .container { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 25px; 
+            padding: 20px;
+        }
+        
+        /* Alinhamento perfeito do seu Vetor + Texto */
+        .marca-oficial {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px; /* Espaço entre o V e o nome */
+        }
+
+        .nome-vulcra {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 80px;
+            font-weight: 900;
+            color: #FFFFFF;
+            letter-spacing: 2px;
+            margin-top: 5px;
+        }
+
+        p { 
+            color: #94A3B8; 
+            font-size: 1.1rem; 
+            max-width: 480px;
+            line-height: 1.6;
+            margin-top: 10px;
+        }
+        .tag { 
+            background-color: rgba(249, 115, 22, 0.1);
+            color: #F97316; 
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(249, 115, 22, 0.3);
+            font-weight: 900; 
+            text-transform: uppercase; 
+            font-size: 0.75rem; 
+            letter-spacing: 2px; 
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="tag">Lançamento em breve</div>
-        <h1>VULCRA</h1>
-        <p>Engenharia de Software & Landing Pages de Alta Performance.</p>
+        
+        <div class="tag">Lançamento Oficial em Breve</div>
+        
+        <div class="marca-oficial">
+            <svg width="110" height="95" viewBox="0 0 124 106" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M70 105.5L101 47.5L65.5 63L56.5 79L32 34L0 25.5L42.5 105.5H70Z" fill="#FFFFFF"/>
+                <path d="M53.5 61L65 37L79 31L68.5 53.5L103.5 37L123.5 0L58.5 29V0L39.5 34L53.5 61Z" fill="#F97316"/>
+            </svg>
+            
+            <div class="nome-vulcra">VULCRA</div>
+        </div>
+
+        <p>A engenharia por trás do seu crescimento. Construímos páginas ultrarrápidas e sistemas que convertem.</p>
+        
     </div>
 </body>
 </html>

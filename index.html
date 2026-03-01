@@ -26,10 +26,10 @@
             color: var(--primary);
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
-            position: relative; /* Para o botão flutuante se basear no corpo */
+            position: relative; 
         }
 
-        /* HEADER (Voltou a ser limpo e absoluto) */
+        /* HEADER */
         header { display: flex; justify-content: space-between; align-items: center; padding: 25px 5%; width: 100%; position: absolute; top: 0; left: 0; z-index: 100; background-color: transparent; border-bottom: none; }
         .logo-v svg { width: 45px; height: auto; }
         .btn-outline { border: 1px solid rgba(15, 23, 42, 0.2); color: var(--primary); padding: 10px 24px; border-radius: 50px; text-decoration: none; font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: all 0.3s ease; background-color: var(--bg-color); }
@@ -117,14 +117,13 @@
         .social-link svg { width: 24px; height: 24px; }
         .copyright { color: var(--primary); opacity: 0.4; font-size: 0.9rem; font-weight: 500; margin: 0; }
 
-        /* --- BOTÃO FLUTUANTE DO WHATSAPP (VULCRA EDITION) --- */
+        /* BOTÃO FLUTUANTE DO WHATSAPP */
         .whatsapp-float {
             position: fixed;
             bottom: 20px;
             right: 20px;
             width: 65px;
             height: 65px;
-            /* Laranja Vulcânico Translúcido (70% opacidade) */
             background-color: rgba(249, 115, 22, 0.7); 
             color: #ffffff;
             border-radius: 50%;
@@ -132,35 +131,30 @@
             justify-content: center;
             align-items: center;
             box-shadow: 0 10px 30px rgba(249, 115, 22, 0.15);
-            z-index: 1001; /* Garante que fique acima de tudo, inclusive header fixo se houver */
+            z-index: 1001;
             transition: all 0.3s ease;
             text-decoration: none;
         }
 
-        /* Solidifica ao passar o mouse */
         .whatsapp-float:hover {
             background-color: rgba(249, 115, 22, 1);
             transform: translateY(-5px) scale(1.05);
             box-shadow: 0 15px 40px rgba(249, 115, 22, 0.3);
         }
 
-        /* O Logo do Zap em Azul Marinho Profundo */
-        .whatsapp-float svg {
-            width: 32px;
-            height: 32px;
-            fill: var(--primary); 
-            transition: all 0.3s ease;
-        }
+        .whatsapp-float svg { width: 32px; height: 32px; fill: var(--primary); transition: all 0.3s ease; }
+        .whatsapp-float:hover svg { fill: white; }
 
-        .whatsapp-float:hover svg {
-            fill: white; /* Muda para branco no hover para melhor contraste no laranja sólido */
-        }
-
+        /* AJUSTES RESPONSIVOS (MOBILE) */
         @media (max-width: 900px) {
             .pricing-card { flex-direction: column; padding: 40px 30px; }
             .pricing-info h3 { font-size: 2.5rem; }
+            
+            /* Inversão da Foto e Texto no Mobile */
             .about-container { flex-direction: column; text-align: center; }
-            .about-text { align-items: center; display: flex; flex-direction: column; }
+            .about-image { order: 1; margin-bottom: 30px; }
+            .about-text { order: 2; align-items: center; display: flex; flex-direction: column; }
+            
             .image-wrapper { width: 300px; height: 350px; }
             .feature-item { text-align: center; display: flex; flex-direction: column; align-items: center; }
             .projects-grid { grid-template-columns: 1fr; }
@@ -199,7 +193,8 @@
                 <h2>Sobre mim</h2>
                 <p>Sou Cientista da Computação e especialista em gestão de negócios e pessoas (MBA). Com mais de 11 anos de experiência como Product Manager e gestor de tecnologia, eu crio soluções focadas no que realmente importa: <strong>resultado e conversão</strong>.</p>
                 <p>Eu construo sistemas que escalam, processos que funcionam e páginas ultrarrápidas que transformam cliques em contratos assinados.</p>
-                <p class="transition-text">Eu construo sites que:</p>
+                
+                <p class="transition-text">Engenharia aplicada a resultados:</p>
             </div>
             <div class="about-image">
                 <div class="image-wrapper">
@@ -297,12 +292,10 @@
             </div>
 
             <div class="pricing-card">
-                
                 <div class="pricing-info">
                     <span class="pre-title">Projetos Exclusivos</span>
                     <h3>Sob medida</h3>
                     <p>Cada linha de código e pixel é pensado exclusivamente para resolver o problema do seu negócio e maximizar a sua conversão.</p>
-                    
                     <ul class="benefits-list">
                         <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Reunião de alinhamento estratégico</li>
                         <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Design focado em conversão</li>
@@ -315,30 +308,25 @@
                     <div class="input-group">
                         <input type="text" name="nome" placeholder="Seu Nome completo" required>
                     </div>
-                    
                     <div class="input-group">
                         <input type="email" name="email" placeholder="Seu E-mail profissional" required>
                     </div>
-                    
                     <div class="input-group">
                         <input type="text" name="empresa" placeholder="Qual o nome da sua empresa?">
                     </div>
-
                     <div class="input-group">
                         <select name="orcamento" required>
                             <option value="" disabled selected>Expectativa de Investimento</option>
-                            <option value="Até R$300">Até R$300</option>
-                            <option value="R$300 - R$500">R$300 - R$500</option>
-                            <option value="R$500 - R$700">R$500 - R$700</option>
-                            <option value="R$700 - R$1000">R$700 - R$1000</option>
-                            <option value="Acima de R$1000">Acima de R$1000</option>
+                            <option value="Até 300">Até R$ 300</option>
+                            <option value="300 a 500">R$ 300 - R$ 500</option>
+                            <option value="500 a 700">R$ 500 - R$ 700</option>
+                            <option value="700 a 1k">R$ 700 - R$ 1000</option>
+                            <option value="Acima de 1k">Acima de R$ 1.000</option>
                         </select>
                     </div>
-
                     <div class="input-group">
                         <textarea name="mensagem" placeholder="Descreva brevemente o seu projeto e os seus objetivos principais..." required></textarea>
                     </div>
-                    
                     <button type="submit" class="btn-primary" style="width: 100%;">Solicitar Orçamento</button>
                 </form>
 
@@ -352,7 +340,6 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                 Instagram
             </a>
-            
             <a href="https://wa.me/5531983679809" target="_blank" class="social-link" title="Falar no WhatsApp">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                 +55 31 98367-9809

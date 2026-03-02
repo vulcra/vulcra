@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para te lembrar de ir embora | Gabriel Guerra</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           VARIÁVEIS DE COR E TIPOGRAFIA
+           ========================================= */
+        :root {
+            --bg-papel: #F7F7F4;       
+            --azul-noturno: #1C2331;   
+            --tinta: #2C2C2C;          
+            --bege: #E6E4DF;           
+            --dourado-estrela: #D4AF37;
+            
+            --fonte-titulo: 'Playfair Display', serif;
+            --fonte-texto: 'Lora', serif;
+            --fonte-capa: 'Caveat Brush', cursive; 
+        }
+
+        /* RESET BÁSICO */
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            scroll-behavior: smooth; 
+        }
+
+        body {
+            background-color: var(--bg-papel);
+            color: var(--tinta);
+            font-family: var(--fonte-texto);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* =========================================
+           CABEÇALHO (HEADER)
+           ========================================= */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo-text {
+            font-family: var(--fonte-titulo);
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--tinta);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            color: var(--azul-noturno);
+            width: 24px;
+            height: 24px;
+        }
+
+        .social-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #ffffff;
+            border: 1px solid var(--bege);
+            border-radius: 4px;
+            color: var(--tinta);
+            transition: all 0.3s ease;
+        }
+
+        .social-box:hover {
+            background-color: var(--azul-noturno);
+            color: var(--bg-papel);
+            border-color: var(--azul-noturno);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--tinta);
+            font-weight: 500;
+            font-size: 1.05rem;
+            transition: color 0.3s ease;
+            margin-right: 30px;
+        }
+
+        .nav-links a:hover {
+            color: var(--azul-noturno);
+        }
+
+        /* BOTÃO PADRÃO (Efeito Preenchido -> Vazado) */
+        .btn-primary {
+            background-color: var(--azul-noturno);
+            color: var(--bg-papel);
+            border: 2px solid var(--azul-noturno);
+            padding: 14px 35px;
+            text-decoration: none;
+            font-family: var(--fonte-texto);
+            font-weight: 600;
+            font-size: 1.05rem;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--azul-noturno);
+        }
+
+        .btn-text {
+            color: var(--tinta);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            border-bottom: 2px solid var(--tinta);
+            padding-bottom: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-text:hover {
+            color: var(--azul-noturno);
+            border-color: var(--azul-noturno);
+        }
+
+        /* =========================================
+           SEÇÃO 1: HERO (DOBRA PRINCIPAL)
+           ========================================= */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 60px 5%;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .pre-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-family: var(--fonte-titulo);
+            font-style: italic;
+            font-size: 1.3rem;
+            color: var(--tinta);
+            margin-bottom: 25px;
+        }
+
+        .pre-title::before {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 2px;
+            background-color: var(--azul-noturno);
+        }
+
+        .hero-content h1 {
+            font-family: var(--fonte-capa);
+            font-size: clamp(4rem, 6vw, 6rem);
+            font-weight: 400;
+            line-height: 0.95;
+            color: var(--azul-noturno);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .hero-content h2 {
+            font-family: var(--fonte-titulo);
+            font-size: 1.8rem;
+            font-style: italic;
+            font-weight: 400;
+            color: var(--tinta);
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+
+        .hero-content p.description {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            opacity: 0.85;
+            margin-bottom: 40px;
+            max-width: 90%;
+        }
+
+        .cta-group {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        /* ESTATÍSTICAS DA HERO */
+        .book-stats {
+            display: flex;
+            gap: 40px;
+            border-top: 1px solid var(--bege);
+            padding-top: 30px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .stat-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--fonte-titulo);
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--tinta);
+        }
+
+        .stat-title::before {
+            content: '';
+            display: block;
+            width: 12px;
+            height: 12px;
+            background-color: var(--azul-noturno);
+            border-radius: 50%;
+        }
+
+        .stat-value {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            padding-left: 22px;
+        }
+
+        .stat-obs {
+            font-size: 0.75rem;
+            opacity: 0.6;
+            font-style: italic;
+            padding-left: 22px;
+            margin-top: -5px;
+        }
+
+        /* IMAGEM DA CAPA HERO */
+        .hero-image {
+            position: relative;
+            background-color: #ffffff;
+            padding: 10px;
+            border: 1px solid var(--bege);
+            box-shadow: 0 20px 50px rgba(44, 44, 44, 0.05);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image img:hover {
+            transform: translateY(-5px);
+        }
+
+        /* =========================================
+           SEÇÃO 2: CITAÇÃO (CORTE VISUAL)
+           ========================================= */
+        .quote-section {
+            background-color: var(--azul-noturno);
+            color: var(--bg-papel);
+            padding: 80px 5%;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .quote-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .quote-icon {
+            font-family: var(--fonte-titulo);
+            font-size: 5rem;
+            color: var(--bege);
+            line-height: 0;
+            display: block;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .quote-text {
+            font-family: var(--fonte-titulo);
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-style: italic;
+            font-weight: 400;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .quote-author {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.7;
+        }
+
+        /* =========================================
+           SEÇÃO 3: SOBRE O AUTOR
+           ========================================= */
+        .about-section {
+            background-color: #ffffff;
+            padding: 100px 5%;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: -25px;
+            width: 100%;
+            height: 100%;
+            border: 5px solid var(--azul-noturno);
+            z-index: -1;
+        }
+
+        .about-image img {
+            width: 100%;
+            aspect-ratio: 4/5;
+            object-fit: cover;
+            background-color: var(--bege); 
+            display: block;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .about-content h2 {
+            font-family: var(--fonte-titulo);
+            font-size: 2.8rem;
+            color: var(--azul-noturno);
+            margin-bottom: 15px;
+        }
+
+        .title-line {
+            width: 50px;
+            height: 3px;
+            background-color: var(--azul-noturno);
+            margin-bottom: 30px;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--tinta);
+            opacity: 0.85;
+            margin-bottom: 20px;
+        }
+
+        .author-stats {
+            display: flex;
+            gap: 40px;
+            margin: 40px 0;
+            border-bottom: 1px solid var(--bege);
+            padding-bottom: 30px;
+        }
+
+        .author-stat-item {
+            display: flex;
+            flex-direction: column;
+            border-left: 2px solid var(--bege);
+            padding-left: 20px;
+        }
+
+        .author-stat-item:first-child {
+            border-left: none;
+            padding-left: 0;
+        }
+
+        .author-stat-number {
+            font-family: var(--fonte-titulo);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--azul-noturno);
+            line-height: 1.1;
+        }
+
+        .author-stat-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+        }
+
+        .contact-card {
+            background-color: var(--azul-noturno);
+            padding: 25px 30px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            border-radius: 2px;
+        }
+
+        .qr-placeholder {
+            width: 70px;
+            height: 70px;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 4px;
+        }
+
+        .qr-placeholder svg {
+            width: 40px;
+            height: 40px;
+            color: var(--azul-noturno);
+        }
+
+        .contact-info h4 {
+            font-family: var(--fonte-titulo);
+            font-size: 1.3rem;
+            color: #ffffff;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .contact-info p {
+            font-size: 0.95rem;
+            color: #ffffff;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .contact-info a {
+            color: var(--bege);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* =========================================
+           SEÇÃO 4: AVALIAÇÕES (PROVA SOCIAL)
+           ========================================= */
+        .reviews-section {
+            background-color: var(--bg-papel); 
+            padding: 100px 5%;
+            border-top: 1px solid var(--bege);
+        }
+
+        .reviews-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .reviews-header h2 {
+            font-family: var(--fonte-titulo);
+            font-size: 2.8rem;
+            color: var(--azul-noturno);
+            margin-bottom: 15px;
+            line-height: 1.1;
+        }
+
+        .reviews-header p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--tinta);
+            opacity: 0.85;
+            margin-bottom: 30px;
+        }
+
+        .overall-rating {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .stars {
+            color: var(--dourado-estrela); 
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        .overall-rating p {
+            font-weight: 500;
+            margin: 0;
+            opacity: 1;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .reviews-col-2 {
+            margin-top: 50px;
+        }
+
+        .review-card {
+            background-color: var(--azul-noturno);
+            padding: 35px 30px;
+            border-radius: 2px;
+            margin-bottom: 30px;
+            color: #ffffff;
+            box-shadow: 0 15px 30px rgba(28, 35, 49, 0.1);
+        }
+
+        .review-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .review-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--bege);
+            object-fit: cover;
+        }
+
+        .review-name h4 {
+            font-family: var(--fonte-titulo);
+            font-size: 1.1rem;
+            margin-bottom: 2px;
+        }
+
+        .review-name .stars {
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .review-card h5 {
+            font-family: var(--fonte-titulo);
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .review-card p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            opacity: 0.85;
+        }
+
+        /* =========================================
+           SEÇÃO 5: CAPÍTULOS (SPOILERS DO LIVRO)
+           ========================================= */
+        .chapters-section {
+            background-color: #ffffff; 
+            padding: 100px 5%;
+            text-align: center;
+        }
+
+        .chapters-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .chapters-header {
+            margin-bottom: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .chapters-header h2 {
+            font-family: var(--fonte-titulo);
+            font-size: 2.8rem;
+            color: var(--azul-noturno);
+            margin-bottom: 15px;
+        }
+
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            text-align: left;
+            margin-bottom: 60px;
+        }
+
+        .chapter-card {
+            background-color: var(--bg-papel);
+            padding: 40px;
+            border: 1px solid var(--bege);
+            border-radius: 2px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            transition: transform 0.3s ease;
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .chapter-title {
+            font-family: var(--fonte-titulo);
+            font-size: 1.4rem;
+            color: var(--azul-noturno);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .chapter-desc {
+            font-size: 1rem;
+            color: var(--tinta);
+            opacity: 0.8;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .chapter-stats {
+            display: flex;
+            gap: 30px;
+        }
+
+        .chapter-stat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--tinta);
+        }
+
+        .chapter-stat-item::before {
+            content: '';
+            display: block;
+            width: 10px;
+            height: 10px;
+            background-color: var(--azul-noturno);
+            border-radius: 50%;
+        }
+
+        .chapter-stat-value {
+            opacity: 0.7;
+            font-weight: 400;
+        }
+
+        /* =========================================
+           RODAPÉ (FOOTER)
+           ========================================= */
+        footer {
+            background-color: var(--azul-noturno);
+            color: var(--bg-papel);
+            padding: 80px 5% 40px 5%;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 40px;
+            border-bottom: 1px solid rgba(230, 228, 223, 0.1);
+            padding-bottom: 60px;
+        }
+
+        .footer-brand h3 {
+            font-family: var(--fonte-titulo);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .footer-brand p {
+            max-width: 300px;
+            opacity: 0.7;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .footer-links h4 {
+            font-family: var(--fonte-titulo);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links ul li a {
+            color: var(--bg-papel);
+            text-decoration: none;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-links ul li a:hover {
+            opacity: 1;
+        }
+
+        /* Base do Footer (Créditos) */
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            color: var(--bg-papel);
+        }
+
+        .footer-bottom a {
+            color: var(--bg-papel);
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-bottom a:hover {
+            opacity: 0.7;
+            text-decoration: underline;
+        }
+
+        /* =========================================
+           RESPONSIVIDADE (MOBILE E TABLETS)
+           ========================================= */
+        @media (max-width: 900px) {
+            header { flex-direction: column; gap: 20px; }
+            .header-right { flex-direction: column; gap: 20px; }
+            .nav-links a { margin-right: 15px; margin-left: 15px; }
+            
+            .hero { grid-template-columns: 1fr; padding: 40px 5%; gap: 50px; }
+            .hero-content h1 { font-size: 3.5rem; }
+            .cta-group { flex-direction: column; align-items: flex-start; }
+            .book-stats { flex-direction: column; gap: 20px; }
+            
+            .about-container { grid-template-columns: 1fr; gap: 60px; }
+            .about-image { max-width: 400px; margin: 0 auto; }
+            .author-stats { flex-direction: column; gap: 20px; }
+            .author-stat-item { border-left: none; padding-left: 0; border-bottom: 1px solid var(--bege); padding-bottom: 15px; }
+            .contact-card { flex-direction: column; text-align: center; }
+
+            .reviews-container { grid-template-columns: 1fr; gap: 50px; }
+            .reviews-grid { grid-template-columns: 1fr; }
+            .reviews-col-2 { margin-top: 0; }
+            .review-card { margin-bottom: 20px; }
+
+            .chapters-grid { grid-template-columns: 1fr; }
+            
+            .footer-container { flex-direction: column; text-align: center; align-items: center; }
+            .footer-brand p { margin: 0 auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <a href="#" class="logo-text">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                Página
+            </a>
+            
+            <a href="https://www.instagram.com/gabrielguerr4" target="_blank" class="social-box" title="Instagram do Autor">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+        </div>
+
+        <div class="header-right">
+            <nav class="nav-links">
+                <a href="#sobre">Sobre</a>
+                <a href="#avaliacoes">Avaliações</a>
+            </nav>
+            <a href="https://caravanagrupoeditorial.com/livro/para-te-lembrar-de-ir-embora-ou-ficar-para-sempre/?v=2d3615d82bb9" target="_blank" class="btn-primary">Peça hoje</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        
+        <div class="hero-content">
+            <div class="pre-title">Bem-vindo(a) à Página!!!</div>
+            
+            <h1>Para te lembrar<br>de ir embora</h1>
+            <h2>ou ficar para sempre</h2>
+            
+            <p class="description">
+                "Estar vivo é o primeiro passo do sentir." Observei a vida seguindo o seu percurso: encontrei casais apaixonados e corações quebrados, vi o amor ir e nunca mais voltar. Este livro é o resultado de viver uma vida à flor da pele.
+            </p>
+            
+            <div class="cta-group">
+                <a href="https://caravanagrupoeditorial.com/livro/para-te-lembrar-de-ir-embora-ou-ficar-para-sempre/?v=2d3615d82bb9" target="_blank" class="btn-primary">Peça hoje</a>
+                <a href="#amostra" class="btn-text">Ler Excertos da Obra</a>
+            </div>
+
+            <div class="book-stats">
+                <div class="stat-item">
+                    <span class="stat-title">Páginas:</span>
+                    <span class="stat-value">60 páginas</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-title">Duração:</span>
+                    <span class="stat-value">3 a 5 Horas</span>
+                    <span class="stat-obs">Depende do emocional do leitor.</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-title">Avaliação:</span>
+                    <a href="#avaliacoes" style="text-decoration: none; color: inherit; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.6'" onmouseout="this.style.opacity='1'">
+                        <span class="stat-value" style="text-decoration: underline; text-underline-offset: 4px; cursor: pointer;">4.9/5 (150 avaliações)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-image">
+            <img src="capa.png" alt="Capa do livro Para te lembrar de ir embora">
+        </div>
+
+    </section>
+
+    <section class="quote-section" id="amostra">
+        <div class="quote-content">
+            <span class="quote-icon">"</span>
+            <p class="quote-text">
+                Desesperado pelo sentir, me lanço fora de mim, me encontro perdido em um turbilhão de agulhas molhadas, parecendo uma cilada, igual seus lábios enquanto me tocava. Coração partido, pedindo abrigo, só queria ser sentido...
+            </p>
+            <span class="quote-author">— Excertos do Livro</span>
+        </div>
+    </section>
+
+    <section class="about-section" id="sobre">
+        <div class="about-container">
+            
+            <div class="about-image">
+                <img src="foto-autor.jpg" alt="Foto de Gabriel Guerra">
+            </div>
+
+            <div class="about-content">
+                <h2>Sobre o Autor</h2>
+                <div class="title-line"></div>
+                
+                <p>Aos 28 anos, Gabriel Guerra é, acima de tudo, um telespectador das relações humanas e um profundo apreciador do <em>sentir</em>. Ele possui o dom raro de se deslumbrar com a afetividade e enxergar a sutileza melancólica oculta nos olhares — aqueles que passam, que ficam, que cativam e que machucam.</p>
+                
+                <p>Jovem e intensamente entregue à vida, seu maior receio é que os detalhes cotidianos e as emoções passem despercebidos pelo tempo. Por isso, ele transforma suas vivências em arte, eternizando o seu olhar e o seu coração nas páginas de sua escrita.</p>
+
+                <div class="author-stats">
+                    <div class="author-stat-item">
+                        <span class="author-stat-number">01</span>
+                        <span class="author-stat-label">Livro Publicado</span>
+                    </div>
+                    <div class="author-stat-item">
+                        <span class="author-stat-number">28</span>
+                        <span class="author-stat-label">Anos de Vida</span>
+                    </div>
+                    <div class="author-stat-item">
+                        <span class="author-stat-number">100%</span>
+                        <span class="author-stat-label">Sentimento</span>
+                    </div>
+                </div>
+
+                <div class="contact-card" id="contato">
+                    <div class="qr-placeholder">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </div>
+                    <div class="contact-info">
+                        <h4>Gabriel Guerra</h4>
+                        <p>Acompanhe os próximos versos:</p>
+                        <p>Instagram: <a href="https://www.instagram.com/gabrielguerr4" target="_blank">@gabrielguerr4</a></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="reviews-section" id="avaliacoes">
+        <div class="reviews-container">
+            
+            <div class="reviews-header">
+                <h2>Palavras de<br>quem sentiu</h2>
+                <div class="title-line"></div>
+                
+                <p>Acreditamos que a poesia só ganha vida quando encontra um coração disposto a escutá-la. É onde a melancolia se transforma em abraço. Veja o que os primeiros leitores relataram após mergulharem nas páginas desta obra.</p>
+                
+                <div class="overall-rating">
+                    <div class="stars">★★★★★</div>
+                    <p>4.9/5 Avaliação Geral</p>
+                </div>
+            </div>
+
+            <div class="reviews-grid">
+                
+                <div class="reviews-col-1">
+                    <div class="review-card">
+                        <div class="review-author">
+                            <div class="review-avatar"></div>
+                            <div class="review-name">
+                                <h4>Mariana S.</h4>
+                                <div class="stars">★★★★★</div>
+                            </div>
+                        </div>
+                        <h5>"Um mergulho na própria alma"</h5>
+                        <p>A forma como o Gabriel descreve a dor e a melancolia me fez chorar nas primeiras páginas. É como se ele tivesse lido o meu diário de adolescência. Intenso e necessário.</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-author">
+                            <div class="review-avatar"></div>
+                            <div class="review-name">
+                                <h4>Lucas R.</h4>
+                                <div class="stars">★★★★☆</div>
+                            </div>
+                        </div>
+                        <h5>"Sutil e avassalador"</h5>
+                        <p>Comprei achando que seria apenas mais um livro de poemas. Terminei a leitura de uma só vez, incapaz de largar. A escrita te prende e te faz questionar os próprios sentimentos.</p>
+                    </div>
+                </div>
+
+                <div class="reviews-col-2">
+                    <div class="review-card">
+                        <div class="review-author">
+                            <div class="review-avatar"></div>
+                            <div class="review-name">
+                                <h4>Camila T.</h4>
+                                <div class="stars">★★★★★</div>
+                            </div>
+                        </div>
+                        <h5>"Ecoa por dias na cabeça"</h5>
+                        <p>A poesia tem um ritmo próprio. Os textos curtos sobre os 'olhares que machucaram' são de uma sinceridade brutal. Recomendo para qualquer um que já teve o coração partido.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="chapters-section">
+        <div class="chapters-container">
+            
+            <div class="chapters-header">
+                <h2>Um vislumbre das páginas</h2>
+                <div class="title-line"></div>
+            </div>
+
+            <div class="chapters-grid">
+                <div class="chapter-card">
+                    <h3 class="chapter-title">I. O Início do Fim</h3>
+                    <p class="chapter-desc">Um mergulho inicial nos sentimentos que antecedem a ruptura. Onde a melancolia dá os seus primeiros e silenciosos passos.</p>
+                    <div class="chapter-stats">
+                        <div class="chapter-stat-item">Páginas: <span class="chapter-stat-value">12 págs</span></div>
+                        <div class="chapter-stat-item">Duração: <span class="chapter-stat-value">40 Min</span></div>
+                    </div>
+                </div>
+
+                <div class="chapter-card">
+                    <h3 class="chapter-title">II. O Peso do Olhar</h3>
+                    <p class="chapter-desc">A sutilidade de um olhar que machuca e cativa ao mesmo tempo. A arte de eternizar uma fração de segundo na memória.</p>
+                    <div class="chapter-stats">
+                        <div class="chapter-stat-item">Páginas: <span class="chapter-stat-value">15 págs</span></div>
+                        <div class="chapter-stat-item">Duração: <span class="chapter-stat-value">55 Min</span></div>
+                    </div>
+                </div>
+
+                <div class="chapter-card">
+                    <h3 class="chapter-title">III. Coração Partido</h3>
+                    <p class="chapter-desc">O turbilhão de agulhas molhadas. A fase do desespero cru quando a alma ferida tenta, a todo custo, encontrar abrigo.</p>
+                    <div class="chapter-stats">
+                        <div class="chapter-stat-item">Páginas: <span class="chapter-stat-value">18 págs</span></div>
+                        <div class="chapter-stat-item">Duração: <span class="chapter-stat-value">1 Hora</span></div>
+                    </div>
+                </div>
+
+                <div class="chapter-card">
+                    <h3 class="chapter-title">IV. O Sol-Coração</h3>
+                    <p class="chapter-desc">A cura através da expressão. Como o menino sob a chuva se transforma, encontra a sua luz e volta a brilhar após a tempestade.</p>
+                    <div class="chapter-stats">
+                        <div class="chapter-stat-item">Páginas: <span class="chapter-stat-value">15 págs</span></div>
+                        <div class="chapter-stat-item">Duração: <span class="chapter-stat-value">45 Min</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="https://caravanagrupoeditorial.com/livro/para-te-lembrar-de-ir-embora-ou-ficar-para-sempre/?v=2d3615d82bb9" target="_blank" class="btn-primary" style="padding: 18px 50px; font-size: 1.15rem;">Garantir meu exemplar hoje</a>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>Gabriel Guerra</h3>
+                <p>"Eternizando o olhar e o coração no papel." Uma obra dedicada a todos os que não têm medo de sentir.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="#">Início</a></li>
+                    <li><a href="#sobre">O Autor</a></li>
+                    <li><a href="https://caravanagrupoeditorial.com/livro/para-te-lembrar-de-ir-embora-ou-ficar-para-sempre/?v=2d3615d82bb9" target="_blank">Comprar Livro</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Contato</h4>
+                <ul>
+                    <li><a href="https://www.instagram.com/gabrielguerr4" target="_blank">Instagram</a></li>
+                    <li><a href="mailto:contato@vulcra.com.br">Assessoria / E-mail</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>
+                &copy; 2024 Desenvolvido por <a href="https://vulcra.com.br" target="_blank">Vulcra</a> - Escrito por <a href="https://www.instagram.com/gabrielguerr4" target="_blank">Gabriel Guerra</a>.
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>

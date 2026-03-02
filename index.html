@@ -219,12 +219,38 @@
                 <p>Em breve: uma seleção de interfaces de alta performance e sistemas robustos desenhados do absoluto zero. Acompanhe as novas implantações.</p>
             </div>
             <div class="projects-grid">
-                <div class="project-card">
-                    <div class="mockup-window">
-                        <div class="mockup-topbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></div>
-                        <div class="mockup-body"><div class="skeleton-left"><div class="skeleton-line short"></div><div class="skeleton-line long"></div><div class="skeleton-line medium"></div><div class="skeleton-line short" style="margin-top: 20px;"></div></div><div class="skeleton-right"></div></div>
+                <div class="project-card" style="width: 100%; max-width: 800px; margin: 0 auto;">
+                        <div class="browser-bar" style="background-color: #1C2331; height: 30px; border-radius: 8px 8px 0 0; display: flex; align-items: center; padding: 0 15px; gap: 8px;">
+                        <div style="width: 10px; height: 10px; background: #ff5f56; border-radius: 50%;"></div>
+                        <div style="width: 10px; height: 10px; background: #ffbd2e; border-radius: 50%;"></div>
+                        <div style="width: 10px; height: 10px; background: #27c93f; border-radius: 50%;"></div>
                     </div>
-                    <h3>Website One</h3><p>Espaço reservado para o projeto de Landing Page focada em conversão. Detalhes de arquitetura e design em breve.</p><a href="#" class="btn-text" onclick="event.preventDefault();">Live demo</a>
+
+                    <div class="iframe-wrapper" style="width: 100%; height: 400px; overflow: hidden; position: relative; border: 1px solid #E6E4DF; border-top: none; background: #fff;">
+                        
+                        <iframe 
+                            src="https://www.vulcra.com.br/paratelembrar" 
+                            style="
+                                width: 1080px; 
+                                height: 800px; 
+                                border: none; 
+                                position: absolute; 
+                                top: 0; 
+                                left: 0; 
+                                transform: scale(0.5); 
+                                transform-origin: 0 0;
+                                pointer-events: none; /* Evita scrolls acidentais no preview */
+                            "
+                            title="Preview Desktop Para te Lembrar">
+                        </iframe>
+                        
+                        <a href="https://www.vulcra.com.br/paratelembrar" target="_blank" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;"></a>
+                    </div>
+
+                    <div class="project-info" style="padding: 20px 0;">
+                        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.6rem; color: #1C2331; margin-bottom: 8px;">Para Te Lembrar de Ir Embora</h3>
+                        <p style="color: #666; font-size: 0.95rem;">Lançamento Editorial: Arquitetura de conversão com estética minimalista e melancólica.</p>
+                    </div>
                 </div>
                 <div class="project-card">
                     <div class="mockup-window">

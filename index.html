@@ -85,6 +85,11 @@
         .project-card p { font-size: 1rem; color: var(--primary); opacity: 0.7; line-height: 1.6; margin-bottom: 25px; }
         .btn-text { color: var(--accent); font-weight: 700; text-decoration: none; font-size: 1rem; display: inline-flex; align-items: center; gap: 8px; transition: opacity 0.3s ease; }
         .btn-text:hover { opacity: 0.7; }
+        
+        /* BOTÃO MAIS PROJETOS */
+        .more-projects-wrapper { width: 100%; display: flex; justify-content: center; margin-top: 60px; }
+        .btn-secondary { border: 2px solid var(--primary); color: var(--primary); padding: 16px 40px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.3s ease; display: inline-block; cursor: pointer; }
+        .btn-secondary:hover { background-color: var(--primary); color: var(--bg-color); transform: translateY(-2px); }
 
         /* EXPECTATIVAS */
         .expectations { display: flex; justify-content: center; align-items: flex-start; padding: 40px 5% 80px 5%; }
@@ -249,7 +254,7 @@
 
                     <div class="project-info" style="padding: 20px 0;">
                         <h3 style="font-family: 'Playfair Display', serif; font-size: 1.6rem; color: #1C2331; margin-bottom: 8px;">Para Te Lembrar de Ir Embora</h3>
-                        <p style="color: #666; font-size: 0.95rem;">Lançamento Editorial: Arquitetura de conversão com estética minimalista e melancólica.</p><a href="https://www.vulcra.com.br/paratelembrar" class="btn-text" onclick="event.preventDefault();">Live demo</a>
+                        <p style="color: #666; font-size: 0.95rem;">Lançamento Editorial: Arquitetura de conversão com estética minimalista e melancólica.</p><a href="https://www.vulcra.com.br/paratelembrar" class="btn-text" target="_blank">Live demo</a>
                     </div>
                 </div>
                 <div class="project-card">
@@ -260,6 +265,11 @@
                     <h3>Website Two</h3><p>Espaço reservado para o projeto de Sistema Web personalizado. Funcionalidades avançadas e fluxo de usuário em breve.</p><a href="#" class="btn-text" onclick="event.preventDefault();">Live demo</a>
                 </div>
             </div>
+            
+            <div class="more-projects-wrapper">
+                <a href="#" class="btn-secondary">Ver todos os projetos</a>
+            </div>
+            
         </div>
     </section>
 

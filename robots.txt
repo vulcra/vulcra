@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /guilhermeferreiraarquitetura/
+Disallow: /paratelembrar/
+
+Sitemap: https://www.vulcra.com.br/sitemap.xml

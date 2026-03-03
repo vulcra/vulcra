@@ -9,7 +9,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -60,7 +60,7 @@
         .project-item { transition: opacity 0.4s ease, transform 0.4s ease; }
         .project-item.hide { display: none; }
 
-        /* Estilos do Card (Copiados da Home) */
+        /* Estilos do Card */
         .browser-mockup { background-color: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08); border: 1px solid rgba(15, 23, 42, 0.05); }
         .browser-bar { background-color: #1C2331; height: 35px; display: flex; align-items: center; padding: 0 15px; gap: 8px; }
         .dot { width: 10px; height: 10px; border-radius: 50%; }
@@ -70,10 +70,12 @@
         .iframe-content { width: 1280px; height: 1800px; border: none; position: absolute; top: 0; left: 0; transform-origin: 0 0; pointer-events: none; transform: scale(0.45); }
         .project-link-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; }
 
+        /* AJUSTE DAS FONTES: Padronizado para toda a área ser idêntica */
         .project-meta { padding: 30px 0; }
         .project-category { color: var(--accent); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; display: block; }
-        .project-meta h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 12px; color: var(--primary); }
-        .project-meta p { font-size: 1rem; color: #64748b; line-height: 1.6; margin-bottom: 20px; }
+        .project-meta h3 { font-family: 'Montserrat', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; color: var(--primary); }
+        .project-meta p { font-size: 1rem; color: var(--primary); opacity: 0.7; line-height: 1.6; margin-bottom: 20px; }
+        
         .btn-text { color: var(--accent); font-weight: 800; text-decoration: none; font-size: 1rem; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; }
         .btn-text:hover { transform: translateX(5px); opacity: 0.8; }
 
@@ -131,7 +133,27 @@
                     <h3>Gabriel Guerra</h3>
                     <p>Landing page editorial para lançamento literário. Arquitetura de conversão com estética minimalista e melancólica.</p>
                     <a href="https://www.vulcra.com.br/paratelembrar" target="_blank" class="btn-text">
-                        Acessar Projeto <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        Live demo <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-item" data-category="arquitetura">
+                <div class="browser-mockup">
+                    <div class="browser-bar">
+                        <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+                    </div>
+                    <div class="iframe-container">
+                        <iframe src="https://www.vulcra.com.br/guilhermeferreiraarquitetura/" class="iframe-content" title="Guilherme Ferreira Preview"></iframe>
+                        <a href="https://www.vulcra.com.br/guilhermeferreiraarquitetura/" target="_blank" class="project-link-overlay"></a>
+                    </div>
+                </div>
+                <div class="project-meta">
+                    <span class="project-category">Arquitetura & Interiores</span>
+                    <h3>Guilherme Ferreira</h3>
+                    <p>Portfólio de alto padrão focado em visual imersivo. Engenharia de ponta com motor de rolagem horizontal contínuo.</p>
+                    <a href="https://www.vulcra.com.br/guilhermeferreiraarquitetura/" target="_blank" class="btn-text">
+                        Live demo <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </a>
                 </div>
             </div>
@@ -151,7 +173,7 @@
                     <span class="project-category">Advocacia Premium</span>
                     <h3>Escritório Associados</h3>
                     <p>Plataforma corporativa focada em captação de clientes High-Ticket. Design sóbrio transmitindo autoridade e confiança.</p>
-                    <a href="#" class="btn-text" onclick="event.preventDefault();" style="opacity:0.5">Em breve</a>
+                    <a href="#" class="btn-text" onclick="event.preventDefault();" style="opacity:0.5; color: var(--primary);">Em breve</a>
                 </div>
             </div>
 
@@ -168,22 +190,7 @@
                     <span class="project-category">Saúde & Estética</span>
                     <h3>Clínica Harmony</h3>
                     <p>Landing page para agendamento de consultas de harmonização facial. Foco em conversão via WhatsApp e prova social.</p>
-                    <a href="#" class="btn-text" onclick="event.preventDefault();" style="opacity:0.5">Em breve</a>
-                </div>
-            </div>
-
-            <div class="project-item" data-category="arquitetura">
-                <div class="browser-mockup">
-                    <div class="browser-bar"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
-                    <div class="iframe-container" style="background: #E6E4DF; display: flex; align-items: center; justify-content: center;">
-                        <span style="font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #1C2331; opacity: 0.5;">Minimalismo & Espaço</span>
-                    </div>
-                </div>
-                <div class="project-meta">
-                    <span class="project-category">Arquitetura & Interiores</span>
-                    <h3>Guilherme [Sobrenome]</h3>
-                    <p>Portfólio de alto padrão focado em fotografia de arquitetura e linhas limpas. Design que valoriza o projeto.</p>
-                    <a href="https://wa.me/5531983679809" class="btn-text">Projeto em Desenvolvimento</a>
+                    <a href="#" class="btn-text" onclick="event.preventDefault();" style="opacity:0.5; color: var(--primary);">Em breve</a>
                 </div>
             </div>
 
@@ -198,7 +205,7 @@
                     <span class="project-category">Saúde & Bem-estar</span>
                     <h3>Esse pode ser o seu!</h3>
                     <p>Design sofisticado para clínicas e médicos. Focado em transmitir higiene, luxo e autoridade instantânea.</p>
-                    <a href="https://wa.me/5531983679809" target="_blank" class="btn-text" style="color: #F97316;">Quero um orçamento</a>
+                    <a href="https://wa.me/5531983679809" target="_blank" class="btn-text">Quero um orçamento</a>
                 </div>
             </div>
 
@@ -213,15 +220,15 @@
                     <span class="project-category">Finanças & B2B</span>
                     <h3>Sua Consultoria aqui</h3>
                     <p>Interfaces robustas e seguras para o mercado financeiro. Credibilidade convertida em design moderno.</p>
-                    <a href="https://wa.me/5531983679809" target="_blank" class="btn-text" style="color: #F97316;">Personalizar agora</a>
+                    <a href="https://wa.me/5531983679809" target="_blank" class="btn-text">Personalizar agora</a>
                 </div>
             </div>
 
-            </div>
+        </div>
     </section>
 
     <footer>
-        <p class="copyright">&copy; 2026 VULCRA - Desenvolvido por VULCRA.TECH</p>
+        <p class="copyright">&copy; 2026 VULCRA - Todos os direitos reservados.</p>
     </footer>
 
     <script>
@@ -230,14 +237,11 @@
 
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // 1. Remove a classe 'active' de todos os botões e adiciona no clicado
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
 
-                // 2. Pega o valor do filtro escolhido (ex: 'direito', 'saude')
                 const filterValue = btn.getAttribute('data-filter');
 
-                // 3. Mostra ou esconde os projetos baseados na categoria
                 projects.forEach(project => {
                     const projectCategory = project.getAttribute('data-category');
                     

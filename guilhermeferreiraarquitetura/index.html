@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guilherme Ferreira | Arquitetura & Design</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-body: #F4F6F8; 
+            --bg-card: #FFFFFF; 
+            --charcoal: #3C4146; 
+            --bronze: #B89C79; 
+            --gray-light: #F0F4F8; 
+            --input-bg: #F3F4F6; 
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--charcoal);
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden; 
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* --- SPLASH SCREEN --- */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #FFFFFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease-in-out, visibility 1s;
+        }
+        
+        .splash-logo { width: 65vw; max-width: 900px; opacity: 0; animation: reveal 1.5s forwards ease-out; }
+        @keyframes reveal { 100% { opacity: 1; transform: scale(1); } }
+
+        /* --- MOTOR DE ROLAGEM E TRILHA --- */
+        .scroll-container {
+            width: 100vw;
+            height: 90vh;
+            margin-top: 5vh;
+            display: flex;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-behavior: auto; 
+            scrollbar-width: none; 
+        }
+        .scroll-container::-webkit-scrollbar { display: none; }
+
+        .track {
+            display: flex;
+            height: 100%;
+            margin-left: 2.5vw; 
+            border-radius: 20px; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+            flex-shrink: 0;
+            overflow: hidden; 
+        }
+
+        .end-spacer { width: 2.5vw; height: 100%; flex-shrink: 0; }
+
+        /* --- PAINÉIS PADRÕES --- */
+        .panel {
+            width: 100vw; 
+            height: 100%;
+            flex-shrink: 0;
+            display: flex;
+        }
+
+        .split-panel .image-side {
+            width: 45%;
+            height: 100%;
+            background-size: cover;
+            background-position: center center;
+            position: relative; 
+            overflow: hidden;
+        }
+
+        .split-panel .text-side {
+            width: 55%;
+            height: 100%;
+            padding: 8% 6%; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .split-panel.reverse { flex-direction: row-reverse; }
+
+        /* --- O NOVO MOSAICO ETHEREAL (5 COLUNAS SOB MEDIDA) --- */
+        .masonry-grid {
+            display: grid;
+            /* Ajuste Mestre:
+               Col 1 (Texto): 1fr
+               Col 2 (Casas Empilhadas LARGAS): 1.5fr
+               Col 3 (Prédio Único Gigante): 1fr
+               Col 4 (Quartos Empilhados): 1fr
+               Col 5 (Quarto + CTA): 1fr
+            */
+            grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr;
+            grid-template-rows: repeat(2, 1fr);
+            width: 100%; 
+            height: 100%;
+            background-color: var(--charcoal);
+        }
+
+        .masonry-item {
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transition: transform 0.5s ease;
+        }
+
+        .masonry-item:hover {
+            z-index: 10;
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .span-row-2 {
+            grid-row: span 2;
+        }
+
+        /* Card de Texto dentro do Grid (Intacto) */
+        .text-card-grid {
+            background-color: var(--gray-light);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+            transition: none; 
+        }
+        .text-card-grid:hover { transform: none; box-shadow: none; z-index: 1; }
+
+        /* NOVO Bloco de CTA Premium */
+        .cta-block {
+            background-color: var(--charcoal);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px; /* Mais espaço pra respirar */
+            text-align: center;
+            transition: none; 
+        }
+        .cta-block:hover { transform: none; box-shadow: none; }
+
+        /* --- TAGS E BOTÕES --- */
+        .bio-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px; }
+        .bio-tags span { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--bronze); border: 1px solid rgba(184, 156, 121, 0.4); padding: 6px 14px; border-radius: 50px; background: rgba(184, 156, 121, 0.05); }
+
+        .btn-submit { background-color: var(--charcoal); color: #FFFFFF; padding: 16px; border: none; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: all 0.3s; margin-top: 5px; border-radius: 6px; text-decoration: none; display: inline-block; }
+        .btn-submit:hover { background-color: var(--bronze); }
+        
+        .btn-cta-mosaic { background-color: var(--bronze); padding: 16px 28px; font-size: 0.8rem; border: none; color: #fff; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; cursor: pointer; border-radius: 4px; text-decoration: none; transition: background 0.3s; margin-top: 15px;}
+        .btn-cta-mosaic:hover { background-color: #a38765; }
+
+        /* --- PAINEL DE CONTATO --- */
+        .contact-panel { background-color: var(--bg-card); color: var(--charcoal); padding: 0 5vw; display: flex; align-items: center; justify-content: flex-start; }
+        .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 5vw; width: 100%; max-width: 1200px; align-items: center; }
+        .contact-info { display: flex; flex-direction: column; justify-content: center; text-align: left; }
+        .contact-form { display: flex; flex-direction: column; gap: 10px; background: #FFFFFF; padding: 30px; border-radius: 12px; border: 1px solid #E5E7EB; box-shadow: 0 10px 30px rgba(0,0,0,0.03); width: 100%; }
+
+        .form-group { display: flex; flex-direction: column; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 16px; background: var(--input-bg); border: 1px solid transparent; color: var(--charcoal); font-family: 'Montserrat', sans-serif; font-size: 0.85rem; border-radius: 6px; transition: all 0.3s ease; }
+        .form-group select { appearance: none; -webkit-appearance: none; cursor: pointer; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B89C79' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 16px center; background-size: 16px; padding-right: 40px; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--bronze); background: #FFFFFF; }
+        .form-group textarea { resize: none; height: 80px; }
+
+        .contact-links { margin-top: 20px; display: flex; gap: 20px; flex-wrap: wrap; }
+        .social-btn { display: flex; align-items: center; gap: 8px; color: var(--bronze); text-decoration: none; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; transition: color 0.3s; }
+        .social-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .social-btn:hover { color: var(--charcoal); }
+
+        .footer { margin-top: 40px; font-size: 0.75rem; color: #9CA3AF; letter-spacing: 1px; text-align: left; }
+        .footer a { color: var(--bronze); font-weight: 700; text-decoration: none; transition: color 0.3s; }
+        .footer a:hover { color: var(--charcoal); text-decoration: underline; }
+
+        /* TIPOGRAFIA */
+        .subtitle { font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--bronze); margin-bottom: 15px; font-weight: 600; }
+        .title { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 4vw, 3.5rem); line-height: 1.1; margin-bottom: 20px; }
+        .description { font-size: 1rem; line-height: 1.6; font-weight: 300; opacity: 0.9; max-width: 500px; }
+        .bold-accent { font-weight: 600; color: var(--charcoal); }
+
+    </style>
+</head>
+<body>
+
+    <div id="splash-screen">
+        <img src="logo.png" alt="GF Arquitetura" class="splash-logo">
+    </div>
+
+    <div class="scroll-container" id="ethereal-scroll">
+        
+        <div class="track">
+            <section class="panel split-panel" id="panel-1">
+                <div class="image-side" style="background-image: url('foto-arquiteto.png');"></div>
+                
+                <div class="text-side" style="background-color: var(--bg-card); color: var(--charcoal);">
+                    <span class="subtitle">O Estúdio</span>
+                    <h1 class="title">Guilherme Ferreira</h1>
+                    <p class="description">
+                        Desenvolvo projetos residenciais e comerciais focados em entregar <span class="bold-accent">soluções práticas e sem dor de cabeça</span>. Mais do que desenhar espaços, minha missão é entender como você vive e trabalha, garantindo excelência da concepção à obra final.
+                    </p>
+                    
+                    <div class="bio-tags">
+                        <span>Arquitetura</span>
+                        <span>Diagnóstico Técnico</span>
+                        <span>Regularização</span>
+                        <span>Gestão de Obras</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel split-panel reverse" id="panel-2">
+                <div class="image-side" style="background-image: url('casa-ambiente-integrado.jpeg');"></div>
+                
+                <div class="text-side" style="background-color: var(--gray-light); color: var(--charcoal);">
+                    <span class="subtitle">Residencial Araguari</span>
+                    <h1 class="title">Arquitetura como<br>Experiência</h1>
+                    <p class="description">
+                        Transformamos uma área compacta de 90m² em um ambiente integrado, funcional e cheio de identidade. 
+                        A arquitetura bem pensada não precisa ser exagerada; ela funciona, acolhe e valoriza o jeito mineiro de viver os espaços, equilibrando materiais, luz natural e proporções reais de uso.
+                    </p>
+                </div>
+            </section>
+
+            <section class="panel" id="panel-3" style="width: 130vw;">
+                <div class="masonry-grid">
+                    
+                    <div class="masonry-item span-row-2 text-card-grid">
+                        <span class="subtitle" style="color: var(--bronze);">Nossa Filosofia</span>
+                        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 15px; color: var(--charcoal); line-height: 1.2;">Arquitetura não é só estética. É experiência.</h3>
+                        <p style="font-size: 0.85rem; line-height: 1.6; color: var(--charcoal); opacity: 0.85;">
+                            Cada projeto começa entendendo como as pessoas vivem e recebem no dia a dia. Transformamos áreas compactas em ambientes integrados, cheios de identidade.<br><br>
+                            Se você acredita que a arquitetura deve ser vivida, não apenas vista, estamos falando a mesma língua.<br><br>
+                            <strong style="color: var(--charcoal);">📍 Araguari - MG</strong>
+                        </p>
+                    </div>
+
+                    <div class="masonry-item" style="background-image: url('casa-ambiente-integrado-2.jpeg');"></div>
+                    <div class="masonry-item" style="background-image: url('casa-ambiente-integrado-3.jpeg');"></div>
+                    
+                    <div class="masonry-item span-row-2" style="background-image: url('predio-1.jpeg');"></div>
+                    
+                    <div class="masonry-item" style="background-image: url('quarto-1.png');"></div>
+                    <div class="masonry-item" style="background-image: url('quarto-2.png');"></div>
+                    
+                    <div class="masonry-item" style="background-image: url('quarto-3.png');"></div>
+                    
+                    <div class="cta-block" style="grid-row: span 1;">
+                        <span style="color: var(--bronze); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; margin-bottom: 15px;">Transformação</span>
+                        <h3 style="color: #fff; font-family: 'Playfair Display', serif; margin-bottom: 15px; font-size: 1.8rem; line-height: 1.2;">O Seu Espaço<br>com Identidade</h3>
+                        <p style="color: #9CA3AF; font-size: 0.85rem; margin-top: 5px; line-height: 1.6; margin-bottom: 20px;">Conheça nosso processo.</p>
+                        <a href="portfolio.html" class="btn-cta-mosaic">Explorar Portfólio</a>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="panel contact-panel" id="panel-4">
+                <div class="contact-wrapper">
+                    
+                    <div class="contact-info">
+                        <span class="subtitle">Inicie seu Projeto</span>
+                        <h1 class="title">Projetos<br>Sob Medida</h1>
+                        <p class="description">
+                            Cada detalhe é pensado exclusivamente para resolver a sua necessidade e maximizar o potencial do seu espaço. Vamos conversar?
+                        </p>
+                        
+                        <div class="contact-links">
+                            <a href="https://wa.me/553195771182?text=Olá,%20Guilherme%20Ferreira%20Arquiteto,%20acabei%20de%20ver%20o%20seu%20site%20e%20quero%20fazer%20um%20orçamento!" target="_blank" class="social-btn">
+                                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                Telefone
+                            </a>
+                            <a href="https://www.instagram.com/guilhermeferreira.arq/" target="_blank" class="social-btn">
+                                <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                                Instagram
+                            </a>
+                            <a href="https://www.linkedin.com/in/guilherme-ferreira-9150a820b/" target="_blank" class="social-btn">
+                                <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                LinkedIn
+                            </a>
+                        </div>
+
+                        <div class="footer">
+                            &copy; 2026 Desenvolvido por <a href="https://www.vulcra.com.br" target="_blank">VULCRA</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-form">
+                        <div class="form-group">
+                            <input type="text" placeholder="Seu Nome completo">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Seu E-mail profissional">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Qual o local ou tipo do projeto?">
+                        </div>
+                        <div class="form-group">
+                            <select>
+                                <option value="" disabled selected>Expectativa de Investimento</option>
+                                <option value="800-1500">R$ 800 a R$ 1.500</option>
+                                <option value="1500-3000">R$ 1.500 a R$ 3.000</option>
+                                <option value="3000-5000">R$ 3.000 a R$ 5.000</option>
+                                <option value="acima-5000">Acima de R$ 5.000</option>
+                                <option value="nao-sei">Ainda não sei</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Descreva brevemente o seu projeto..."></textarea>
+                        </div>
+                        <button class="btn-submit">SOLICITAR ORÇAMENTO</button>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+        
+        <div class="end-spacer"></div>
+
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const splash = document.getElementById('splash-screen');
+                splash.style.opacity = '0';
+                setTimeout(() => { splash.style.visibility = 'hidden'; }, 1000);
+            }, 1800);
+        });
+
+        const scrollContainer = document.getElementById('ethereal-scroll');
+        
+        scrollContainer.addEventListener('wheel', (evt) => {
+            evt.preventDefault();
+            scrollContainer.scrollLeft += evt.deltaY * 1.5;
+        }, { passive: false });
+    </script>
+</body>
+</html>

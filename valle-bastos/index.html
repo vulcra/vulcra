@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valle & Bastos | Segurança Jurídica no Varejo Imobiliário</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0A1128;      
+            --bg-light: #F8FAFC;     
+            --bg-card: #FFFFFF;
+            --text-main: #1E293B;    
+            --text-light: #FFFFFF;
+            --text-sub: #64748B;
+            --accent-gold: #D4AF37;  
+            
+            --font-title: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+        }
+
+        /* HEADER */
+        header { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 25px 8%; z-index: 1000; background-color: rgba(10, 17, 40, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+        /* =========================================
+           ALINHAMENTO DO LOGOTIPO (CENTRALIZAÇÃO)
+           ========================================= */
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centraliza horizontalmente o texto secundário */
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-light);
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1;
+            z-index: 1001; /* Mantém acima da barra lateral mobile */
+        }
+
+        /* Estilo para o texto secundário (o dourado) */
+        .logo span {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            color: var(--accent-gold);
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 5px;
+            display: block; /* Garante que fique em uma nova linha */
+        }
+
+        @media (max-width: 968px) {
+            .logo {
+                align-items: flex-start;
+                text-align: left;
+            }
+        }
+                
+        .nav-links { display: flex; gap: 25px; list-style: none; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--text-light); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s ease; font-weight: 500; }
+        .nav-links a:hover { color: var(--accent-gold); }
+        .btn-header { background-color: var(--accent-gold); color: var(--bg-dark) !important; padding: 12px 25px; border-radius: 4px; font-weight: 600 !important; }
+        .btn-header:hover { background-color: #FFF !important; }
+
+        /* HERO SECTION */
+        .hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 8% 0; background-color: var(--bg-dark); position: relative; overflow: hidden; }
+        .hero::after { content: ''; position: absolute; right: 0; top: 0; width: 50%; height: 100%; background-image: url('https://images.unsplash.com/photo-1582407947304-fd86f028f716?q=80&w=1200'); background-size: cover; background-position: center; opacity: 0.4; mask-image: linear-gradient(to right, transparent, black 40%); -webkit-mask-image: linear-gradient(to right, transparent, black 40%); }
+        .hero-content { flex: 1; max-width: 650px; z-index: 10; position: relative; }
+        .badge { display: inline-block; padding: 8px 16px; border: 1px solid rgba(212, 175, 55, 0.4); color: var(--accent-gold); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; border-radius: 50px; margin-bottom: 25px; }
+        .hero-content h1 { font-family: var(--font-title); font-size: clamp(3rem, 5vw, 4.5rem); font-weight: 700; line-height: 1.1; margin-bottom: 25px; color: var(--text-light); }
+        .hero-content p { font-size: 1.15rem; color: #CBD5E1; line-height: 1.7; margin-bottom: 40px; border-left: 2px solid var(--accent-gold); padding-left: 20px; }
+        .btn-primary { display: inline-flex; align-items: center; gap: 10px; padding: 18px 40px; background-color: var(--accent-gold); color: var(--bg-dark); text-decoration: none; font-weight: 600; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; border-radius: 4px; }
+        .btn-primary:hover { background-color: #FFF; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2); }
+        
+        /* ESTATÍSTICAS FLUTUANTES */
+        .stats-bar { position: relative; display: flex; max-width: 1200px; margin: -50px auto 80px; background-color: var(--bg-card); box-shadow: 0 20px 40px rgba(0,0,0,0.05); border-radius: 8px; z-index: 20; padding: 40px; justify-content: space-around; text-align: center; }
+        .stat-box h3 { font-family: var(--font-title); font-size: 2.5rem; color: var(--bg-dark); margin-bottom: 5px; }
+        .stat-box p { font-size: 0.85rem; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; font-weight: 500; }
+        .stat-divider { width: 1px; background-color: #E2E8F0; }
+
+        /* SOBRE O ESCRITÓRIO */
+        .about-section { padding: 60px 8% 100px; display: flex; align-items: center; gap: 80px; max-width: 1200px; margin: 0 auto; }
+        .about-text { flex: 1; }
+        .about-text h2 { font-family: var(--font-title); font-size: clamp(2.2rem, 4vw, 3rem); color: var(--bg-dark); margin-bottom: 20px; line-height: 1.2; }
+        .about-text p { font-size: 1.05rem; color: var(--text-sub); line-height: 1.8; margin-bottom: 30px; }
+        .feature-list { list-style: none; }
+        .feature-list li { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; font-weight: 500; color: var(--text-main); }
+        .feature-list svg { color: var(--accent-gold); width: 24px; height: 24px; flex-shrink: 0; }
+        .about-image { flex: 1; position: relative; }
+        .about-image img { width: 100%; border-radius: 8px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .experience-badge { position: absolute; bottom: -20px; left: -20px; background-color: var(--bg-dark); color: var(--text-light); padding: 30px; border-radius: 8px; border-bottom: 4px solid var(--accent-gold); }
+        .experience-badge h4 { font-family: var(--font-title); font-size: 2.5rem; margin-bottom: 5px; }
+        .experience-badge span { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+
+        /* NOVA SEÇÃO: DORES E SOLUÇÕES (Estilo Cards Sobrepostos) */
+        .solutions-section { background-color: var(--bg-light); padding: 60px 8% 100px; }
+        .solutions-header { text-align: center; margin-bottom: 70px; }
+        .solutions-header h2 { font-family: var(--font-title); font-size: clamp(2rem, 4vw, 2.5rem); color: var(--bg-dark); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        .solutions-header p { color: var(--text-sub); font-size: 1.05rem; }
+        .solutions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 60px 30px; max-width: 1200px; margin: 0 auto; }
+        .sol-card { background-color: var(--bg-card); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 8px; padding: 45px 30px 30px; position: relative; text-align: left; box-shadow: 0 10px 20px rgba(0,0,0,0.02); }
+        .sol-icon { position: absolute; top: -25px; left: 30px; background-color: var(--accent-gold); width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; border-radius: 4px; color: var(--bg-dark); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); }
+        .sol-card h4 { font-family: var(--font-title); font-size: 1.2rem; color: var(--bg-dark); margin-bottom: 15px; text-transform: uppercase; }
+        .sol-card p { font-size: 0.95rem; color: var(--text-sub); line-height: 1.6; }
+
+        /* NOVA SEÇÃO: NOSSA EQUIPE */
+        .team-section { padding: 100px 8%; background-color: var(--bg-card); text-align: center; border-top: 1px solid #E2E8F0; }
+        .team-header { margin-bottom: 60px; }
+        .team-header h2 { font-family: var(--font-body); font-size: 1.5rem; font-weight: 700; color: var(--bg-dark); text-transform: uppercase; letter-spacing: 2px; position: relative; display: inline-block; padding-bottom: 15px; }
+        .team-header h2::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 2px; background-color: var(--text-sub); }
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; max-width: 1000px; margin: 0 auto; }
+        .team-card { text-align: center; }
+        .team-card img { width: 100%; height: 380px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; filter: grayscale(10%) contrast(105%); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .team-card h4 { font-family: var(--font-body); font-weight: 700; font-size: 1.2rem; color: var(--bg-dark); margin-bottom: 10px; text-transform: uppercase; }
+        .team-card a { font-size: 0.9rem; color: var(--text-main); text-decoration: none; font-weight: 500; transition: color 0.3s ease; display: inline-flex; align-items: center; gap: 5px; }
+        .team-card a:hover { color: var(--accent-gold); }
+
+        /* =========================================
+           NOVA SEÇÃO: DEPOIMENTOS GOOGLE (AJUSTE FINO)
+           ========================================= */
+        .reviews-section { padding: 80px 8%; background-color: var(--bg-light); border-top: 1px solid #E2E8F0; overflow: hidden; }
+        .reviews-header-title { text-align: center; font-family: var(--font-body); font-weight: 700; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 50px; color: var(--bg-dark); position: relative; padding-bottom: 15px;}
+        .reviews-header-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 2px; background-color: var(--text-sub); }
+        
+        /* Aumentamos o GAP para 80px para afastar o carrossel do texto */
+        .reviews-wrapper { display: flex; align-items: center; gap: 80px; max-width: 1200px; margin: 0 auto; width: 100%; }
+        
+        .reviews-summary { text-align: center; min-width: 180px; flex-shrink: 0; }
+        .reviews-summary h3 { font-family: var(--font-body); font-weight: 700; font-size: 1.4rem; color: var(--bg-dark); margin-bottom: 10px; }
+        .reviews-summary svg.stars { width: 120px; margin-bottom: 5px; }
+        .reviews-summary p { font-size: 0.85rem; color: var(--text-main); font-weight: 500; margin-bottom: 15px; }
+        .reviews-summary img.google-logo { width: 80px; margin: 0 auto; }
+        
+        .carousel-container { position: relative; flex: 1; min-width: 0; }
+        
+        .reviews-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 15px 5px; scrollbar-width: none; scroll-snap-type: x mandatory; }
+        .reviews-carousel::-webkit-scrollbar { display: none; }
+        
+        .review-card { background: var(--bg-card); padding: 25px; border-radius: 8px; min-width: 280px; max-width: 300px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border: 1px solid #F1F5F9; scroll-snap-align: start; flex-shrink: 0; }
+        
+        .reviewer-info { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; position: relative; }
+        .reviewer-info img.avatar { width: 40px; height: 40px; border-radius: 50%; }
+        .reviewer-info h5 { font-size: 0.95rem; color: var(--bg-dark); }
+        .reviewer-info span { font-size: 0.75rem; color: var(--text-sub); display: block; }
+        .reviewer-info svg.g-icon { width: 18px; position: absolute; right: 0; top: 0; }
+        .review-card .stars-small svg { width: 14px; fill: #FBBC04; }
+        .review-card p { font-size: 0.9rem; color: var(--text-main); line-height: 1.6; margin-top: 10px; }
+
+        /* Setas Flutuantes Premium (Redondas) */
+        .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background-color: var(--bg-dark); border: 1px solid rgba(212, 175, 55, 0.4); color: var(--accent-gold); width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 10; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .carousel-btn:hover { background-color: var(--accent-gold); color: var(--bg-dark); box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4); border-color: var(--accent-gold); }
+        .carousel-btn.prev { left: -25px; } /* Ajustado para não vazar pra fora nem colar no texto */
+        .carousel-btn.next { right: -20px; }
+        .carousel-btn:disabled { opacity: 0; pointer-events: none; }
+
+        /* As Novas Setas Flutuantes Premium */
+        .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background-color: var(--bg-dark); border: 1px solid rgba(212, 175, 55, 0.4); color: var(--accent-gold); width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 10; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .carousel-btn:hover { background-color: var(--accent-gold); color: var(--bg-dark); box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4); border-color: var(--accent-gold); }
+        .carousel-btn.prev { left: -15px; }
+        .carousel-btn.next { right: -15px; }
+        /* Quando não tiver pra onde rolar, a seta some elegante */
+        .carousel-btn:disabled { opacity: 0; pointer-events: none; }
+
+
+        /* ÁREAS DE ATUAÇÃO */
+        .practice-areas { background-color: var(--bg-dark); padding: 100px 8%; text-align: center; }
+        .section-header { max-width: 600px; margin: 0 auto 60px; }
+        .section-header h2 { font-family: var(--font-title); font-size: clamp(2.2rem, 4vw, 3rem); color: var(--text-light); margin-bottom: 15px; }
+        .section-header p { color: #CBD5E1; font-size: 1.05rem; }
+        
+        .areas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .area-card { background-color: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 40px 30px; text-align: left; border-radius: 8px; transition: all 0.3s ease; cursor: pointer; }
+        .area-card:hover { background-color: rgba(255,255,255,0.05); transform: translateY(-5px); border-color: rgba(212, 175, 55, 0.3); }
+        .area-icon { margin-bottom: 25px; color: var(--accent-gold); }
+        .area-card h3 { font-family: var(--font-title); font-size: 1.4rem; color: var(--text-light); margin-bottom: 15px; }
+        .area-card p { font-size: 0.95rem; color: #94A3B8; line-height: 1.6; }
+
+        /* BLOG / ATUALIZAÇÕES */
+        .blog-section { padding: 100px 8%; background-color: var(--bg-card); border-top: 1px solid #E2E8F0; }
+        .blog-header { display: flex; justify-content: space-between; align-items: flex-end; max-width: 1200px; margin: 0 auto 50px; }
+        .blog-header h2 { font-family: var(--font-title); font-size: clamp(2.2rem, 4vw, 3rem); color: var(--bg-dark); }
+        .blog-link { color: var(--bg-dark); text-decoration: none; font-weight: 600; border-bottom: 1px solid var(--accent-gold); padding-bottom: 5px; transition: color 0.3s ease; }
+        .blog-link:hover { color: var(--accent-gold); }
+        
+        .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
+        .blog-card { background: var(--bg-light); border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.03); transition: transform 0.3s ease; border: 1px solid #F1F5F9; }
+        .blog-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+        .blog-img { width: 100%; height: 220px; object-fit: cover; border-bottom: 3px solid var(--accent-gold); }
+        .blog-content { padding: 30px; }
+        .blog-meta { font-size: 0.8rem; color: var(--accent-gold); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: block; }
+        .blog-content h4 { font-family: var(--font-title); font-size: 1.3rem; color: var(--bg-dark); margin-bottom: 15px; line-height: 1.4; }
+        .blog-content p { font-size: 0.95rem; color: var(--text-sub); line-height: 1.6; margin-bottom: 20px; }
+        .read-more { font-size: 0.9rem; color: var(--bg-dark); font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 5px; }
+
+        /* FORMULÁRIO DE TRIAGEM */
+        .contact-section { padding: 100px 8%; background-color: var(--bg-light); border-top: 1px solid #E2E8F0; display: flex; justify-content: center; }
+        .contact-container { max-width: 1000px; width: 100%; display: flex; background: var(--bg-dark); border-radius: 12px; overflow: hidden; box-shadow: 0 30px 60px rgba(10, 17, 40, 0.2); }
+        .contact-info { flex: 1; padding: 60px 50px; background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=800'); background-size: cover; background-position: center; position: relative; color: var(--text-light); }
+        .contact-info::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(10,17,40,0.95) 0%, rgba(10,17,40,0.8) 100%); }
+        .info-content { position: relative; z-index: 2; }
+        .info-content h3 { font-family: var(--font-title); font-size: 2rem; margin-bottom: 20px; }
+        
+        .contact-form { flex: 1.2; padding: 60px 50px; }
+        .contact-form h3 { font-family: var(--font-title); font-size: 1.8rem; color: var(--text-light); margin-bottom: 10px; }
+        .contact-form p { color: #94A3B8; font-size: 0.95rem; margin-bottom: 30px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 15px 20px; background-color: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; color: var(--text-light); font-family: var(--font-body); font-size: 0.95rem; outline: none; transition: border 0.3s ease; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent-gold); }
+        
+        /* CORREÇÃO DO BUG DO SELECT NO MODO ESCURO */
+        .form-group select option { background-color: var(--bg-dark); color: var(--text-light); }
+        
+        /* FOOTER */
+        footer { background-color: #050814; padding: 40px 8%; text-align: center; color: #64748B; font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.05); }
+
+        /* WPP FLUTUANTE */
+        .float-wpp { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background-color: var(--bg-dark); border: 2px solid var(--accent-gold); color: var(--accent-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 20px rgba(0,0,0,0.4); z-index: 9999; transition: all 0.3s ease; }
+        .float-wpp:hover { transform: scale(1.1); background-color: var(--accent-gold); color: var(--bg-dark); }
+
+        /* MENU MOBILE (HAMBÚRGUER) */
+        .menu-toggle { display: none; flex-direction: column; justify-content: space-between; width: 30px; height: 21px; cursor: pointer; z-index: 1001; margin-left: auto; }
+        .menu-toggle span { display: block; height: 2px; width: 100%; background-color: var(--accent-gold); border-radius: 2px; transition: all 0.3s ease; }
+
+        @media (max-width: 968px) {
+            .menu-toggle { display: flex; }
+            .nav-links { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background-color: var(--bg-dark); border-left: 1px solid rgba(212, 175, 55, 0.2); flex-direction: column; justify-content: center; gap: 40px; transition: right 0.4s ease; }
+            .nav-links.active { right: 0; }
+            
+            .hero { padding-top: 150px; padding-bottom: 80px; }
+            .hero::after { display: none; }
+            .hero-content h1 { font-size: 2.8rem; }
+            .stats-bar { flex-direction: column; gap: 30px; margin: 0 5%; top: -30px; }
+            .stat-divider { width: 100%; height: 1px; }
+            .about-section { flex-direction: column; text-align: center; }
+            .feature-list li { justify-content: center; }
+            .experience-badge { left: 50%; transform: translateX(-50%); bottom: -30px; width: 80%; }
+            .reviews-wrapper { flex-direction: column; gap: 20px; }
+            .blog-header { flex-direction: column; align-items: center; gap: 20px; text-align: center; }
+            .contact-container { flex-direction: column; }
+        }
+
+        /* =========================================
+           CARROSSEL DE DEPOIMENTOS (ESTILIZAÇÃO DAS SETAS)
+           ========================================= */
+        /* Estilização e posicionamento das setas */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--bg-dark);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            color: var(--accent-gold);
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-btn:hover {
+            background-color: var(--accent-gold);
+            color: var(--bg-dark);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .carousel-btn.prev {
+            left: -60px; /* Ajuste a distância da borda */
+        }
+
+        .carousel-btn.next {
+            right: -60px; /* Ajuste a distância da borda */
+        }
+
+        /* Estilos para quando o botão estiver desabilitado */
+        .carousel-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            border-color: rgba(100, 116, 139, 0.3);
+            color: #64748B;
+        }
+        .carousel-btn:disabled:hover {
+            background-color: var(--bg-dark);
+            color: #64748B;
+            box-shadow: none;
+        }
+        
+        /* Garante que o contêiner wrapper tenha posicionamento relativo para as setas absolutadas */
+        .reviews-wrapper {
+            position: relative;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">VALLE & BASTOS<span>Advocacia Imobiliária</span></a>
+        
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span><span></span><span></span>
+        </div>
+
+        <nav>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#escritorio">O Escritório</a></li>
+                <li><a href="#solucoes">Soluções</a></li>
+                <li><a href="#equipe">Equipe</a></li>
+                <li><a href="#artigos">Leis do Lar</a></li>
+                <li><a href="#contato" class="btn-header">Falar com Advogado</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="badge">Especialistas em Leis de Moradia</span>
+            <h1>Blindagem jurídica para o seu imóvel ou contrato de aluguel.</h1>
+            <p>Atuação preventiva e contenciosa focada em conflitos de inquilinato, despejo, renovatórias e compra e venda. Protegemos sua moradia e seu investimento com agilidade e transparência 100% digital.</p>
+            <a href="#contato" class="btn-primary">
+                Evitar Conflitos Imobiliários
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <div class="stats-bar">
+        <div class="stat-box">
+            <h3>32</h3>
+            <p>Anos de Prática</p>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-box">
+            <h3>1000+</h3>
+            <p>Contratos Blindados</p>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-box">
+            <h3>24h</h3>
+            <p>Análise Preliminar</p>
+        </div>
+    </div>
+
+    <section class="about-section" id="escritorio">
+        <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=800" alt="Consultoria Imobiliária">
+            <div class="experience-badge">
+                <h4>Moradia</h4>
+                <span>É um Direito.</span>
+            </div>
+        </div>
+        <div class="about-text">
+            <h2>Justiça e Equilíbrio nas Relações de Inquilinato.</h2>
+            <p>As leis que regem a moradia e o aluguel no Brasil são complexas e cheias de detalhes técnicos. Nós entendemos que, seja você dono do imóvel ou inquilino, o equilíbrio contratual é fundamental para a paz e a segurança do seu lar ou investimento.</p>
+            <ul class="feature-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Foco absoluto na Lei do Inquilinato (Lei 8.245).</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Mediação especializada para evitar despejos e litígios.</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Análise de risco em contratos de compra e venda.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="solutions-section" id="solucoes">
+        <div class="solutions-header">
+            <h2>Soluções Completas para sua vida imobiliária</h2>
+            <p>Não aceite cobranças indevidas ou dores de cabeça. Nós resolvemos a burocracia para você.</p>
+        </div>
+        <div class="solutions-grid">
+            
+            <div class="sol-card">
+                <div class="sol-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
+                <h4>Fundo de Reserva</h4>
+                <p>Não pague fundo de reserva se você é inquilino. Essa é uma despesa extraordinária de responsabilidade exclusiva do locador do imóvel. Nós ajudamos no reembolso.</p>
+            </div>
+
+            <div class="sol-card">
+                <div class="sol-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></div>
+                <h4>Transferência de Emprego</h4>
+                <p>Foi transferido pelo seu empregador e a imobiliária quer cobrar multa por quebra de contrato? A Lei do Inquilinato te isenta dessa multa mediante comprovação.</p>
+            </div>
+
+            <div class="sol-card">
+                <div class="sol-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 12H16c-.7 2-2 3-4 3s-3.3-1-4-3H2.5"/><path d="M5.5 5.1L2 12v6c0 1.1.9 2 2 2h16a2 2 0 002-2v-6l-3.5-6.9A2 2 0 0016.7 4H7.3a2 2 0 00-1.8 1.1z"/></svg></div>
+                <h4>Atraso no Aluguel</h4>
+                <p>Inquilino não está pagando? Ingressamos com ação de despejo com pedido de liminar para desocupação rápida em até 15 dias, minimizando seus prejuízos.</p>
+            </div>
+
+            <div class="sol-card">
+                <div class="sol-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
+                <h4>Problemas Estruturais</h4>
+                <p>Infiltrações graves ou telhado caindo? A responsabilidade estrutural é do dono. Intermediamos os reparos ou a rescisão por falha de habitabilidade.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="team-section" id="equipe">
+        <div class="team-header">
+            <h2>Nossa Equipe</h2>
+        </div>
+        <div class="team-grid">
+            <div class="team-card">
+                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800" alt="Dr. Marcos Valle">
+                <h4>Dr. Marcos Valle</h4>
+                <a href="#contato">→ Conheça</a>
+            </div>
+            <div class="team-card">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800" alt="Dra. Helena Bastos">
+                <h4>Dra. Helena Bastos</h4>
+                <a href="#contato">→ Conheça</a>
+            </div>
+            <div class="team-card">
+                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800" alt="Dr. Leonardo Faria">
+                <h4>Dr. Leonardo Faria</h4>
+                <a href="#contato">→ Conheça</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="practice-areas" id="areas">
+        <div class="section-header">
+            <h2>Sua Segurança Jurídica no Imóvel</h2>
+            <p>Estrutura multidisciplinar desenhada para resolver conflitos de aluguel, garantir a posse ou blindar sua compra.</p>
+        </div>
+        <div class="areas-grid">
+            <div class="area-card">
+                <div class="area-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
+                <h3>Inquilinato & Despejo</h3>
+                <p>Ações de despejo por falta de pagamento, denúncia vazia, renovatórias de aluguel comercial e defesas de inquilinos em situação de vulnerabilidade.</p>
+            </div>
+            <div class="area-card">
+                <div class="area-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
+                <h3>Contratos de Aluguel</h3>
+                <p>Elaboração e revisão minuciosa de contratos residenciais e comerciais, garantindo cláusulas de reajuste, garantias e benfeitorias seguras.</p>
+            </div>
+            <div class="area-card">
+                <div class="area-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="14.31" y1="8" x2="20.05" y2="17.94"/><line x1="9.69" y1="8" x2="21.17" y2="8"/><line x1="7.38" y1="12" x2="13.12" y2="2.06"/><line x1="9.69" y1="16" x2="3.95" y2="6.06"/><line x1="14.31" y1="16" x2="2.83" y2="16"/><line x1="16.62" y1="12" x2="10.88" y2="21.94"/></svg></div>
+                <h3>Compra, Venda & Leilões</h3>
+                <p>Assessoria completa em transações imobiliárias (*Due Diligence*), análise de dívidas, gravames e defesa em leilões judiciais ou extrajudiciais.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="reviews-section" id="depoimentos">
+        <h2 class="reviews-header-title">Depoimentos</h2>
+        <div class="reviews-wrapper">
+            <div class="reviews-summary">
+                <h3>EXCELENTE</h3>
+                <svg class="stars" viewBox="0 0 100 20" fill="#FBBC04"><path d="M10 1L13 7L19 8L15 12L16 18L10 15L4 18L5 12L1 8L7 7L10 1Z"/><path transform="translate(20,0)" d="M10 1L13 7L19 8L15 12L16 18L10 15L4 18L5 12L1 8L7 7L10 1Z"/><path transform="translate(40,0)" d="M10 1L13 7L19 8L15 12L16 18L10 15L4 18L5 12L1 8L7 7L10 1Z"/><path transform="translate(60,0)" d="M10 1L13 7L19 8L15 12L16 18L10 15L4 18L5 12L1 8L7 7L10 1Z"/><path transform="translate(80,0)" d="M10 1L13 7L19 8L15 12L16 18L10 15L4 18L5 12L1 8L7 7L10 1Z"/></svg>
+                <p>Com base em 84 avaliações</p>
+                <img class="google-logo" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google">
+            </div>
+            
+            <div class="carousel-container">
+                <button class="carousel-btn prev" id="prev-review" aria-label="Avaliação anterior">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                
+                <div class="reviews-carousel">
+                    <div class="review-card">
+                        <div class="reviewer-info">
+                            <img class="avatar" src="https://ui-avatars.com/api/?name=Luan+Silva&background=E2E8F0" alt="Luan Silva">
+                            <div><h5>Luan Silva</h5><span>Há 1 semana</span></div>
+                            <svg class="g-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                        </div>
+                        <div class="stars-small"><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg></div>
+                        <p>Muito bom, recomendo. Resolveram meu problema de infiltração com o locador de forma ágil e super profissional. Não precisei gastar do meu bolso.</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="reviewer-info">
+                            <img class="avatar" src="https://ui-avatars.com/api/?name=Gleiciane+R&background=E2E8F0" alt="Gleiciane">
+                            <div><h5>Gleiciane Rodrigues</h5><span>Há 2 semanas</span></div>
+                            <svg class="g-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                        </div>
+                        <div class="stars-small"><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg></div>
+                        <p>Advogados mto atenciosos, educados, me ajudaram mtooo com a ordem de despejo do meu inquilino que não pagava. Obrigado!</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="reviewer-info">
+                            <img class="avatar" src="https://ui-avatars.com/api/?name=Heleno+M&background=E2E8F0" alt="Heleno">
+                            <div><h5>Heleno Mendes</h5><span>Há 1 mês</span></div>
+                            <svg class="g-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                        </div>
+                        <div class="stars-small"><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg></div>
+                        <p>Fui super bem tratado. Conseguiram anular a multa rescisória do meu aluguel quando fui transferido de cidade pelo meu trabalho.</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="reviewer-info">
+                            <img class="avatar" src="https://ui-avatars.com/api/?name=Mariana+Costa&background=E2E8F0" alt="Mariana Costa">
+                            <div><h5>Mariana Costa</h5><span>Há 2 meses</span></div>
+                            <svg class="g-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                        </div>
+                        <div class="stars-small"><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg></div>
+                        <p>Excelente assessoria na revisão do meu contrato comercial. Evitaram que eu assinasse cláusulas abusivas. Muito obrigada!</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="reviewer-info">
+                            <img class="avatar" src="https://ui-avatars.com/api/?name=Roberto+Alves&background=E2E8F0" alt="Roberto Alves">
+                            <div><h5>Roberto Alves</h5><span>Há 2 meses</span></div>
+                            <svg class="g-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                        </div>
+                        <div class="stars-small"><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg></div>
+                        <p>Comprei um imóvel que veio com dívidas de condomínio antigas ocultas. A equipe resolveu o litígio rapidamente.</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="reviewer-info">
+                            <img class="avatar" src="https://ui-avatars.com/api/?name=Fernanda+Lima&background=E2E8F0" alt="Fernanda Lima">
+                            <div><h5>Fernanda Lima</h5><span>Há 3 meses</span></div>
+                            <svg class="g-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                        </div>
+                        <div class="stars-small"><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg></div>
+                        <p>A imobiliária me cobrou fundo de reserva por 2 anos indevidamente. Graças ao escritório, consegui o reembolso integral.</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="reviewer-info">
+                            <img class="avatar" src="https://ui-avatars.com/api/?name=Carlos+Eduardo&background=E2E8F0" alt="Carlos Eduardo">
+                            <div><h5>Carlos Eduardo</h5><span>Há 3 meses</span></div>
+                            <svg class="g-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                        </div>
+                        <div class="stars-small"><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg></div>
+                        <p>Meu inquilino estava há 4 meses sem pagar. Em menos de 20 dias a liminar de despejo foi cumprida com perfeição.</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="reviewer-info">
+                            <img class="avatar" src="https://ui-avatars.com/api/?name=Patricia+Soares&background=E2E8F0" alt="Patricia Soares">
+                            <div><h5>Patricia Soares</h5><span>Há 4 meses</span></div>
+                            <svg class="g-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                        </div>
+                        <div class="stars-small"><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg></div>
+                        <p>Tive todo o suporte para arrematar um apartamento em leilão. Segurança jurídica do início ao fim do processo.</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="reviewer-info">
+                            <img class="avatar" src="https://ui-avatars.com/api/?name=Thiago+Freitas&background=E2E8F0" alt="Thiago Freitas">
+                            <div><h5>Thiago Freitas</h5><span>Há 5 meses</span></div>
+                            <svg class="g-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                        </div>
+                        <div class="stars-small"><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg></div>
+                        <p>Profissionais extremamente capacitados. Resolveram um impasse gigante na renovatória de aluguel da minha empresa.</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="reviewer-info">
+                            <img class="avatar" src="https://ui-avatars.com/api/?name=Camila+Borges&background=E2E8F0" alt="Camila Borges">
+                            <div><h5>Camila Borges</h5><span>Há 6 meses</span></div>
+                            <svg class="g-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                        </div>
+                        <div class="stars-small"><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg></div>
+                        <p>Fui muito bem orientada sobre meus direitos em uma rescisão antecipada. Equipe nota 10!</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="reviewer-info">
+                            <img class="avatar" src="https://ui-avatars.com/api/?name=Rafael+Nogueira&background=E2E8F0" alt="Rafael Nogueira">
+                            <div><h5>Rafael Nogueira</h5><span>Há 8 meses</span></div>
+                            <svg class="g-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                        </div>
+                        <div class="stars-small"><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg></div>
+                        <p>Estava com medo de perder meu investimento no apartamento na planta. O distrato foi feito sem dores de cabeça.</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="reviewer-info">
+                            <img class="avatar" src="https://ui-avatars.com/api/?name=Amanda+Silveira&background=E2E8F0" alt="Amanda Silveira">
+                            <div><h5>Amanda Silveira</h5><span>Há 9 meses</span></div>
+                            <svg class="g-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                        </div>
+                        <div class="stars-small"><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg></div>
+                        <p>Atendimento impecável! O advogado me explicou cada passo do processo de rescisão de forma muito clara e me deu muita paz.</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="reviewer-info">
+                            <img class="avatar" src="https://ui-avatars.com/api/?name=Lucas+Peixoto&background=E2E8F0" alt="Lucas Peixoto">
+                            <div><h5>Lucas Peixoto</h5><span>Há 10 meses</span></div>
+                            <svg class="g-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                        </div>
+                        <div class="stars-small"><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17l5.9 3.1-1.6-6.6 5.1-4.4-6.8-.6L12 2 9.4 8.5l-6.8.6 5.1 4.4-1.6 6.6z"/></svg></div>
+                        <p>Fechei a compra do meu primeiro imóvel com eles avaliando toda a documentação. Recomendo de olhos fechados.</p>
+                    </div>
+
+                </div>
+                
+                <button class="carousel-btn next" id="next-review" aria-label="Próxima avaliação">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="blog-section" id="artigos">
+        <div class="blog-header">
+            <div>
+                <h2>Leis do Lar: Seus Direitos Explicados</h2>
+                <p style="color: var(--text-sub); margin-top: 10px;">Conteúdo direto sobre aluguel, condomínio e moradia.</p>
+            </div>
+            <a href="#" class="blog-link">Ver todos os guias</a>
+        </div>
+        <div class="blog-grid">
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=800" alt="Blog 1" class="blog-img">
+                <div class="blog-content">
+                    <span class="blog-meta">Inquilinato • Há 2 dias</span>
+                    <h4>Aumento do Aluguel: O IGP-M pode ser substituído pelo IPCA?</h4>
+                    <p>Entenda quando a revisão judicial do índice de reajuste é possível devido à inflação excessiva e como negociar com o proprietário...</p>
+                    <a href="#" class="read-more">Ler guia completo <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?q=80&w=800" alt="Blog 2" class="blog-img">
+                <div class="blog-content">
+                    <span class="blog-meta">Despejo • Há 1 semana</span>
+                    <h4 style="font-size: 1.25rem;">Benfeitorias no imóvel alugado: Tenho direito a indenização ou retenção?</h4>
+                    <p>Uma análise clara sobre obras necessárias, úteis e voluptuárias e o que a Lei do Inquilinato diz sobre o ressarcimento...</p>
+                    <a href="#" class="read-more">Ler guia completo <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800" alt="Blog 3" class="blog-img">
+                <div class="blog-content">
+                    <span class="blog-meta">Contratos • Há 2 semanas</span>
+                    <h4>Garantia de Aluguel: Caução, Fiador ou Seguro Fiança?</h4>
+                    <p>Saiba qual a melhor opção para sua realidade, os riscos de cada modalidade e como a escolha impacta a aprovação do contrato...</p>
+                    <a href="#" class="read-more">Ler guia completo <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contato">
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="info-content">
+                    <h3>Paz e Segurança no seu Imóvel.</h3>
+                    <p style="line-height: 1.7; margin-bottom: 30px;">O tempo é o fator mais crítico em conflitos imobiliários, especialmente em riscos de despejo. Nossa equipe fará uma análise primária do seu caso e entrará em contato em até 2 horas úteis.</p>
+                    <div style="display: flex; gap: 20px; align-items: center;">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        <div>
+                            <span style="display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-gold);">Plantão WhatsApp 24h</span>
+                            <span style="font-size: 1.2rem; font-weight: 600;">(11) 99999-0000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form">
+                <h3>Análise Jurídica Imediata</h3>
+                <p>Preencha os dados abaixo para o especialista correto entrar em contato.</p>
+                <form action="#">
+                    <div class="form-group">
+                        <input type="text" placeholder="Seu Nome Completo" required>
+                    </div>
+                    <div style="display: flex; gap: 15px;">
+                        <div class="form-group" style="flex: 1;">
+                            <input type="email" placeholder="Seu E-mail" required>
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <input type="tel" placeholder="Seu WhatsApp" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <select required>
+                            <option value="" disabled selected>Qual sua situação?</option>
+                            <option value="dono_aluguel">Sou Dono e quero cobrar/despejar</option>
+                            <option value="inquilino_despejo">Sou Inquilino com risco de despejo</option>
+                            <option value="contrato">Quero fazer/revisar um contrato</option>
+                            <option value="compra_venda">Vou comprar ou vender um imóvel</option>
+                            <option value="outro">Outro problema imobiliário</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="3" placeholder="Descreva brevemente sua dúvida imobiliária..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; border: none; cursor: pointer;">Solicitar Ajuda Jurídica Confidencial</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 Desenvolvido por <a href="https://www.vulcra.com.br" target="_blank">VULCRA</a>
+    </footer>
+
+    <a href="#" class="float-wpp" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.405-.883-.733-1.479-1.641-1.653-1.938-.173-.298-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+    </a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // SCRIPT DO MENU MOBILE
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinksContainer = document.getElementById('nav-links');
+            const navItemsLinks = document.querySelectorAll('.nav-links li a');
+
+            if (mobileMenu && navLinksContainer) {
+                mobileMenu.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('active');
+                    navLinksContainer.classList.toggle('active');
+                });
+                navItemsLinks.forEach(item => {
+                    item.addEventListener('click', () => {
+                        mobileMenu.classList.remove('active');
+                        navLinksContainer.classList.remove('active');
+                    });
+                });
+            }
+
+            // SCRIPT DO CARROSSEL DE DEPOIMENTOS (ÚNICO E BLINDADO)
+            const carouselTrack = document.querySelector('.reviews-carousel');
+            const prevBtn = document.getElementById('prev-review');
+            const nextBtn = document.getElementById('next-review');
+
+            if (carouselTrack && prevBtn && nextBtn) {
+                
+                const checkArrows = () => {
+                    const maxScroll = Math.round(carouselTrack.scrollWidth - carouselTrack.clientWidth);
+                    const currentScroll = Math.round(carouselTrack.scrollLeft);
+                    
+                    if (currentScroll <= 5) {
+                        prevBtn.style.opacity = '0';
+                        prevBtn.style.pointerEvents = 'none';
+                    } else {
+                        prevBtn.style.opacity = '1';
+                        prevBtn.style.pointerEvents = 'auto';
+                    }
+                    
+                    if (currentScroll >= maxScroll - 5) {
+                        nextBtn.style.opacity = '0';
+                        nextBtn.style.pointerEvents = 'none';
+                    } else {
+                        nextBtn.style.opacity = '1';
+                        nextBtn.style.pointerEvents = 'auto';
+                    }
+                };
+
+                nextBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const cardWidth = carouselTrack.querySelector('.review-card').offsetWidth;
+                    carouselTrack.scrollLeft += (cardWidth + 20); 
+                });
+
+                prevBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const cardWidth = carouselTrack.querySelector('.review-card').offsetWidth;
+                    carouselTrack.scrollLeft -= (cardWidth + 20);
+                });
+
+                carouselTrack.addEventListener('scroll', checkArrows);
+                window.addEventListener('resize', checkArrows);
+                
+                setTimeout(checkArrows, 200);
+            }
+
+            // SCRIPT HEADER BACKGROUND
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('header');
+                if (window.scrollY > 50) {
+                    header.style.backgroundColor = 'rgba(10, 17, 40, 0.98)';
+                } else {
+                    header.style.backgroundColor = 'rgba(10, 17, 40, 0.8)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

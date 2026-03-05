@@ -189,10 +189,50 @@
         .faq-item.active .faq-icon { transform: rotate(45deg); }
 
 
-        /* RESPONSIVIDADE */
-        @media (max-width: 1300px) { .nav-btn.prev { left: 10px; } .nav-btn.next { right: 10px; } }
-        @media (max-width: 968px) { .hero { flex-direction: column; text-align: center; padding-top: 150px; } .hero-visuals { width: 100%; margin-top: 50px; height: 350px;} .mockup-back { right: 0; width: 300px; height: 400px; } .mockup-front { left: 0; width: 240px; height: 340px; } .authority-container { flex-direction: column; text-align: center; gap: 50px; } .image-wrapper { height: 500px; } .stats-grid { text-align: left; } .nav-btn { display: none !important; } .carousel-wrapper { padding: 0; } .comparison-slider { height: 300px; } }
-        @media (max-width: 500px) { .hero { padding-top: 120px; } .stats-grid { grid-template-columns: 1fr; text-align: center; } .service-card { padding: 30px; height: auto; min-height: 400px; } .diff-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; } .review-card { min-width: 290px; padding: 20px; } .comparison-slider { height: 200px; } }
+        /* =========================================
+           RESPONSIVIDADE (ESTRATÉGIA DE CONTENÇÃO)
+           ========================================= */
+        @media (max-width: 1300px) { 
+            .nav-btn.prev { left: 10px; } 
+            .nav-btn.next { right: 10px; } 
+        }
+
+        @media (max-width: 968px) { 
+            /* 1. Destrava a altura para o container crescer conforme o conteúdo */
+            .hero { flex-direction: column; text-align: center; padding-top: 130px; min-height: unset; height: auto; display: block; } 
+            .hero-content { max-width: 100%; margin-bottom: 50px; }
+            
+            /* 2. Cria a "Caixa Rígida" para as imagens não vazarem (Tablet) */
+            .hero-visuals { width: 100%; height: 450px; position: relative; margin: 0 auto; display: block; } 
+            .mockup-back { right: 10%; width: 280px; height: 380px; top: 0; } 
+            .mockup-front { left: 10%; width: 220px; height: 320px; bottom: 20px; } 
+            
+            .authority-container { flex-direction: column; text-align: center; gap: 50px; } 
+            .image-wrapper { height: 500px; } 
+            .stats-grid { text-align: left; } 
+            .nav-btn { display: none !important; } 
+            .carousel-wrapper { padding: 0; } 
+            .comparison-slider { height: 300px; } 
+        }
+
+        @media (max-width: 500px) { 
+            .hero { padding-top: 110px; } 
+            .hero-content h1 { font-size: clamp(2.5rem, 8vw, 3rem); }
+            
+            /* 3. Reduz a "Caixa Rígida" para Celular */
+            .hero-visuals { height: 320px; }
+            
+            /* 4. Imagens milimetricamente calculadas para ficarem DENTRO da caixa de 320px */
+            .mockup-back { right: 5%; width: 180px; height: 250px; top: 0; }
+            .mockup-front { left: 5%; width: 150px; height: 200px; bottom: 20px; } 
+            
+            .image-wrapper { height: 400px; max-width: 100%; border-radius: 150px 150px 0 0; }
+            .stats-grid { grid-template-columns: 1fr; text-align: center; } 
+            .service-card { padding: 30px; height: auto; min-height: 380px; } 
+            .diff-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; } 
+            .review-card { min-width: 290px; padding: 20px; } 
+            .comparison-slider { height: 200px; } 
+        }
     
         /* =========================================
            SESSÃO FOOTER E WHATSAPP FLUTUANTE
@@ -227,13 +267,65 @@
 
         @media (max-width: 968px) { .footer-main { grid-template-columns: 1fr; text-align: center; } }
     
+        /* =========================================
+           MENU MOBILE (HAMBÚRGUER E SIDEBAR)
+           ========================================= */
+        /* Oculta o botão no computador */
+        .menu-toggle { display: none; flex-direction: column; justify-content: space-between; width: 30px; height: 21px; cursor: pointer; z-index: 1001; }
+        .menu-toggle span { display: block; height: 2px; width: 100%; background-color: var(--accent-gold); border-radius: 2px; transition: all 0.3s ease-in-out; }
+
+        @media (max-width: 968px) {
+            /* Mostra o botão hambúrguer no celular e tablet */
+            .menu-toggle { display: flex; margin-left: auto; }
+            
+            /* Transforma a lista de links em uma barra lateral invisível */
+            .nav-links { 
+                position: fixed; 
+                top: 0; 
+                right: -100%; /* Esconde fora da tela */
+                width: 280px; 
+                height: 100vh; 
+                background-color: var(--bg-dark); 
+                border-left: 1px solid rgba(212, 175, 55, 0.2); 
+                flex-direction: column; 
+                justify-content: center; 
+                align-items: center; 
+                gap: 40px; 
+                transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+                z-index: 1000; 
+                box-shadow: -10px 0 30px rgba(0,0,0,0.8); 
+            }
+            
+            /* Classe que o Javascript vai acionar para mostrar o menu */
+            .nav-links.active { right: 0; }
+            .nav-links a { font-size: 1.2rem; }
+            
+            /* Animação Mágica: Transforma as 3 linhas em um "X" dourado */
+            .menu-toggle.active span:nth-child(1) { transform: translateY(9.5px) rotate(45deg); }
+            .menu-toggle.active span:nth-child(2) { opacity: 0; }
+            .menu-toggle.active span:nth-child(3) { transform: translateY(-9.5px) rotate(-45deg); }
+        }
+
     </style>
 </head>
 <body>
 
     <header>
         <a href="#" class="logo">ATELIÊ<span>ORAL</span></a>
-        <nav><ul class="nav-links"><li><a href="#sobre">A Especialista</a></li><li><a href="#solucoes">Soluções</a></li><li><a href="#experiencia">A Experiência</a></li></ul></nav>
+        
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#sobre">A Especialista</a></li>
+                <li><a href="#solucoes">Soluções</a></li>
+                <li><a href="#experiencia">A Experiência</a></li>
+            </ul>
+        </nav>
     </header>
 
     <section class="hero">
@@ -511,6 +603,27 @@
             if (slider && sliderContainer) {
                 slider.addEventListener('input', (e) => {
                     sliderContainer.style.setProperty('--slider-pos', `${e.target.value}%`);
+                });
+            }
+
+            // SCRIPT DO MENU MOBILE (HAMBÚRGUER)
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinksContainer = document.getElementById('nav-links');
+            const navItemsLinks = document.querySelectorAll('.nav-links li a');
+
+            if (mobileMenu && navLinksContainer) {
+                // Abre e fecha o menu ao clicar no hambúrguer
+                mobileMenu.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('active');
+                    navLinksContainer.classList.toggle('active');
+                });
+
+                // Fecha o menu automaticamente quando o usuário clica em um link
+                navItemsLinks.forEach(item => {
+                    item.addEventListener('click', () => {
+                        mobileMenu.classList.remove('active');
+                        navLinksContainer.classList.remove('active');
+                    });
                 });
             }
 

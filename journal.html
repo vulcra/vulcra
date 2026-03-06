@@ -33,7 +33,7 @@
             --bg-color: #F8FAFC; 
             --primary: #0F172A; 
             --accent: #F97316; 
-            --dots: #CBD5E1; 
+            --dots: #94A3B8; 
             --white: #ffffff;
         }
 
@@ -52,7 +52,8 @@
         }
 
         /* --- HEADER --- */
-        header { display: flex; justify-content: space-between; align-items: center; padding: 25px 5%; width: 100%; position: relative; z-index: 100; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 25px 5%; width: 100%; position: relative; z-index: 1000; }
+        .logo-v { position: relative; z-index: 1001; }
         .logo-v svg { width: 45px; height: auto; transition: transform 0.3s; }
         .logo-v:hover svg { transform: scale(1.05); }
         .header-actions { display: flex; align-items: center; gap: 30px; }
@@ -67,6 +68,18 @@
 
         .btn-outline { border: 1px solid rgba(15, 23, 42, 0.2); color: var(--primary); padding: 10px 24px; border-radius: 50px; text-decoration: none; font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: all 0.3s ease; background-color: var(--bg-color); }
         .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+        /* MENU MOBILE (SANDUÍCHE) ESTILO VULCRA */
+        .hamburger { display: none; background: none; border: none; cursor: pointer; color: var(--primary); z-index: 1001; padding: 10px; }
+        .hamburger svg { width: 30px; height: 30px; stroke-width: 2.5; transition: transform 0.3s ease; }
+        
+        .mobile-nav { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: var(--bg-color); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 40px; transform: translateY(-100%); transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1); z-index: 999; }
+        .mobile-nav.active { transform: translateY(0); }
+        
+        .mobile-nav .nav-link-journal { font-size: 1.2rem; padding-top: 12px; }
+        .mobile-nav .nav-link-journal::before { width: 25px; height: 3px; }
+        .mobile-nav .btn-outline { font-size: 1rem; padding: 18px 40px; background-color: var(--primary); color: var(--accent); border-color: var(--primary); }
+
 
         /* --- JOURNAL HERO --- */
         .journal-hero { padding: 60px 5% 20px; text-align: center; }
@@ -113,31 +126,18 @@
         .copyright { color: var(--primary); opacity: 0.4; font-size: 0.9rem; font-weight: 500; margin: 0; }
 
         /* --- MOBILE --- */
+        @media (max-width: 900px) {
+            .header-actions { display: none; }
+            .hamburger { display: block; }
+        }
+
         @media (max-width: 600px) {
             header { padding-top: 20px; }
-            .header-actions { gap: 15px; }
             .nav-link-journal { font-size: 0.7rem; }
             .btn-outline { padding: 10px 18px; font-size: 0.7rem; }
             .journal-grid { grid-template-columns: 1fr; gap: 40px; }
             .footer-contacts { flex-direction: column; gap: 15px; }
         }
-
-        /* MENU MOBILE (SANDUÍCHE) - PADRÃO VULCRA */
-        .hamburger { display: none; background: none; border: none; cursor: pointer; color: var(--primary); z-index: 1001; padding: 10px; }
-        .hamburger svg { width: 30px; height: 30px; stroke-width: 2.5; transition: transform 0.3s ease; }
-        
-        .mobile-nav { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: var(--bg-color); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 40px; transform: translateY(-100%); transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1); z-index: 999; }
-        .mobile-nav.active { transform: translateY(0); }
-        
-        .mobile-nav .nav-link-journal { font-size: 1.2rem; padding-top: 12px; }
-        .mobile-nav .nav-link-journal::before { width: 25px; height: 3px; }
-        .mobile-nav .btn-outline { font-size: 1rem; padding: 18px 40px; background-color: var(--primary); color: var(--accent); border-color: var(--primary); }
-
-        @media (max-width: 900px) {
-            .header-actions { display: none; } /* Esconde o menu normal no mobile */
-            .hamburger { display: block; }    /* Mostra o sanduíche */
-        }
-
     </style>
 </head>
 <body>
@@ -398,7 +398,7 @@
             hamburger.addEventListener('click', function() {
                 mobileNav.classList.toggle('active');
                 
-                // Animação das linhas do SVG (X effect)
+                // Animação do X Estiloso Vulcra
                 if(mobileNav.classList.contains('active')){
                     document.getElementById('line1').setAttribute('y1', '18');
                     document.getElementById('line1').setAttribute('x2', '21');
@@ -418,7 +418,7 @@
             mobLinks.forEach(link => {
                 link.addEventListener('click', () => {
                     mobileNav.classList.remove('active');
-                    // Reseta o ícone para as 3 linhas
+                    // Volta as linhas para o formato original
                     document.getElementById('line1').setAttribute('y1', '12');
                     document.getElementById('line1').setAttribute('x2', '21');
                     document.getElementById('line3').setAttribute('y1', '18');

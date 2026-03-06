@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clínica Valois | Dermatologia & Estética Avançada</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Paleta exata (Nude/Areia e Verde Bandeira Escuro) */
+            --bg-sand: #EFECE5; 
+            --bg-white: #FFFFFF;
+            --primary-green: #007D69; 
+            --primary-green-light: #D4EAE5;
+            --text-dark: #2A2A2A;
+            --text-muted: #6B7280;
+            --gold: #C5A880;
+            
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-sand); 
+            color: var(--text-dark);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER & MENU MOBILE --- */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; padding: 20px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(239, 236, 229, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        .logo { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 700; color: var(--text-dark); text-decoration: none; position: relative; z-index: 1002;}
+        
+        .nav-container { display: flex; align-items: center; gap: 30px; }
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a { text-decoration: none !important; color: var(--text-dark); font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--primary-green); }
+        
+        /* Novo Botão Elegante */
+        .btn-header {
+            background-color: transparent; border: 1px solid var(--primary-green); color: var(--primary-green) !important;
+            padding: 10px 24px; border-radius: 4px; text-decoration: none !important; font-weight: 600; font-size: 0.85rem;
+            text-transform: uppercase; letter-spacing: 1px; transition: all 0.4s ease;
+        }
+        .btn-header:hover { background-color: var(--primary-green); color: #FFF !important; }
+
+        /* Botão Hambúrguer Mobile */
+        .menu-toggle { display: none; flex-direction: column; justify-content: space-between; width: 30px; height: 21px; cursor: pointer; z-index: 1002; }
+        .menu-toggle span { display: block; height: 2px; width: 100%; background-color: var(--primary-green); border-radius: 2px; transition: all 0.3s ease; }
+
+        @media (max-width: 900px) {
+            .menu-toggle { display: flex; }
+            .nav-container {
+                position: fixed; top: 0; right: -100%; width: 280px; height: 100vh;
+                background-color: var(--bg-sand); border-left: 1px solid rgba(0, 125, 105, 0.1);
+                flex-direction: column; justify-content: center; align-items: center;
+                transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); z-index: 1001;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+            }
+            .nav-container.active { right: 0; }
+            .nav-links { flex-direction: column; text-align: center; gap: 40px; margin-bottom: 40px; }
+            .nav-links a { font-size: 1.2rem; }
+            
+            .menu-toggle.active span:nth-child(1) { transform: translateY(9.5px) rotate(45deg); }
+            .menu-toggle.active span:nth-child(2) { opacity: 0; }
+            .menu-toggle.active span:nth-child(3) { transform: translateY(-9.5px) rotate(-45deg); }
+        }
+
+        /* --- 1. HERO SECTION (100% Visual) --- */
+        .hero {
+            width: 100%; height: 100vh; display: block;
+        }
+        .hero-bg {
+            width: 100%; height: 100%; object-fit: cover; object-position: center;
+        }
+
+        /* --- 1.5 INTRO SECTION (Manifesto) --- */
+        .intro-section {
+            padding: 100px 5%; background-color: var(--bg-sand); text-align: center;
+        }
+        .intro-container { max-width: 850px; margin: 0 auto; }
+        .intro-container h2 { font-family: var(--font-serif); font-size: clamp(2.5rem, 5vw, 4rem); color: var(--text-dark); margin-bottom: 20px; line-height: 1.1; }
+        .intro-container p { font-size: 1.15rem; color: var(--text-muted); line-height: 1.8; }
+
+        /* --- 2. NÚCLEOS DE ATENDIMENTO --- */
+        .nucleos-section { padding: 0; background-color: var(--bg-white); }
+        .nucleos-grid { display: grid; grid-template-columns: repeat(5, 1fr); width: 100%; height: 75vh; }
+        @media (max-width: 900px) { .nucleos-grid { grid-template-columns: 1fr; height: auto; } }
+        
+        .nucleo-card { position: relative; overflow: hidden; cursor: pointer; border-right: 1px solid rgba(0,0,0,0.05); }
+        @media (max-width: 900px) { .nucleo-card { height: 350px; border-right: none; border-bottom: 1px solid rgba(0,0,0,0.1); } }
+        
+        .nucleo-img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center top;
+            transition: opacity 0.5s ease, transform 0.5s ease; z-index: 2;
+        }
+        .nucleo-img::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 60%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+        }
+        
+        .nucleo-title { position: absolute; bottom: 30px; left: 20px; z-index: 3; color: white; transition: all 0.5s ease; }
+        .nucleo-title span { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; opacity: 0.8; display: block; margin-bottom: 5px;}
+        .nucleo-title h3 { font-family: var(--font-sans); font-size: 1.5rem; font-weight: 700; line-height: 1.1; }
+
+        .nucleo-info {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--bg-sand); padding: 40px 30px;
+            display: flex; flex-direction: column; justify-content: center;
+            opacity: 0; z-index: 1; transition: opacity 0.5s ease; text-align: left;
+        }
+        .nucleo-info h4 { font-family: var(--font-serif); font-size: 1.8rem; color: var(--primary-green); margin-bottom: 15px; }
+        .nucleo-info p { font-size: 0.95rem; color: var(--text-dark); line-height: 1.6; }
+
+        .nucleo-card:hover .nucleo-img { opacity: 0; transform: scale(1.05); }
+        .nucleo-card:hover .nucleo-title { opacity: 0; transform: translateY(20px); }
+        .nucleo-card:hover .nucleo-info { opacity: 1; z-index: 4; }
+
+        /* --- 3. A MÉDICA (Formato Orgânico Animado) --- */
+        .doctor-section { padding: 120px 8%; background-color: var(--bg-sand); display: flex; justify-content: center; }
+        .doctor-container { max-width: 1200px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        @media (max-width: 900px) { .doctor-container { grid-template-columns: 1fr; text-align: center; } }
+        
+        /* Animação do Blob Orgânico */
+        @keyframes morph {
+            0% { border-radius: 60% 40% 50% 50% / 50% 50% 60% 40%; }
+            50% { border-radius: 40% 60% 60% 40% / 60% 40% 50% 50%; }
+            100% { border-radius: 60% 40% 50% 50% / 50% 50% 60% 40%; }
+        }
+        
+        .doctor-image-wrapper {
+            width: 100%; max-width: 480px; height: 550px; margin: 0 auto;
+            background-color: rgba(0, 125, 105, 0.15); /* Verde translucido */
+            overflow: hidden;
+            display: flex; justify-content: center; align-items: flex-end;
+            box-shadow: 0 20px 50px rgba(0, 125, 105, 0.1);
+            position: relative;
+            animation: morph 8s ease-in-out infinite; /* Respiração orgânica */
+        }
+        
+        .doctor-image-wrapper img {
+            width: 100%; height: 100%; object-fit: cover; object-position: center;
+        }
+
+        .doctor-text h2 { font-family: var(--font-serif); font-size: 3rem; margin-bottom: 20px; color: var(--text-dark); }
+        .doctor-text p { font-size: 1.1rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 20px; }
+        .crm-tag { display: inline-block; background: var(--bg-white); padding: 8px 16px; border-radius: 50px; font-size: 0.85rem; font-weight: 600; color: var(--primary-green); margin-top: 20px; border: 1px solid rgba(0, 125, 105, 0.2); }
+
+        /* --- 4. PROVA SOCIAL --- */
+        .reviews-section { padding: 100px 0; background-color: var(--bg-white); overflow: hidden; }
+        .reviews-header { text-align: center; margin-bottom: 50px; padding: 0 5%; }
+        .reviews-header h2 { font-family: var(--font-serif); font-size: 2.5rem; color: var(--text-dark); }
+
+        .marquee-container { display: flex; width: 100%; overflow: hidden; white-space: nowrap; position: relative; }
+        .marquee-container::before, .marquee-container::after { content: ''; position: absolute; top: 0; width: 150px; height: 100%; z-index: 2; }
+        .marquee-container::before { left: 0; background: linear-gradient(to right, var(--bg-white) 0%, transparent 100%); }
+        .marquee-container::after { right: 0; background: linear-gradient(to left, var(--bg-white) 0%, transparent 100%); }
+
+        .marquee-track { display: flex; gap: 30px; padding-left: 30px; animation: scroll-left 40s linear infinite; }
+        .marquee-container:hover .marquee-track { animation-play-state: paused; }
+
+        @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        .review-card { width: 380px; white-space: normal; background: var(--bg-sand); padding: 30px; border-radius: 8px; flex-shrink: 0; border: 1px solid rgba(0,0,0,0.05); }
+        .review-header { display: flex; justify-content: space-between; margin-bottom: 15px; }
+        .stars svg { width: 16px; fill: #F59E0B; }
+        .review-card p { font-size: 0.95rem; line-height: 1.6; color: var(--text-dark); margin-bottom: 20px; }
+        .reviewer { font-weight: 600; font-size: 0.9rem; color: var(--primary-green); }
+
+        /* --- 5. SERVIÇOS --- */
+        .services-section { padding: 100px 8%; background-color: var(--bg-sand); text-align: center; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 1200px; margin: 50px auto 0; }
+        .service-item { background: var(--bg-white); padding: 50px 30px; border-radius: 8px; transition: transform 0.3s; text-align: left; }
+        .service-item:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        .service-icon { color: var(--primary-green); margin-bottom: 20px; }
+        .service-item h3 { font-family: var(--font-serif); font-size: 1.8rem; margin-bottom: 15px; }
+        .service-item p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; }
+
+        /* --- 6. AGENDAMENTO VIP CUSTOMIZADO --- */
+        .schedule-section { padding: 100px 5%; background-color: var(--bg-sand); display: flex; flex-direction: column; align-items: center; }
+        .schedule-header { text-align: center; margin-bottom: 40px; }
+        .schedule-header h2 { font-family: var(--font-serif); font-size: 3rem; color: #4A3A34; margin-bottom: 10px; }
+        .schedule-header p { font-size: 1.1rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+
+        .app-container { width: 100%; max-width: 700px; background: var(--bg-white); border-radius: 16px; overflow: visible; box-shadow: 0 30px 60px rgba(0,0,0,0.08); }
+        .app-header { background-color: var(--primary-green); padding: 25px 30px; color: white; font-weight: 600; font-size: 1.2rem; border-radius: 16px 16px 0 0;}
+        .app-body { padding: 30px; }
+        
+        .app-tabs { display: flex; border-bottom: 1px solid #E5E7EB; margin-bottom: 30px; }
+        .app-tab { padding: 15px 20px; font-weight: 600; color: var(--primary-green); border-bottom: 3px solid var(--primary-green); cursor: pointer; display: flex; align-items: center; gap: 8px;}
+        .app-tab.inactive { color: var(--text-muted); border-bottom: 3px solid transparent; }
+
+        .step-list { position: relative; padding-left: 20px; }
+        .step-list::before { content: ''; position: absolute; top: 15px; bottom: 50px; left: 6px; width: 2px; background-color: #86EFAC; z-index: 1; }
+
+        /* Correção do Bug de Z-Index (O Segredo!) */
+        .step-item { position: relative; margin-bottom: 35px; z-index: 2; }
+        .step-item.active-z { z-index: 50 !important; } /* Classe injetada pelo JS para sobrepor as outras */
+
+        .step-icon { position: absolute; left: -20px; top: 0; width: 16px; height: 16px; background-color: var(--primary-green-light); border-radius: 50%; display: flex; justify-content: center; align-items: center; }
+        .step-icon::after { content: ''; width: 8px; height: 4px; border-left: 2px solid var(--primary-green); border-bottom: 2px solid var(--primary-green); transform: rotate(-45deg); margin-top: -2px; }
+
+        .step-content { padding-left: 15px; }
+        .step-label { font-weight: 700; font-size: 0.95rem; color: var(--text-dark); margin-bottom: 10px; display: block; }
+        
+        /* === CUSTOM SELECT FLAWLESS === */
+        .custom-select-wrapper { position: relative; width: 100%; user-select: none; }
+        .custom-select-trigger {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px; border: 1px solid #E5E7EB; border-radius: 8px;
+            background-color: var(--bg-white); font-family: var(--font-sans); font-size: 1rem; color: var(--text-dark); cursor: pointer; transition: all 0.3s;
+        }
+        .custom-select-trigger.open { border-color: var(--primary-green); border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+        .custom-arrow { width: 12px; height: 12px; border-left: 2px solid var(--text-muted); border-bottom: 2px solid var(--text-muted); transform: rotate(-45deg) translateY(-2px); transition: transform 0.3s; }
+        .custom-select-trigger.open .custom-arrow { transform: rotate(135deg) translateY(-4px); border-color: var(--primary-green); }
+        
+        .custom-options {
+            position: absolute; top: 100%; left: 0; width: 100%;
+            background-color: #FFFFFF; border: 1px solid var(--primary-green); border-top: none;
+            border-radius: 0 0 8px 8px; box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            z-index: 100; display: none; overflow: hidden;
+        }
+        .custom-options.open { display: block; }
+        .custom-option {
+            display: block; padding: 15px; font-size: 1rem; color: var(--text-dark); cursor: pointer; transition: background 0.2s;
+        }
+        .custom-option:hover, .custom-option.selected { background-color: var(--primary-green-light); color: var(--primary-green); font-weight: 500; }
+        /* ======================================== */
+
+        .step-text { font-size: 0.95rem; color: var(--text-dark); line-height: 1.5; }
+        .doc-name { font-size: 1rem; color: var(--text-dark); }
+
+        .time-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; text-align: center; margin-top: 20px; }
+        @media (max-width: 900px) { .time-grid { grid-template-columns: repeat(2, 1fr); } }
+        
+        .time-col-header { font-size: 0.85rem; color: var(--text-dark); margin-bottom: 15px; }
+        .time-col-header span { font-size: 0.75rem; color: var(--text-muted); display: block; font-weight: 400; margin-top: 2px;}
+        .time-pill { background-color: var(--primary-green-light); color: var(--primary-green); padding: 10px 0; border-radius: 20px; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; margin-bottom: 15px; }
+        .time-pill:hover { background-color: var(--primary-green); color: white; }
+        .time-empty { padding: 10px 0; color: #D1D5DB; margin-bottom: 15px; }
+
+        footer { background: #111; color: #9CA3AF; padding: 40px 5%; text-align: center; font-size: 0.85rem; }
+
+        /* --- WHATSAPP FLUTUANTE --- */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-green);
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0, 125, 105, 0.4);
+            z-index: 9999;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .whatsapp-float:hover {
+            background-color: var(--text-dark);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(42, 42, 42, 0.3);
+        }
+        .whatsapp-float svg {
+            width: 32px;
+            height: 32px;
+            fill: currentColor;
+        }
+        @media (max-width: 900px) {
+            .whatsapp-float {
+                width: 55px; height: 55px; bottom: 20px; right: 20px;
+            }
+            .whatsapp-float svg { width: 28px; height: 28px; }
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">VALOIS</a>
+        
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span><span></span><span></span>
+        </div>
+
+        <nav class="nav-container" id="nav-container">
+            <ul class="nav-links">
+                <li><a href="#nucleos">Núcleos</a></li>
+                <li><a href="#especialista">Corpo Clínico</a></li>
+                <li><a href="#servicos">Performance</a></li>
+            </ul>
+            <a href="#agendar" class="btn-header">Agendar Avaliação</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <img src="https://static.vecteezy.com/ti/fotos-gratis/p2/73765159-estetico-dermatologia-clinica-recepcao-area-apresentando-moderno-mobilia-elegante-decoracao-e-calmante-ambiente-com-copia-de-espaco-para-promocional-conteudo-foto.jpg" alt="Lobby Clínica" class="hero-bg">
+    </section>
+
+    <section class="intro-section">
+        <div class="intro-container">
+            <h2>Arquitetura da Beleza.</h2>
+            <p>Odontologia estética, dermatologia avançada e cirurgia plástica unidas em um único ecossistema de alto padrão.</p>
+        </div>
+    </section>
+
+    <section class="nucleos-section" id="nucleos">
+        <div class="nucleos-grid">
+            <div class="nucleo-card">
+                <div class="nucleo-img" style="background-image: url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=600');"></div>
+                <div class="nucleo-title"><span>Núcleo</span><h3>Dermatologia Estética</h3></div>
+                <div class="nucleo-info">
+                    <h4>Dermatologia</h4>
+                    <p>Tecnologias a laser, bioestimuladores e protocolos injetáveis focados no rejuvenescimento natural sem cortes.</p>
+                </div>
+            </div>
+            <div class="nucleo-card">
+                <div class="nucleo-img" style="background-image: url('https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=600');"></div>
+                <div class="nucleo-title"><span>Núcleo</span><h3>Cirurgia Plástica</h3></div>
+                <div class="nucleo-info">
+                    <h4>Cirurgia Plástica</h4>
+                    <p>Intervenções de alta precisão para contorno corporal e refinamento facial em ambiente hospitalar.</p>
+                </div>
+            </div>
+            <div class="nucleo-card">
+                <div class="nucleo-img" style="background-image: url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=600');"></div>
+                <div class="nucleo-title"><span>Núcleo</span><h3>Rejuvenescimento Íntimo</h3></div>
+                <div class="nucleo-info">
+                    <h4>Estética Íntima</h4>
+                    <p>Protocolos a laser e preenchimentos focados em devolver a funcionalidade, conforto e resgatar a segurança.</p>
+                </div>
+            </div>
+            <div class="nucleo-card">
+                <div class="nucleo-img" style="background-image: url('https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=600');"></div>
+                <div class="nucleo-title"><span>Núcleo</span><h3>Angiologia</h3></div>
+                <div class="nucleo-info">
+                    <h4>Vascular</h4>
+                    <p>Tratamento de varizes com laser transdérmico integrado à realidade aumentada para pernas impecáveis.</p>
+                </div>
+            </div>
+            <div class="nucleo-card">
+                <div class="nucleo-img" style="background-image: url('https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=600');"></div>
+                <div class="nucleo-title"><span>Núcleo</span><h3>Terapia Capilar</h3></div>
+                <div class="nucleo-info">
+                    <h4>Restauração Capilar</h4>
+                    <p>Transplante capilar técnica FUE e tratamentos clínicos robóticos para tratamento definitivo da calvície.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="doctor-section" id="especialista">
+        <div class="doctor-container">
+            <div class="doctor-image-wrapper">
+                <img src="https://images.unsplash.com/photo-1651008376811-b90baee60c1f?q=80&w=800" alt="Dra Helena Valois">
+            </div>
+            <div class="doctor-text">
+                <h2>A ciência por trás do luxo.</h2>
+                <p>Com mais de 14 anos de atuação, a Dra. Helena Valois construiu a clínica baseada em um pilar inegociável: a previsibilidade clínica alinhada ao extremo conforto.</p>
+                <p>Nossa equipe multidisciplinar estuda a anatomia de cada paciente de forma integrada. Não realizamos procedimentos; nós desenhamos projetos de autoestima.</p>
+                <span class="crm-tag">Dra. Helena Valois - CRM 54321 / RQE 9876</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="reviews-section">
+        <div class="reviews-header">
+            <h2>A experiência dos nossos pacientes</h2>
+        </div>
+        <div class="marquee-container">
+            <div class="marquee-track">
+                <div class="review-card">
+                    <div class="review-header"><span class="reviewer">Marina Silveira</span><div class="stars">★★★★★</div></div>
+                    <p>"Fiz meu protocolo capilar e o resultado foi muito além do esperado. A estrutura da clínica parece um hotel 5 estrelas e o atendimento é impecável."</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header"><span class="reviewer">Carlos Eduardo</span><div class="stars">★★★★★</div></div>
+                    <p>"Procurei a cirurgia plástica para um contorno HD. A segurança que o corpo clínico transmite na primeira consulta me fez fechar na hora. Pós-operatório perfeito."</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header"><span class="reviewer">Letícia Brandão</span><div class="stars">★★★★★</div></div>
+                    <p>"Sempre tive medo de harmonização facial e ficar artificial. A Dra. Helena fez intervenções mínimas que me rejuvenesceram 10 anos. Sou cliente para a vida."</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header"><span class="reviewer">Amanda Nogueira</span><div class="stars">★★★★★</div></div>
+                    <p>"O tratamento vascular a laser foi indolor. O equipamento que eles usam mostra as veias na tela, é muita tecnologia. Resultados visíveis na primeira sessão."</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header"><span class="reviewer">Marina Silveira</span><div class="stars">★★★★★</div></div>
+                    <p>"Fiz meu protocolo capilar e o resultado foi muito além do esperado. A estrutura da clínica parece um hotel 5 estrelas e o atendimento é impecável."</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header"><span class="reviewer">Carlos Eduardo</span><div class="stars">★★★★★</div></div>
+                    <p>"Procurei a cirurgia plástica para um contorno HD. A segurança que o corpo clínico transmite na primeira consulta me fez fechar na hora. Pós-operatório perfeito."</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header"><span class="reviewer">Letícia Brandão</span><div class="stars">★★★★★</div></div>
+                    <p>"Sempre tive medo de harmonização facial e ficar artificial. A Dra. Helena fez intervenções mínimas que me rejuvenesceram 10 anos. Sou cliente para a vida."</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header"><span class="reviewer">Amanda Nogueira</span><div class="stars">★★★★★</div></div>
+                    <p>"O tratamento vascular a laser foi indolor. O equipamento que eles usam mostra as veias na tela, é muita tecnologia. Resultados visíveis na primeira sessão."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-section" id="servicos">
+        <h2 style="font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 20px;">Protocolos High-End</h2>
+        <p style="color: var(--text-muted); margin-bottom: 40px;">Tecnologia de ponta a favor da sua estética.</p>
+        <div class="services-grid">
+            <div class="service-item">
+                <svg class="service-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                <h3>Spa Facial & Laser</h3>
+                <p>Plataforma Lavieen e Fotona para clareamento de manchas, melasma e estímulo profundo de colágeno, garantindo o efeito "pele de porcelana".</p>
+            </div>
+            <div class="service-item">
+                <svg class="service-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/></svg>
+                <h3>Mapeamento Corporal</h3>
+                <p>Utilizamos bioimpedância de precisão e escaneamento 3D para definir a abordagem ideal entre cirurgia plástica ou tratamentos não invasivos.</p>
+            </div>
+            <div class="service-item">
+                <svg class="service-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                <h3>Arquitetura Injetável</h3>
+                <p>Foco total em naturalidade. Uso de Ultraformer MPT somado a Radiesse para tracionar a pele e combater a flacidez em múltiplas camadas.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="schedule-section" id="agendar">
+        <div class="schedule-header">
+            <h2>Agendar Avaliação</h2>
+            <p>Escolha a especialidade, selecione o profissional e veja os horários disponíveis em tempo real.</p>
+        </div>
+
+        <div class="app-container">
+            <div class="app-header">Agendar atendimento</div>
+            <div class="app-body">
+                <div class="app-tabs">
+                    <div class="app-tab"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> Consulta no local</div>
+                    <div class="app-tab inactive" style="margin-left: 20px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg> Teleconsulta</div>
+                </div>
+
+                <div class="step-list">
+                    <div class="step-item">
+                        <div class="step-icon"></div>
+                        <div class="step-content">
+                            <span class="step-label">Especialização</span>
+                            
+                            <div class="custom-select-wrapper" id="custom-select">
+                                <div class="custom-select-trigger">
+                                    <span class="custom-select-value">Dermatologista</span>
+                                    <div class="custom-arrow"></div>
+                                </div>
+                                <div class="custom-options">
+                                    <span class="custom-option selected" data-value="Dermatologista">Dermatologista</span>
+                                    <span class="custom-option" data-value="Cirurgião Plástico">Cirurgião Plástico</span>
+                                    <span class="custom-option" data-value="Angiologista">Angiologista</span>
+                                </div>
+                            </div>
+                            <input type="hidden" id="especialidade-hidden" value="Dermatologista">
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-icon"></div>
+                        <div class="step-content">
+                            <span class="step-label">Endereço</span>
+                            <p class="step-text">Avenida do Contorno, 1000 - Lourdes, Belo Horizonte - MG</p>
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-icon"></div>
+                        <div class="step-content">
+                            <span class="step-label">Serviços</span>
+                            <p class="step-text" id="servico-text">Primeira consulta Dermatologia Estética</p>
+                        </div>
+                    </div>
+
+                    <div class="step-item" style="margin-bottom: 0;">
+                        <div class="step-icon"></div>
+                        <div class="step-content">
+                            <span class="step-label">Especialista</span>
+                            <p class="doc-name">Dra. Helena Valois • Particular</p>
+
+                            <div class="time-grid">
+                                <div>
+                                    <div class="time-col-header">Hoje<span>6 Mar</span></div>
+                                    <div class="time-empty">-</div><div class="time-empty">-</div><div class="time-empty">-</div>
+                                </div>
+                                <div>
+                                    <div class="time-col-header">Amanhã<span>7 Mar</span></div>
+                                    <div class="time-empty">-</div><div class="time-empty">-</div><div class="time-empty">-</div>
+                                </div>
+                                <div>
+                                    <div class="time-col-header">Sex<span>8 Mar</span></div>
+                                    <div class="time-empty">-</div><div class="time-empty">-</div><div class="time-empty">-</div>
+                                </div>
+                                <div>
+                                    <div class="time-col-header" style="font-weight: 600; color: var(--text-dark);">Segunda-feira<span>11 Mar</span></div>
+                                    <div class="time-pill" onclick="alert('Isso é apenas uma demonstração. Na versão final, integraremos com o seu sistema!')">13:00</div>
+                                    <div class="time-pill" onclick="alert('Demonstração Vulcra')">14:00</div>
+                                    <div class="time-pill" onclick="alert('Demonstração Vulcra')">17:00</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <a href="https://wa.me/5531983679809?text=Olá,%20vim%20pelo%20site%20e%20gostaria%20de%20agendar%20uma%20avaliação." target="_blank" class="whatsapp-float" aria-label="Falar no WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.405-.883-.733-1.479-1.641-1.653-1.938-.173-.298-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+    </a>
+
+    <footer> &copy; 2026 Desenvolvido por <a href="https://vulcra.com.br" target="_blank" style="color: var(--text-main); text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-gold)'" onmouseout="this.style.color='var(--text-main)'"><strong>Vulcra</strong></a></footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // SCRIPT MENU MOBILE HAMBÚRGUER
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navContainer = document.getElementById('nav-container');
+            const navLinks = document.querySelectorAll('.nav-links a, .btn-header');
+
+            if (mobileMenu && navContainer) {
+                mobileMenu.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('active');
+                    navContainer.classList.toggle('active');
+                });
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.remove('active');
+                        navContainer.classList.remove('active');
+                    });
+                });
+            }
+
+            // SCRIPT CUSTOM SELECT - Bug de Transparência Resolvido
+            const selectWrapper = document.getElementById('custom-select');
+            const selectTrigger = selectWrapper.querySelector('.custom-select-trigger');
+            const selectOptions = selectWrapper.querySelector('.custom-options');
+            const selectValue = selectWrapper.querySelector('.custom-select-value');
+            const hiddenInput = document.getElementById('especialidade-hidden');
+            const servicoText = document.getElementById('servico-text');
+
+            selectTrigger.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.classList.toggle('open');
+                selectOptions.classList.toggle('open');
+                // Eleva a caixa inteira para a lista não ser esmagada pela próxima etapa
+                const stepItem = this.closest('.step-item');
+                if(stepItem) stepItem.classList.toggle('active-z');
+            });
+
+            const options = selectOptions.querySelectorAll('.custom-option');
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    options.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                    
+                    const newValue = this.getAttribute('data-value');
+                    selectValue.textContent = newValue;
+                    hiddenInput.value = newValue;
+                    
+                    if(newValue === 'Cirurgião Plástico') servicoText.textContent = "Avaliação para Contorno Corporal / Facial";
+                    else if(newValue === 'Angiologista') servicoText.textContent = "Avaliação Vascular e Varizes a Laser";
+                    else servicoText.textContent = "Primeira consulta Dermatologia Estética";
+
+                    selectTrigger.classList.remove('open');
+                    selectOptions.classList.remove('open');
+                    const stepItem = selectTrigger.closest('.step-item');
+                    if(stepItem) stepItem.classList.remove('active-z');
+                });
+            });
+
+            window.addEventListener('click', function(e) {
+                if (!selectWrapper.contains(e.target)) {
+                    selectTrigger.classList.remove('open');
+                    selectOptions.classList.remove('open');
+                    const stepItem = selectTrigger.closest('.step-item');
+                    if(stepItem) stepItem.classList.remove('active-z');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

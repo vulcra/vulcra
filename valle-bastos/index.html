@@ -246,7 +246,18 @@
             .about-section { flex-direction: column; text-align: center; }
             .feature-list li { justify-content: center; }
             .experience-badge { left: 50%; transform: translateX(-50%); bottom: -30px; width: 80%; }
-            .reviews-wrapper { flex-direction: column; gap: 20px; }
+            
+            /* ====================================================
+               NOVO: ESTRATÉGIA MOBILE DO CARROSSEL
+               ==================================================== */
+            .reviews-wrapper { flex-direction: column; gap: 30px; width: 100%; }
+            /* 1. Escondemos os botões. No mobile a rolagem é feita com o dedo (swipe) */
+            .carousel-btn { display: none !important; } 
+            .carousel-container { width: 100%; padding: 0; }
+            /* 2. O card ocupa 85% da tela, deixando uma "fresta" do próximo para incentivar o arraste */
+            .review-card { min-width: 85vw; max-width: 85vw; } 
+            /* ==================================================== */
+
             .blog-header { flex-direction: column; align-items: center; gap: 20px; text-align: center; }
             .contact-container { flex-direction: column; }
         }

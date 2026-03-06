@@ -176,6 +176,11 @@
         .btn-outline { border: 1px solid rgba(15, 23, 42, 0.2); color: var(--primary); padding: 12px 28px; border-radius: 50px; text-decoration: none; font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: all 0.3s ease; background-color: var(--bg-color); }
         .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
         
+        .sr-only {
+            position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+            overflow: hidden; clip: rect(0,0,0,0); border: 0;
+        }
+
         @media (max-width: 600px) {
             .header-actions { gap: 15px; }
             .nav-link-journal { font-size: 0.7rem; }
@@ -411,15 +416,18 @@
                     <input type="text" name="_honey" style="display:none">
 
                     <div class="input-group">
-                        <input type="text" name="nome" placeholder="Seu Nome completo" required>
+                        <label for="nome" class="sr-only">Seu Nome Completo</label>
+                        <input type="text" id="nome" name="nome" placeholder="Seu Nome completo" required>
                     </div>
                     
                     <div class="input-group">
-                        <input type="email" name="email" placeholder="Seu E-mail profissional" required>
+                        <label for="nome" class="sr-only">Seu Melhor E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="Seu E-mail profissional" required>
                     </div>
                     
                     <div class="input-group">
-                        <input type="text" name="empresa" placeholder="Qual o nome da sua empresa?">
+                        <label for="nome" class="sr-only">Nome da sua empresa</label>
+                        <input type="text" id="empresa" name="empresa" placeholder="Qual o nome da sua empresa?">
                     </div>
 
                     <div class="input-group">
@@ -434,7 +442,8 @@
                     </div>
 
                     <div class="input-group">
-                        <textarea name="mensagem" placeholder="Descreva brevemente o seu projeto e os seus objetivos principais..." required></textarea>
+                        <label for="nome" class="sr-only">Escreva sua mensagem</label>
+                        <textarea id="mensagem" name="mensagem" placeholder="Descreva brevemente o seu projeto e os seus objetivos principais..." required></textarea>
                     </div>
                     
                     <button type="submit" class="btn-primary" id="btn-enviar" style="width: 100%;">Solicitar Orçamento</button>

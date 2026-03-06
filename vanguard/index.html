@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanguard | Wealth Management & Multi-Family Office</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        :root {
+            /* Cores */
+            --bg-pastel: #F0F4F8;       
+            --bg-white: #FFFFFF;        
+            --navy-dark: #0B172A;       
+            --navy-light: #1E293B;      
+            --blue-accent: #2563EB;     
+            --blue-soft: #DBEAFE;       
+            --green-up: #10B981;        
+            --red-down: #EF4444;        
+            --text-muted: #64748B;
+            
+            /* Cores Footer Vulcra */
+            --text-main: #94A3B8;
+            --accent-gold: #2563EB; 
+
+            /* Fontes */
+            --font-sans: 'Inter', sans-serif;
+            --font-display: 'Space Grotesk', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-pastel);
+            color: var(--navy-dark);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- TICKER TAPE --- */
+        .ticker-wrap {
+            width: 100%; height: 40px; background-color: var(--navy-dark); color: white;
+            overflow: hidden; display: flex; align-items: center; position: fixed; top: 0; z-index: 1001;
+            font-family: var(--font-display); font-size: 0.8rem; letter-spacing: 1px;
+        }
+        .ticker-move { display: flex; white-space: nowrap; animation: ticker 30s linear infinite; }
+        .ticker-wrap:hover .ticker-move { animation-play-state: paused; }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .ticker-item { padding: 0 30px; display: flex; align-items: center; gap: 8px; }
+        .ticker-symbol { font-weight: 700; color: #94A3B8; }
+        .up { color: var(--green-up); } .down { color: var(--red-down); }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed; top: 40px; left: 0; width: 100%; padding: 15px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(240, 244, 248, 0.9); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            z-index: 1000; border-bottom: 1px solid rgba(11, 23, 42, 0.05);
+        }
+        .logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--navy-dark); text-decoration: none; letter-spacing: -0.5px;}
+        .logo span { color: var(--blue-accent); }
+        .btn-header {
+            background-color: var(--navy-dark); color: var(--bg-white); padding: 12px 24px;
+            border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.85rem;
+            transition: all 0.3s ease; border: 1px solid var(--navy-dark);
+        }
+        .btn-header:hover { background-color: var(--blue-accent); border-color: var(--blue-accent); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 160px 5% 80px; max-width: 1400px; margin: 0 auto;
+            display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center;
+        }
+        .hero-text h1 {
+            font-family: var(--font-display); font-size: clamp(2.8rem, 5vw, 4.2rem);
+            line-height: 1.1; margin-bottom: 20px; color: var(--navy-dark); letter-spacing: -1.5px;
+        }
+        .hero-text p { font-size: 1.15rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 40px; max-width: 550px; }
+        .hero-image { position: relative; width: 100%; height: 500px; border-radius: 16px; overflow: hidden; box-shadow: 0 30px 60px rgba(11, 23, 42, 0.08); }
+        .hero-image img { width: 100%; height: 100%; object-fit: cover; }
+        .glow-bg { position: absolute; width: 400px; height: 400px; background: var(--blue-soft); filter: blur(100px); border-radius: 50%; z-index: -1; top: 20%; right: 10%; opacity: 0.6; }
+
+        /* --- TRACTION --- */
+        .traction-section { background-color: var(--bg-white); padding: 50px 5%; border-top: 1px solid rgba(11, 23, 42, 0.05); border-bottom: 1px solid rgba(11, 23, 42, 0.05); }
+        .traction-grid { display: grid; grid-template-columns: repeat(3, 1fr); max-width: 1200px; margin: 0 auto; gap: 40px; text-align: center; }
+        .traction-item h3 { font-family: var(--font-display); font-size: 3rem; color: var(--blue-accent); margin-bottom: 5px; letter-spacing: -1px; }
+        .traction-item p { font-size: 0.9rem; font-weight: 600; color: var(--navy-light); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- DASHBOARD / CHART JS --- */
+        .tech-section { padding: 100px 5%; text-align: center; }
+        .tech-header { max-width: 700px; margin: 0 auto 50px; }
+        .tech-header h2 { font-family: var(--font-display); font-size: 2.5rem; color: var(--navy-dark); margin-bottom: 15px; letter-spacing: -1px;}
+        .tech-header p { color: var(--text-muted); font-size: 1.1rem; line-height: 1.6; }
+        
+        .chart-container {
+            max-width: 1000px; margin: 0 auto; background: var(--bg-white); border-radius: 12px;
+            padding: 40px; box-shadow: 0 25px 50px rgba(11, 23, 42, 0.05); border: 1px solid rgba(11, 23, 42, 0.05);
+        }
+        .chart-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; text-align: left; }
+        .chart-title h4 { font-size: 1.2rem; color: var(--navy-dark); margin-bottom: 5px; }
+        .chart-title span { font-size: 2.5rem; font-family: var(--font-display); color: var(--navy-dark); font-weight: 700; }
+        .chart-title .profit { font-size: 1rem; color: var(--green-up); margin-left: 10px; font-weight: 600; }
+        .chart-tabs span { padding: 5px 15px; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); cursor: pointer; border-radius: 4px; }
+        .chart-tabs span.active { background: var(--bg-pastel); color: var(--blue-accent); }
+        
+        #wealthChart { width: 100% !important; height: auto !important; max-height: 400px; }
+
+        /* --- PAINEL DO TRADER --- */
+        .trader-section { padding: 80px 5%; background-color: var(--navy-dark); color: white; }
+        .trader-header { max-width: 1200px; margin: 0 auto 40px; }
+        .trader-header h2 { font-family: var(--font-display); font-size: 2rem; margin-bottom: 10px; }
+        .trader-header p { color: #94A3B8; font-size: 1rem; }
+        
+        .trader-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
+        .stock-card { background: var(--navy-light); padding: 25px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); transition: background-color 0.3s; }
+        .stock-header { display: flex; justify-content: space-between; margin-bottom: 15px; font-weight: 600; color: #94A3B8; }
+        .stock-price { font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 5px; }
+        .stock-change { font-size: 0.9rem; font-weight: 600; display: flex; align-items: center; gap: 5px;}
+        
+        .flash-green { animation: flashG 1s ease; }
+        .flash-red { animation: flashR 1s ease; }
+        @keyframes flashG { 0% { background-color: rgba(16, 185, 129, 0.4); } 100% { background-color: var(--navy-light); } }
+        @keyframes flashR { 0% { background-color: rgba(239, 68, 68, 0.4); } 100% { background-color: var(--navy-light); } }
+
+        /* --- SESSÃO APP --- */
+        .app-section { padding: 120px 5%; background-color: var(--bg-white); }
+        .app-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .app-text h2 { font-family: var(--font-display); font-size: 2.8rem; color: var(--navy-dark); margin-bottom: 20px; line-height: 1.1; letter-spacing: -1px; }
+        .app-text p { font-size: 1.1rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 40px; }
+        .app-buttons { display: flex; gap: 15px; }
+        .store-btn { display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--navy-dark); color: white; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: background 0.3s; }
+        .store-btn:hover { background: var(--blue-accent); }
+        .store-btn svg { width: 24px; fill: white; }
+        
+        .app-image { position: relative; text-align: center; }
+        .app-image img { width: 100%; max-width: 350px; border-radius: 30px; box-shadow: 0 30px 60px rgba(11, 23, 42, 0.15); border: 8px solid var(--navy-light); }
+
+        /* --- CTA --- */
+        .cta-section { padding: 100px 5%; background: var(--blue-accent); color: white; text-align: center; }
+        .cta-container { max-width: 800px; margin: 0 auto; }
+        .cta-container h2 { font-family: var(--font-display); font-size: 3rem; margin-bottom: 20px; letter-spacing: -1px; line-height: 1.1;}
+        .cta-container p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 40px; line-height: 1.6; }
+        .btn-cta-large { background: white; color: var(--blue-accent); font-family: var(--font-sans); font-size: 1.1rem; font-weight: 700; padding: 18px 40px; border-radius: 8px; text-decoration: none; display: inline-block; transition: transform 0.3s, box-shadow 0.3s; }
+        .btn-cta-large:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+
+        /* --- FOOTER VULCRA --- */
+        footer { background: var(--navy-dark); padding: 40px 5%; text-align: center; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+
+        /* --- MOBILE --- */
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; padding-top: 140px; text-align: center; }
+            .hero-text p { margin: 0 auto 30px; }
+            .hero-image { height: 350px; }
+            .traction-grid { grid-template-columns: 1fr; gap: 30px; }
+            .chart-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .app-container { grid-template-columns: 1fr; text-align: center; }
+            .app-buttons { justify-content: center; flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ticker-wrap">
+        <div class="ticker-move">
+            <div class="ticker-item"><span class="ticker-symbol">IBOV</span> <span class="ticker-price">128.450</span> <span class="up">▲ +1.24%</span></div>
+            <div class="ticker-item"><span class="ticker-symbol">S&P500</span> <span class="ticker-price">5.120</span> <span class="up">▲ +0.85%</span></div>
+            <div class="ticker-item"><span class="ticker-symbol">USD/BRL</span> <span class="ticker-price">4.95</span> <span class="down">▼ -0.42%</span></div>
+            <div class="ticker-item"><span class="ticker-symbol">EUR/BRL</span> <span class="ticker-price">5.38</span> <span class="down">▼ -0.15%</span></div>
+            <div class="ticker-item"><span class="ticker-symbol">NASDAQ</span> <span class="ticker-price">16.200</span> <span class="up">▲ +1.10%</span></div>
+            <div class="ticker-item"><span class="ticker-symbol">IBOV</span> <span class="ticker-price">128.450</span> <span class="up">▲ +1.24%</span></div>
+            <div class="ticker-item"><span class="ticker-symbol">S&P500</span> <span class="ticker-price">5.120</span> <span class="up">▲ +0.85%</span></div>
+            <div class="ticker-item"><span class="ticker-symbol">USD/BRL</span> <span class="ticker-price">4.95</span> <span class="down">▼ -0.42%</span></div>
+        </div>
+    </div>
+
+    <header>
+        <a href="#" class="logo">VANGUARD<span>.</span></a>
+        <a href="#conta" class="btn-header">Abra sua conta</a>
+    </header>
+
+    <div class="glow-bg"></div>
+
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Proteção e expansão de patrimônio para a elite.</h1>
+            <p>Assessoria financeira institucional, baseada em dados e tecnologia proprietária para investidores com liquidez superior a R$ 1 Milhão.</p>
+            <a href="#conta" class="btn-header" style="background: var(--blue-accent); color: white; border-color: var(--blue-accent); font-size: 1rem; padding: 16px 32px;">Agendar Reunião Confidencial</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1000" alt="Vanguard Corporate">
+        </div>
+    </section>
+
+    <section class="traction-section">
+        <div class="traction-grid">
+            <div class="traction-item">
+                <h3>R$ 2.5B+</h3>
+                <p>Sob nossa custódia</p>
+            </div>
+            <div class="traction-item">
+                <h3>15 Anos</h3>
+                <p>Entregando Alpha consistente</p>
+            </div>
+            <div class="traction-item">
+                <h3>350+</h3>
+                <p>Famílias atendidas</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="tech-section">
+        <div class="tech-header">
+            <h2>Nossa vantagem é a tecnologia.</h2>
+            <p>Enquanto o mercado opera em planilhas, a Vanguard utiliza algoritmos quantitativos de alocação de risco em tempo real para blindar a sua carteira.</p>
+        </div>
+        
+        <div class="chart-container">
+            <div class="chart-header">
+                <div class="chart-title">
+                    <h4>Patrimônio Consolidado</h4>
+                    <span>R$ 14.250.890,00</span><span class="profit">▲ +12.4% (YTD)</span>
+                </div>
+                <div class="chart-tabs">
+                    <span>1M</span>
+                    <span>6M</span>
+                    <span class="active">1Y</span>
+                    <span>MAX</span>
+                </div>
+            </div>
+            <canvas id="wealthChart"></canvas>
+        </div>
+    </section>
+
+    <section class="trader-section">
+        <div class="trader-header">
+            <h2>Painel do Trader / Mercado Global</h2>
+            <p>Acompanhamento de ativos em tempo real pelo motor da Vanguard.</p>
+        </div>
+        <div class="trader-grid" id="trader-board">
+            </div>
+    </section>
+
+    <section class="app-section">
+        <div class="app-container">
+            <div class="app-text">
+                <h2>Seu patrimônio,<br>na palma da mão.</h2>
+                <p>Acompanhe a rentabilidade da sua carteira, assine documentos digitalmente e fale com seu banker diretamente pelo aplicativo exclusivo Vanguard Black.</p>
+                <div class="app-buttons">
+                    <a href="#" class="store-btn">
+                        <svg viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 22 184.9 22 254.1c0 23.5 5.9 53.3 16.9 82.2 10.8 28.5 25.4 59.1 48.6 59.1 23.5 0 33.3-14.1 63.8-14.1 30.5 0 39.5 14.1 64.3 14.1 24.4 0 38-29.6 48.6-58.2 13.6-36.7 19.3-63.8 19.3-64.4-1.4-.5-64.8-23.5-64.8-84.1zm-80.4-152.1c16.9-20.7 27.7-48.4 24.9-76.6-25.4 1.4-55.9 16.9-73.3 37.6-14.6 17.4-27.2 46.5-23.5 73.8 28.2 2.4 55-14.1 71.9-34.8z"/></svg>
+                        App Store
+                    </a>
+                    <a href="#" class="store-btn">
+                        <svg viewBox="0 0 512 512"><path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/></svg>
+                        Google Play
+                    </a>
+                </div>
+            </div>
+            <div class="app-image">
+                <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1000&auto=format&fit=crop" alt="Vanguard App">
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="conta">
+        <div class="cta-container">
+            <h2>Pronto para o próximo nível?</h2>
+            <p>Pare de perder dinheiro em produtos de varejo. Transfira sua custódia para a Vanguard e tenha uma mesa de operações institucional trabalhando a favor do seu patrimônio.</p>
+            <a href="#" class="btn-cta-large" onclick="alert('Demo Vulcra: Este é um botão demonstrativo para o Portfólio.')">Abra sua conta exclusiva</a>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 Desenvolvido por <a href="https://vulcra.com.br" target="_blank" style="color: var(--text-main); text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-gold)'" onmouseout="this.style.color='var(--text-main)'"><strong>Vulcra</strong></a>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Tenta rodar o gráfico, se a internet bloquear o ChartJS, não quebra o resto.
+            try {
+                const canvas = document.getElementById('wealthChart');
+                if(canvas && typeof Chart !== 'undefined') {
+                    const ctx = canvas.getContext('2d');
+                    let gradient = ctx.createLinearGradient(0, 0, 0, 400);
+                    gradient.addColorStop(0, 'rgba(37, 99, 235, 0.2)');
+                    gradient.addColorStop(1, 'rgba(37, 99, 235, 0)');
+
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                            datasets: [{
+                                label: 'Portfólio Vanguard',
+                                data: [10.5, 10.8, 11.2, 11.0, 11.8, 12.4, 12.2, 12.9, 13.5, 13.1, 13.8, 14.2],
+                                borderColor: '#2563EB',
+                                backgroundColor: gradient,
+                                borderWidth: 3,
+                                pointBackgroundColor: '#FFFFFF',
+                                pointBorderColor: '#2563EB',
+                                pointBorderWidth: 2,
+                                pointRadius: 4,
+                                pointHoverRadius: 6,
+                                fill: true,
+                                tension: 0.4 
+                            },
+                            {
+                                label: 'CDI (Referência)',
+                                data: [10.0, 10.1, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7, 10.8, 10.9, 11.0, 11.1],
+                                borderColor: '#94A3B8',
+                                borderWidth: 2,
+                                borderDash: [5, 5],
+                                pointRadius: 0,
+                                fill: false,
+                                tension: 0.4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            interaction: { mode: 'index', intersect: false },
+                            plugins: {
+                                legend: { position: 'top', align: 'end', labels: { usePointStyle: true, boxWidth: 8 } },
+                                tooltip: {
+                                    backgroundColor: '#0B172A',
+                                    titleFont: { family: 'Inter', size: 13 },
+                                    bodyFont: { family: 'Inter', size: 14, weight: 'bold' },
+                                    padding: 12,
+                                    displayColors: false,
+                                    callbacks: { label: function(context) { return 'R$ ' + context.parsed.y + ' Milhões'; } }
+                                }
+                            },
+                            scales: {
+                                x: { grid: { display: false } },
+                                y: { grid: { color: 'rgba(0,0,0,0.03)' }, ticks: { callback: function(value) { return value + 'M'; } } }
+                            }
+                        }
+                    });
+                }
+            } catch(e) { console.log("Erro ao carregar o gráfico: ", e); }
+
+            // PAINEL DO TRADER JS
+            try {
+                const stocks = [
+                    { symbol: 'PETR4', price: 38.45, change: 1.2 },
+                    { symbol: 'VALE3', price: 62.10, change: -0.8 },
+                    { symbol: 'ITUB4', price: 34.20, change: 0.5 },
+                    { symbol: 'WEGE3', price: 28.90, change: 2.1 },
+                    { symbol: 'AAPL34', price: 85.30, change: -1.1 }
+                ];
+
+                const board = document.getElementById('trader-board');
+
+                if(board) {
+                    stocks.forEach((stock, index) => {
+                        const isUp = stock.change > 0;
+                        const card = document.createElement('div');
+                        card.className = 'stock-card';
+                        card.id = `stock-${index}`;
+                        card.innerHTML = `
+                            <div class="stock-header"><span>${stock.symbol}</span> <span>B3</span></div>
+                            <div class="stock-price" id="price-${index}">R$ ${stock.price.toFixed(2)}</div>
+                            <div class="stock-change ${isUp ? 'up' : 'down'}" id="change-${index}">
+                                ${isUp ? '▲' : '▼'} ${Math.abs(stock.change)}%
+                            </div>
+                        `;
+                        board.appendChild(card);
+                    });
+
+                    setInterval(() => {
+                        const randIndex = Math.floor(Math.random() * stocks.length);
+                        const stock = stocks[randIndex];
+                        
+                        const fluctuation = (Math.random() - 0.5); 
+                        stock.price = stock.price + fluctuation;
+                        stock.change = stock.change + (fluctuation * 0.2);
+
+                        const priceEl = document.getElementById(`price-${randIndex}`);
+                        const changeEl = document.getElementById(`change-${randIndex}`);
+                        const cardEl = document.getElementById(`stock-${randIndex}`);
+
+                        if(priceEl && changeEl && cardEl) {
+                            priceEl.innerText = `R$ ${stock.price.toFixed(2)}`;
+                            const isUp = stock.change > 0;
+                            changeEl.className = `stock-change ${isUp ? 'up' : 'down'}`;
+                            changeEl.innerHTML = `${isUp ? '▲' : '▼'} ${Math.abs(stock.change).toFixed(2)}%`;
+
+                            cardEl.classList.remove('flash-green', 'flash-red');
+                            void cardEl.offsetWidth; 
+                            cardEl.classList.add(fluctuation > 0 ? 'flash-green' : 'flash-red');
+                        }
+                    }, 2500);
+                }
+            } catch(e) { console.log("Erro no painel trader: ", e); }
+        });
+    </script>
+</body>
+</html>

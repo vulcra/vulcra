@@ -158,6 +158,65 @@
         .simple-footer a { color: var(--bronze); font-weight: 700; text-decoration: none; transition: color 0.3s; }
         .simple-footer a:hover { color: var(--charcoal); text-decoration: underline; }
 
+        /* =========================================================
+           RESPONSIVIDADE MOBILE (PORTFÓLIO)
+           ========================================================= */
+        @media (max-width: 900px) {
+            /* 1. Transforma o grid horizontal em vertical (Empilhado) */
+            .hero-bento {
+                grid-template-columns: 100vw; /* Ocupa 100% da tela */
+                grid-template-rows: 40vh 25vh 35vh; /* Logo 40% | Vidro 25% | CTA 35% */
+            }
+
+            /* Ocupa a primeira linha inteira */
+            .bento-logo {
+                grid-column: 1 / -1;
+                grid-row: 1 / 2;
+            }
+
+            .bento-logo img {
+                width: 250px; /* Reduz a logo para caber na tela pequena */
+            }
+
+            /* O vidro fica no meio, revelando o vídeo de fundo */
+            .bento-glass {
+                grid-column: 1 / -1;
+                grid-row: 2 / 3;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+            /* A caixa bronze vai para a base da tela */
+            .bento-text {
+                grid-column: 1 / -1;
+                grid-row: 3 / 4;
+                padding: 30px 20px;
+            }
+
+            .bento-text h2 {
+                font-size: 1.8rem; /* Ajusta o título para não vazar */
+            }
+
+            /* 2. Ajustes na Seção de Categorias */
+            .categories-section {
+                padding: 10vh 5vw;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+                margin-bottom: 40px;
+            }
+
+            .cat-card {
+                height: 45vh; /* Deixa os cards de projeto mais compactos */
+                padding: 30px 20px;
+            }
+
+            .cat-content h3 {
+                font-size: 2rem; /* Ajusta o título das categorias */
+            }
+        }
+
     </style>
 </head>
 <body>

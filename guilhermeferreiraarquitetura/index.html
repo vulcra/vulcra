@@ -197,6 +197,103 @@
         .description { font-size: 1rem; line-height: 1.6; font-weight: 300; opacity: 0.9; max-width: 500px; }
         .bold-accent { font-weight: 600; color: var(--charcoal); }
 
+        /* =========================================================
+           RESPONSIVIDADE ESTRATÉGICA (CELULAR E TABLET)
+           A Mágica: Transforma o Horizontal em Vertical!
+           ========================================================= */
+        @media (max-width: 900px) {
+            /* 1. Libera o Body para rolar para baixo */
+            body {
+                overflow-y: auto; 
+                overflow-x: hidden;
+                height: auto;
+            }
+
+            /* 2. O container que rolava de lado, agora empilha tudo para baixo */
+            .scroll-container {
+                height: auto;
+                width: 100vw;
+                flex-direction: column; 
+                overflow-y: visible;
+                overflow-x: hidden;
+                margin-top: 0;
+            }
+
+            /* 3. A "trilha" dos painéis também vira uma coluna */
+            .track {
+                flex-direction: column;
+                margin-left: 0; 
+                width: 100%;
+                height: auto;
+                box-shadow: none; /* Tira a sombra lateral */
+                border-radius: 0; /* Tira o arredondamento */
+            }
+
+            /* 4. Cada painel agora ocupa a altura da tela, mas empilhado */
+            .panel {
+                width: 100vw;
+                min-height: 100vh; /* Garante que o painel tenha pelo menos a altura da tela */
+                height: auto;
+            }
+
+            /* 5. Painéis Divididos (Imagem + Texto): Ficam 100% de largura, um em cima do outro */
+            .split-panel {
+                flex-direction: column !important; /* Força a coluna, ignorando o 'reverse' */
+            }
+
+            .split-panel .image-side, 
+            .split-panel .text-side {
+                width: 100%;
+            }
+
+            .split-panel .image-side {
+                height: 50vh; /* Imagem fica na metade de cima da tela */
+            }
+
+            .split-panel .text-side {
+                height: auto; /* O texto ocupa o resto do espaço necessário */
+                padding: 10% 5%;
+                justify-content: flex-start;
+            }
+
+            /* 6. O Painel do Mosaico (O mais complexo) */
+            #panel-3 {
+                width: 100vw !important; /* Força ele a não ter os 130vw do desktop */
+            }
+
+            .masonry-grid {
+                /* Muda as 5 colunas malucas para 1 coluna simples */
+                grid-template-columns: 1fr;
+                grid-template-rows: auto; /* Altura automática conforme as fotos */
+            }
+
+            .masonry-item {
+                min-height: 400px; /* Garante que cada foto apareça bonita e inteira */
+            }
+
+            /* O texto e CTA não precisam esticar por 2 linhas no mobile */
+            .span-row-2 {
+                grid-row: span 1; 
+            }
+            
+            .text-card-grid {
+                padding: 30px 5%;
+            }
+
+            /* 7. O Painel de Contato */
+            .contact-panel {
+                padding: 5% 5% 15% 5%;
+            }
+
+            .contact-wrapper {
+                grid-template-columns: 1fr; /* Coloca o texto em cima do formulário */
+                gap: 30px;
+            }
+
+            /* Remove o espaçador inútil no final */
+            .end-spacer { display: none; }
+        }
+
     </style>
 </head>
 <body>

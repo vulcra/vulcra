@@ -8,17 +8,23 @@
     <meta name="description" content="VULCRA | Especialista em Product Management e Engenharia Web. Desenvolvemos Landing Pages de alta conversão, sistemas B2B e portfólios premium para escalar o teu negócio digital.">
     <meta name="keywords" content="criação de sites, landing pages, desenvolvimento web, product manager, tech lead, sites de alta conversão, design premium, belo horizonte">
     <meta name="author" content="VULCRA">
-    <meta name="robots" content="index, follow"> <meta property="og:type" content="website">
+    <meta name="robots" content="index, follow"> 
+    
+    <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.vulcra.com.br/">
     <meta property="og:title" content="VULCRA | Engenharia e Produto">
     <meta property="og:description" content="A união entre estratégia executiva e código de alta performance para escalar o teu negócio digital.">
-    <meta property="og:image" content="https://www.vulcra.com.br/imagem-partilha.jpg"> <meta property="og:site_name" content="VULCRA">
+    <meta property="og:image" content="https://www.vulcra.com.br/imagem-partilha.jpg"> 
+    <meta property="og:site_name" content="VULCRA">
 
     <link rel="icon" type="image/png" sizes="192x192" href="https://www.vulcra.com.br/favicon.png?v=2">
     <link rel="apple-touch-icon" sizes="180x180" href="https://www.vulcra.com.br/favicon.png?v=2">
     <link rel="shortcut icon" href="https://www.vulcra.com.br/favicon.png?v=2"> 
     <link rel="canonical" href="https://www.vulcra.com.br/">    
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 124 106'><path d='M70 105.5L101 47.5L65.5 63L56.5 79L32 34L0 25.5L42.5 105.5H70Z' fill='%230F172A'/><path d='M53.5 61L65 37L79 31L68.5 53.5L103.5 37L123.5 0L58.5 29V0L39.5 34L53.5 61Z' fill='%23F97316'/></svg>">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
     
     <style>
@@ -43,9 +49,16 @@
 
         /* HEADER */
         header { display: flex; justify-content: space-between; align-items: center; padding: 25px 5%; width: 100%; position: absolute; top: 0; left: 0; z-index: 100; background-color: transparent; border-bottom: none; }
-        .logo-v svg { width: 45px; height: auto; }
-        .btn-outline { border: 1px solid rgba(15, 23, 42, 0.2); color: var(--primary); padding: 10px 24px; border-radius: 50px; text-decoration: none; font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: all 0.3s ease; background-color: var(--bg-color); }
-        .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+        .logo-v svg { width: 45px; height: auto; transition: transform 0.3s; }
+        .logo-v:hover svg { transform: scale(1.05); }
+        .header-actions { display: flex; align-items: center; gap: 30px; }
+        
+        .nav-link-journal { position: relative; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.75rem; color: var(--primary); text-decoration: none; text-transform: uppercase; letter-spacing: 1.5px; padding-top: 8px; transition: opacity 0.3s ease; }
+        .nav-link-journal::before { content: ''; position: absolute; top: 0; left: 0; width: 15px; height: 2px; background-color: var(--accent); }
+        .nav-link-journal:hover { opacity: 0.6; }
+
+        .btn-outline { border: 1px solid rgba(15, 23, 42, 0.2); color: var(--primary); padding: 12px 28px; border-radius: 50px; text-decoration: none; font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: all 0.3s ease; background-color: var(--bg-color); }
+        .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
         /* HERO */
         .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
@@ -83,16 +96,6 @@
         .section-header p { font-size: 1.15rem; color: var(--primary); opacity: 0.9; max-width: 750px; line-height: 1.6; }
         .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 50px; }
         .project-card { text-align: left; }
-        .mockup-window { background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 15px 35px rgba(15, 23, 42, 0.05); margin-bottom: 30px; border: 1px solid rgba(15, 23, 42, 0.05); }
-        .mockup-topbar { background-color: var(--primary); padding: 12px 15px; display: flex; align-items: center; }
-        .mockup-topbar svg { width: 16px; height: 16px; color: white; }
-        .mockup-body { padding: 40px; display: flex; gap: 30px; background-color: #FAFAFA; }
-        .skeleton-left { flex: 1; display: flex; flex-direction: column; gap: 15px; }
-        .skeleton-line { height: 12px; background-color: rgba(15, 23, 42, 0.06); border-radius: 6px; }
-        .skeleton-line.short { width: 40%; }
-        .skeleton-line.medium { width: 80%; }
-        .skeleton-line.long { width: 100%; }
-        .skeleton-right { width: 120px; height: 120px; background-color: rgba(15, 23, 42, 0.06); border-radius: 8px; }
         .project-card h3 { font-size: 1.4rem; font-weight: 700; color: var(--primary); margin-bottom: 15px; }
         .project-card p { font-size: 1rem; color: var(--primary); opacity: 0.9; line-height: 1.6; margin-bottom: 25px; }
         .btn-text { color: var(--accent); font-weight: 700; text-decoration: none; font-size: 1rem; display: inline-flex; align-items: center; gap: 8px; transition: opacity 0.3s ease; }
@@ -119,12 +122,15 @@
         .benefits-list { list-style: none; margin-bottom: 30px; }
         .benefits-list li { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; font-weight: 500; color: var(--primary); opacity: 0.9; }
         .benefits-list li svg { width: 20px; height: 20px; color: var(--accent); flex-shrink: 0; }
+        
         .pricing-form { flex: 1; display: flex; flex-direction: column; gap: 20px; }
         .input-group { display: flex; flex-direction: column; }
         .pricing-form input, .pricing-form textarea, .pricing-form select { width: 100%; padding: 18px 20px; border-radius: 12px; border: 1px solid rgba(15, 23, 42, 0.15); background-color: #FAFAFA; font-family: 'Montserrat', sans-serif; font-size: 1rem; color: var(--primary); transition: all 0.3s ease; outline: none; }
         .pricing-form input::placeholder, .pricing-form textarea::placeholder { color: #94A3B8; }
         .pricing-form input:focus, .pricing-form textarea:focus, .pricing-form select:focus { border-color: var(--accent); background-color: #ffffff; box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.1); }
         .pricing-form textarea { resize: vertical; min-height: 150px; }
+        
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
 
         /* FOOTER */
         footer { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px 5% 50px 5%; gap: 20px; }
@@ -140,47 +146,6 @@
         .whatsapp-float svg { width: 32px; height: 32px; fill: var(--primary); transition: all 0.3s ease; }
         .whatsapp-float:hover svg { fill: white; }
 
-        /* HEADER */
-        header { display: flex; justify-content: space-between; align-items: center; padding: 25px 5%; width: 100%; z-index: 100; }
-        .logo-v svg { width: 45px; height: auto; transition: transform 0.3s; }
-        .logo-v:hover svg { transform: scale(1.05); }
-        
-        .header-actions { display: flex; align-items: center; gap: 30px; }
-        
-        /* Link Journal - Linha Laranja Curta (Padrão Vulcra) */
-        .nav-link-journal {
-            position: relative;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 800;
-            font-size: 0.75rem; 
-            color: var(--primary);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            padding-top: 8px; /* Dá o espaço para a linha respirar */
-            transition: opacity 0.3s ease;
-        }
-        
-        .nav-link-journal::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 15px; /* Aqui é a mágica: a linha pega só o começo do nome */
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .nav-link-journal:hover { opacity: 0.6; }
-
-        .btn-outline { border: 1px solid rgba(15, 23, 42, 0.2); color: var(--primary); padding: 12px 28px; border-radius: 50px; text-decoration: none; font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: all 0.3s ease; background-color: var(--bg-color); }
-        .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
-        
-        .sr-only {
-            position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-            overflow: hidden; clip: rect(0,0,0,0); border: 0;
-        }
-
         @media (max-width: 600px) {
             .header-actions { gap: 15px; }
             .nav-link-journal { font-size: 0.7rem; }
@@ -191,17 +156,12 @@
         @media (max-width: 900px) {
             .pricing-card { flex-direction: column; padding: 40px 30px; }
             .pricing-info h3 { font-size: 2.5rem; }
-            
-            /* Inversão da Foto e Texto no Mobile */
             .about-container { flex-direction: column; text-align: center; }
             .about-image { order: 1; margin-bottom: 30px; }
             .about-text { order: 2; align-items: center; display: flex; flex-direction: column; }
-            
             .image-wrapper { width: 300px; height: 350px; }
             .feature-item { text-align: center; display: flex; flex-direction: column; align-items: center; }
             .projects-grid { grid-template-columns: 1fr; }
-            .mockup-body { flex-direction: column; }
-            .skeleton-right { width: 100%; height: 200px; }
             .section-header { text-align: center; display: flex; flex-direction: column; align-items: center;}
             .expectations-grid .feature-item { text-align: left; align-items: flex-start; }
             .footer-contacts { flex-direction: column; gap: 15px; }
@@ -220,8 +180,8 @@
             </svg>
         </a>
         <div class="header-actions">
-            <a href="journal.html" class="nav-link-journal" aria-label="Journal">Journal</a>
-            <a href="index.html#orcamento" class="btn-outline" aria-label="Orçamento">Solicitar Orçamento</a>
+            <a href="journal.html" class="nav-link-journal" aria-label="Acessar Journal">Journal</a>
+            <a href="index.html#orcamento" class="btn-outline" aria-label="Solicitar Orçamento">Solicitar Orçamento</a>
         </div>
     </header>
 
@@ -238,12 +198,11 @@
                 <h2>Sobre mim</h2>
                 <p>Sou Cientista da Computação e especialista em gestão de negócios e pessoas (MBA). Com mais de 11 anos de experiência como Product Manager e gestor de tecnologia, eu crio soluções focadas no que realmente importa: <strong>resultado e conversão</strong>.</p>
                 <p>Eu construo sistemas que escalam, processos que funcionam e páginas ultrarrápidas que transformam cliques em contratos assinados.</p>
-                
                 <p class="transition-text">Engenharia aplicada a resultados:</p>
             </div>
             <div class="about-image">
                 <div class="image-wrapper">
-                    <img src="perfil.webp" loading="lazy" alt="Bruno - VULCRA">
+                    <img src="perfil.webp" alt="Bruno - VULCRA">
                 </div>
             </div>
         </div>
@@ -283,7 +242,7 @@
             <div class="section-header">
                 <div class="line-accent"></div>
                 <h2>Projetos recentes</h2>
-                <p>Em breve: uma seleção de interfaces de alta performance e sistemas robustos desenhados do absoluto zero. Acompanhe as novas implantações.</p>
+                <p>Uma seleção de interfaces de alta performance desenhadas do absoluto zero.</p>
             </div>
             
             <div class="projects-grid">
@@ -297,28 +256,18 @@
 
                     <div class="iframe-wrapper" style="width: 100%; height: 400px; overflow: hidden; position: relative; border: 1px solid #E6E4DF; border-top: none; background: #fff;">
                         <iframe 
-                            src="https://www.vulcra.com.br/paratelembrar" 
-                            loading="lazy"
-                            style="
-                                width: 1080px; 
-                                height: 800px; 
-                                border: none; 
-                                position: absolute; 
-                                top: 0; 
-                                left: 0; 
-                                transform: scale(0.5); 
-                                transform-origin: 0 0;
-                                pointer-events: none;
-                            "
+                            data-src="https://www.vulcra.com.br/paratelembrar" 
+                            class="lazy-iframe"
+                            style="width: 1080px; height: 800px; border: none; position: absolute; top: 0; left: 0; transform: scale(0.5); transform-origin: 0 0; pointer-events: none;"
                             title="Preview Desktop Para te Lembrar">
                         </iframe>
-                        <a href="https://www.vulcra.com.br/paratelembrar" target="_blank" aria-label="Demo paratelembrar" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;"></a>
+                        <a href="https://www.vulcra.com.br/paratelembrar" target="_blank" aria-label="Acessar projeto Para te Lembrar" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;"></a>
                     </div>
 
                     <div class="project-info" style="padding: 20px 0;">
                         <h3>Para Te Lembrar de Ir Embora</h3>
                         <p>Lançamento Editorial: Arquitetura de conversão com estética minimalista e melancólica.</p>
-                        <a href="https://www.vulcra.com.br/paratelembrar" class="btn-text" aria-label="Demo paratelembrar" target="_blank">Live demo</a>
+                        <a href="https://www.vulcra.com.br/paratelembrar" class="btn-text" aria-label="Ver projeto ao vivo" target="_blank">Live demo</a>
                     </div>
                 </div>
 
@@ -331,35 +280,25 @@
 
                     <div class="iframe-wrapper" style="width: 100%; height: 400px; overflow: hidden; position: relative; border: 1px solid #E6E4DF; border-top: none; background: #fff;">
                         <iframe 
-                            src="https://www.vulcra.com.br/guilhermeferreiraarquitetura/" 
-                            loading="lazy"
-                            style="
-                                width: 1080px; 
-                                height: 800px; 
-                                border: none; 
-                                position: absolute; 
-                                top: 0; 
-                                left: 0; 
-                                transform: scale(0.5); 
-                                transform-origin: 0 0;
-                                pointer-events: none;
-                            "
+                            data-src="https://www.vulcra.com.br/guilhermeferreiraarquitetura/" 
+                            class="lazy-iframe"
+                            style="width: 1080px; height: 800px; border: none; position: absolute; top: 0; left: 0; transform: scale(0.5); transform-origin: 0 0; pointer-events: none;"
                             title="Preview Desktop Guilherme Ferreira">
                         </iframe>
-                        <a href="https://www.vulcra.com.br/guilhermeferreiraarquitetura/" target="_blank" aria-label="Demo Arquitetura" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;"></a>
+                        <a href="https://www.vulcra.com.br/guilhermeferreiraarquitetura/" target="_blank" aria-label="Acessar projeto Guilherme Ferreira" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;"></a>
                     </div>
 
                     <div class="project-info" style="padding: 20px 0;">
                         <h3>Guilherme Ferreira | Arquitetura</h3>
-                        <p>Portfólio Premium: Engenharia de ponta com motor de rolagem horizontal imersiva e design de agência internacional.</p>
-                        <a href="https://www.vulcra.com.br/guilhermeferreiraarquitetura/" class="btn-text" aria-label="Demo Arquitetura" target="_blank">Live demo</a>
+                        <p>Portfólio Premium: Engenharia de ponta com motor de rolagem horizontal imersiva.</p>
+                        <a href="https://www.vulcra.com.br/guilhermeferreiraarquitetura/" class="btn-text" aria-label="Ver projeto ao vivo" target="_blank">Live demo</a>
                     </div>
                 </div>
 
             </div>
             
             <div class="more-projects-wrapper">
-                <a href="portfolio.html" class="btn-secondary" aria-label="Todos os projetos">Ver todos os projetos</a>
+                <a href="portfolio.html" class="btn-secondary" aria-label="Ver todos os projetos no portfólio">Ver todos os projetos</a>
             </div>
             
         </div>
@@ -411,7 +350,6 @@
                 </div>
 
                 <form class="pricing-form" action="https://formsubmit.co/ajax/contato@vulcra.com.br" method="POST" id="form-orcamento">
-                    
                     <input type="hidden" name="_subject" value="🚀 NOVO LEAD VULCRA - Formulário de Discovery!">
                     <input type="text" name="_honey" style="display:none">
 
@@ -421,17 +359,18 @@
                     </div>
                     
                     <div class="input-group">
-                        <label for="nome" class="sr-only">Seu Melhor E-mail</label>
+                        <label for="email" class="sr-only">Seu Melhor E-mail</label>
                         <input type="email" id="email" name="email" placeholder="Seu E-mail profissional" required>
                     </div>
                     
                     <div class="input-group">
-                        <label for="nome" class="sr-only">Nome da sua empresa</label>
+                        <label for="empresa" class="sr-only">Nome da sua empresa</label>
                         <input type="text" id="empresa" name="empresa" placeholder="Qual o nome da sua empresa?">
                     </div>
 
                     <div class="input-group">
-                        <select name="orcamento" required>
+                        <label for="orcamento" class="sr-only">Expectativa de Investimento</label>
+                        <select id="orcamento" name="orcamento" required>
                             <option value="" disabled selected>Expectativa de Investimento</option>
                             <option value="Até R$ 300">Até R$ 300</option>
                             <option value="R$ 300 a R$ 500">R$ 300 - R$ 500</option>
@@ -442,7 +381,7 @@
                     </div>
 
                     <div class="input-group">
-                        <label for="nome" class="sr-only">Escreva sua mensagem</label>
+                        <label for="mensagem" class="sr-only">Escreva sua mensagem</label>
                         <textarea id="mensagem" name="mensagem" placeholder="Descreva brevemente o seu projeto e os seus objetivos principais..." required></textarea>
                     </div>
                     
@@ -452,7 +391,6 @@
                 <script>
                     document.getElementById("form-orcamento").addEventListener("submit", function(e) {
                         e.preventDefault();
-                        
                         var form = this;
                         var btn = document.getElementById("btn-enviar");
                         var textoOriginal = btn.innerText;
@@ -468,10 +406,9 @@
                           .then(data => {
                               if(data.success) {
                                   btn.innerText = "E-mail enviado com sucesso! ✓";
-                                  btn.style.backgroundColor = "#10B981"; // Verde Premium
+                                  btn.style.backgroundColor = "#10B981"; 
                                   btn.style.opacity = "1";
                                   form.reset(); 
-                                  
                                   setTimeout(() => {
                                       btn.innerText = textoOriginal;
                                       btn.style.backgroundColor = "var(--primary)";
@@ -486,18 +423,17 @@
                           });
                     });
                 </script>
-
             </div>
         </div>
     </section>
 
     <footer>
         <div class="footer-contacts">
-            <a href="https://instagram.com/vulcra.tech" target="_blank" class="social-link" aria-label="Entrar em contato pelo Instagram" title="Instagram Vulca">
+            <a href="https://instagram.com/vulcra.tech" target="_blank" class="social-link" aria-label="Acessar página do Instagram" title="Instagram Vulcra">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                 Instagram
             </a>
-            <a href="https://wa.me/5531983679809" target="_blank" class="social-link" aria-label="Entrar em contato pelo WhatsApp" title="Falar no WhatsApp">
+            <a href="https://wa.me/5531983679809" target="_blank" class="social-link" aria-label="Ligar pelo WhatsApp" title="Falar no WhatsApp">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                 Telefone
             </a>
@@ -505,9 +441,36 @@
         <p class="copyright">&copy; 2026 VULCRA - Todos os direitos reservados.</p>
     </footer>
 
-    <a href="https://wa.me/5531983679809?text=Olá,%20acabei%20de%20ver%20o%20seu%20site%20e%20gostaria%20de%20informações%20sobre%20o%20que%20seria%20necessário%20para%20fazer%20o%20meu!" target="_blank" class="whatsapp-float" aria-label="Fale no Whatsapp" title="Fale comigo no WhatsApp">
+    <a href="https://wa.me/5531983679809?text=Olá,%20acabei%20de%20ver%20o%20seu%20site%20e%20gostaria%20de%20informações%20sobre%20o%20que%20seria%20necessário%20para%20fazer%20o%20meu!" target="_blank" class="whatsapp-float" aria-label="Abrir conversa no Whatsapp" title="Fale comigo no WhatsApp">
         <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.2-8.5-44.2-27.1-16.4-14.6-27.4-32.7-30.6-38.1-3.2-5.5-.3-8.5 2.5-11.2 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.2 3.7-5.5 5.6-9.2 1.9-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.7 23.5 9.2 31.6 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.5 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.7z"/></svg>
     </a>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var lazyIframes = document.querySelectorAll(".lazy-iframe");
+            if ("IntersectionObserver" in window) {
+                var iframeObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            var iframe = entry.target;
+                            iframe.src = iframe.getAttribute("data-src");
+                            iframe.classList.remove("lazy-iframe");
+                            iframeObserver.unobserve(iframe);
+                        }
+                    });
+                }, { rootMargin: "0px 0px 400px 0px" }); // Carrega quando o usuário chegar a 400px perto do portfólio
+
+                lazyIframes.forEach(function(iframe) {
+                    iframeObserver.observe(iframe);
+                });
+            } else {
+                // Fallback para celular muito antigo
+                lazyIframes.forEach(function(iframe) {
+                    iframe.src = iframe.getAttribute("data-src");
+                });
+            }
+        });
+    </script>
 
 </body>
 </html>

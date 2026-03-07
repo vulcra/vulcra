@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>O custo oculto do WordPress | Vulcra Journal</title>
+    <title>O fim dos templates genéricos | Vulcra Journal</title>
     
-    <meta name="description" content="Entenda como a velocidade do seu site e o uso de templates genéricos reduzem sua nota no Google e aumentam o seu custo de aquisição (CAC).">
+    <meta name="description" content="Descubra por que sites feitos em construtores baratos destroem a percepção de valor do seu negócio no mercado de alto padrão.">
     <meta name="author" content="Vulcra">
     <meta name="robots" content="index, follow"> 
 
@@ -23,9 +23,6 @@
             --dots: #94A3B8; 
             --white: #ffffff;
             --text-body: #334155;
-            
-            /* Cores Google PageSpeed */
-            --google-green: #0F9D58;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
@@ -59,6 +56,7 @@
         /* MENU MOBILE (SANDUÍCHE) ESTILO VULCRA */
         .hamburger { display: none; background: none; border: none; cursor: pointer; color: var(--primary); z-index: 1001; padding: 10px; }
         .hamburger svg { width: 30px; height: 30px; stroke-width: 2.5; transition: transform 0.3s ease; }
+        .hamburger line { transition: all 0.3s ease; }
         
         .mobile-nav { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: var(--bg-color); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 40px; transform: translateY(-100%); transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1); z-index: 999; }
         .mobile-nav.active { transform: translateY(0); }
@@ -85,7 +83,7 @@
         .article-featured-image img { width: 100%; height: auto; max-height: 500px; object-fit: cover; border-radius: 16px; box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08); }
 
         /* --- ARTICLE CONTENT --- */
-        .article-content { max-width: 750px; margin: 0 auto; padding: 0 5%; color: var(--text-body); font-size: 1.1rem; line-height: 1.8; }
+        .article-content { max-width: 750px; margin: 0 auto; padding: 0 5% 80px; color: var(--text-body); font-size: 1.1rem; line-height: 1.8; }
         .article-content h2 { font-size: 1.8rem; font-weight: 800; color: var(--primary); margin: 50px 0 20px; line-height: 1.3; letter-spacing: -0.5px; }
         .article-content h3 { font-size: 1.3rem; font-weight: 700; color: var(--primary); margin: 40px 0 15px; }
         .article-content p { margin-bottom: 25px; }
@@ -96,19 +94,8 @@
         .article-content li { margin-bottom: 10px; }
         .article-content strong { color: var(--primary); font-weight: 700; }
 
-        /* --- PROVA SOCIAL GOOGLE PAGESPEED --- */
-        .proof-card { background: var(--primary); color: white; border-radius: 16px; padding: 40px; margin: 60px 0; display: flex; align-items: center; gap: 40px; box-shadow: 0 20px 50px rgba(15, 23, 42, 0.15); }
-        .proof-score { flex-shrink: 0; width: 120px; height: 120px; border-radius: 50%; border: 8px solid var(--google-green); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: 900; color: var(--google-green); font-family: 'Montserrat', sans-serif; position: relative; }
-        .proof-text { flex: 1; }
-        .proof-text h4 { font-size: 1.4rem; font-weight: 800; margin-bottom: 10px; line-height: 1.2; }
-        .proof-text p { font-size: 0.95rem; opacity: 0.8; line-height: 1.5; margin-bottom: 20px; }
-        
-        .btn-google { display: inline-flex; align-items: center; gap: 10px; background: white; color: var(--primary); font-size: 0.85rem; font-weight: 700; padding: 12px 24px; border-radius: 50px; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; transition: transform 0.3s; }
-        .btn-google:hover { transform: translateY(-2px); }
-        .btn-google svg { width: 18px; height: 18px; }
-
         /* --- CTA FORM BOTTOM --- */
-        .article-cta { max-width: 750px; margin: 60px auto 80px; background-color: var(--white); border: 1px solid rgba(15, 23, 42, 0.1); border-radius: 16px; padding: 50px; text-align: center; box-shadow: 0 20px 40px rgba(15, 23, 42, 0.05); }
+        .article-cta { max-width: 750px; margin: 0 auto 80px; background-color: var(--white); border: 1px solid rgba(15, 23, 42, 0.1); border-radius: 16px; padding: 50px; text-align: center; box-shadow: 0 20px 40px rgba(15, 23, 42, 0.05); }
         .article-cta h3 { font-size: 1.8rem; font-weight: 800; color: var(--primary); margin-bottom: 15px; margin-top: 0;}
         .article-cta p { font-size: 1.05rem; margin-bottom: 30px; color: var(--text-body); max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.6; }
         
@@ -152,12 +139,8 @@
         .copyright { color: var(--primary); opacity: 0.4; font-size: 0.9rem; font-weight: 500; margin: 0; }
 
         @media (max-width: 900px) {
-            .header-actions { display: none; } /* Esconde o menu normal */
-            .hamburger { display: block; }    /* Mostra o ícone sanduíche */
-        }
-
-        @media (max-width: 768px) {
-            .proof-card { flex-direction: column; text-align: center; gap: 25px; padding: 30px 20px; }
+            .header-actions { display: none; } 
+            .hamburger { display: block; }    
         }
 
         @media (max-width: 600px) {
@@ -205,75 +188,51 @@
             Voltar para Journal
         </a>
         <div class="article-meta-top">
-            <span class="article-category">Engenharia Web</span>
-            <span class="article-date">Março 2024</span>
+            <span class="article-category">Estratégia</span>
+            <span class="article-date">Dez 2023</span>
         </div>
-        <h1>O custo oculto do WordPress: Como a velocidade do seu site afeta o seu faturamento</h1>
-        <p class="article-subtitle">A ilusão do "template fácil" pode estar custando metade dos seus leads em anúncios e destruindo o seu ranqueamento orgânico no Google. Entenda a engenharia por trás do problema.</p>
+        <h1>O fim dos templates genéricos: Como o design exclusivo blinda o seu preço</h1>
+        <p class="article-subtitle">No mercado de alto padrão, a primeira impressão define o quanto você pode cobrar. Descubra por que sites feitos em construtores baratos destroem a percepção de valor do seu negócio.</p>
     </div>
 
     <div class="article-featured-image">
-        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop" fetchpriority="high" alt="Engenharia Web e Velocidade de Site">
+        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1200&auto=format&fit=crop" fetchpriority="high" alt="Estratégia e Design de Marca">
     </div>
 
     <article class="article-content">
-        <p>Se você investe em tráfego pago (Google Ads ou Meta Ads), provavelmente já olhou para os seus relatórios e se perguntou: <em>"Por que tenho 1.000 cliques no anúncio, mas apenas 400 pessoas chegaram na minha Landing Page?"</em></p>
+        <p>Imagine a seguinte cena: você foi convidado para uma reunião de negócios com um executivo que promete multiplicar o faturamento da sua empresa. Você chega ao endereço e encontra um escritório com pintura descascada, cadeiras de plástico e café em copinho descartável. Qual a primeira coisa que passa pela sua cabeça? <em>"Essa pessoa não tem os resultados que diz ter."</em></p>
         
-        <p>A resposta na maioria das vezes não está no seu anúncio, e sim na engenharia — ou na falta dela — por trás do seu site. A internet atual não perdoa lentidão, e o principal vilão silencioso dessa história atende pelo nome de <strong>WordPress mal otimizado</strong>.</p>
+        <p>No mundo digital, o seu site é esse escritório. Se você vende produtos ou serviços <em>High-Ticket</em> (consultorias, imóveis, cirurgias, infoprodutos premium), mas a sua vitrine digital foi feita em um template de 50 dólares comprado na internet, você está espantando os clientes certos.</p>
 
-        <h2>A matemática da lentidão</h2>
-        <p>Estudos da Amazon e do Google mostram um dado assustador: <strong>a cada 1 segundo extra no tempo de carregamento de uma página, a conversão cai em média 20%.</strong> Se o seu site demora 4 segundos para abrir em um 4G (o padrão do Brasil), você já perdeu quase metade do seu dinheiro investido em anúncios.</p>
+        <h2>A Síndrome do "Mais do Mesmo"</h2>
+        <p>Com o avanço de plataformas do tipo "arraste e solte", ficou fácil e barato colocar um site no ar. O efeito colateral disso é que a internet se tornou um oceano de páginas idênticas. Seus concorrentes usam os mesmos blocos, as mesmas animações padrão e as mesmas estruturas visuais.</p>
+
+        <p>Quando o seu cliente em potencial abre a sua Landing Page e ela se parece com todas as outras que ele já visitou hoje, a percepção de valor sobre o seu serviço despenca para a média do mercado. E se o seu valor percebido é a média, você é obrigado a brigar por preço.</p>
 
         <blockquote>
-            "O visitante não tem paciência para ver a barra de carregamento do seu site girar. Se ele clicar no seu anúncio e a página ficar branca por 3 segundos, ele volta para o Google e clica no seu concorrente."
+            "Marcas de luxo não usam prateleiras pré-fabricadas. A exclusividade da embalagem é o que justifica o alto valor do conteúdo."
         </blockquote>
 
-        <h2>Por que o WordPress de gaveta é uma bomba-relógio?</h2>
-        <p>O WordPress é uma ferramenta fantástica para blogs de notícias, mas quando usado por curiosos para construir Landing Pages de negócios, ele se torna um "Frankenstein" digital. O ciclo é sempre o mesmo:</p>
+        <h2>A Engenharia do Alto Padrão</h2>
+        <p>Para se descolar da concorrência e justificar um preço *premium*, você precisa de **Engenharia Web Exclusiva**. Isso significa abandonar construtores visuais genéricos e desenvolver uma arquitetura digital a partir do zero, pensada exclusivamente para o seu funil de vendas.</p>
 
         <ul>
-            <li><strong>Excesso de Plugins:</strong> Um plugin para o formulário, outro para o botão de WhatsApp, outro para compressão de imagens. Cada plugin carrega scripts que o usuário tem que baixar no celular antes de ver sua página.</li>
-            <li><strong>Page Builders Pesados:</strong> Ferramentas como Elementor ou WPBakery escrevem um código HTML sujo e gigantesco. Para desenhar um simples botão, eles geram 20 linhas de código inútil.</li>
-            <li><strong>Banco de Dados Lento:</strong> Diferente de um site em HTML estático que entrega a tela instantaneamente, o WordPress precisa fazer dezenas de consultas ao banco de dados a cada visitante novo.</li>
+            <li><strong>Autenticidade Visual:</strong> Cores, tipografias e espaçamentos (Quiet Luxury) que respiram a identidade da sua marca, e não de um tema importado.</li>
+            <li><strong>Navegação Guiada:</strong> O código limpo permite criar micro-interações e rolagens fluídas que dão a sensação de se estar navegando em um aplicativo da Apple, gerando autoridade instantânea.</li>
+            <li><strong>Velocidade Implacável:</strong> Templates prontos carregam scripts inúteis que deixam o site pesado. Um código feito sob medida carrega em milissegundos, respeitando o tempo (e a impaciência) do cliente de alto nível.</li>
         </ul>
 
-        <h2>O que o Google realmente vê (Core Web Vitals)</h2>
-        <p>Em 2021, o Google atualizou seu algoritmo para penalizar sites lentos. Eles criaram o <strong>Core Web Vitals</strong>. Se o seu site não passar nesses testes de velocidade de renderização, duas coisas acontecem:</p>
-        <p>1. O seu site desaparece das buscas orgânicas gratuitas.<br>
-        2. O Google Ads cobra o seu clique mais caro, pois ele julga que a experiência do usuário na sua página é ruim.</p>
-
-        <h2>A Engenharia Vulcra: O caminho High-End</h2>
-        <p>Empresas de alto faturamento não operam em templates de US$ 50 comprados prontos. Elas utilizam <strong>Engenharia Web nativa</strong>.</p>
-        
-        <p>Na Vulcra, nós abandonamos construtores visuais pesados. Nossas interfaces são escritas linha a linha em código limpo (HTML, CSS e JS puros) e hospedadas em CDNs globais. O resultado é o que você vê abaixo:</p>
-
-        <div class="proof-card">
-            <div class="proof-score">95+</div>
-            <div class="proof-text">
-                <h4>Não acredite apenas em mim. Pergunte ao Google.</h4>
-                <p>Nossa arquitetura de código é auditada pela ferramenta oficial do Google (PageSpeed Insights), alcançando notas de excelência no Mobile que a maioria das agências não consegue entregar.</p>
-                <a href="https://pagespeed.web.dev/analysis/https-www-vulcra-com-br/mfm7r9hupp?form_factor=mobile" target="_blank" rel="noopener noreferrer" class="btn-google" aria-label="Ver auditoria oficial do Google">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-                    </svg>
-                    Ver Relatório Oficial
-                </a>
-            </div>
-        </div>
-
-        <p>Se você vende serviços High-Ticket, a velocidade e a fluidez do seu site são o equivalente digital de uma recepção com ar-condicionado, café expresso e poltronas de couro. É o básico para cobrar o que você vale.</p>
+        <h2>Seu Site como Filtro de Clientes</h2>
+        <p>Um design exclusivo faz o trabalho duro por você. Ele ancora o seu preço nas alturas antes mesmo de você abrir a boca. Quando um lead qualificado entra na sua página e se depara com uma interface impecável e rápida, a mente dele automaticamente assume: <em>"Se o site deles é assim, o serviço deve ser excepcional. Isso não vai ser barato (e eu quero)."</em></p>
 
     </article>
 
     <div class="article-cta" id="orcamento">
-        <h3>Pare de perder dinheiro para a tela branca</h3>
-        <p>Descubra como a engenharia da VULCRA pode acelerar as suas vendas reconstruindo a sua presença digital com tecnologia de ponta.</p>
+        <h3>Pronto para ter uma vitrine exclusiva?</h3>
+        <p>Deixe os templates genéricos para os amadores. Vamos construir uma presença digital de alto padrão que ancore o seu preço e gere autoridade instantânea.</p>
         
         <form class="pricing-form" action="https://formsubmit.co/ajax/contato@vulcra.com.br" method="POST" id="form-orcamento" style="margin-top: 30px; text-align: left;">
-            <input type="hidden" name="_subject" value="🚀 NOVO LEAD VULCRA - Veio do Artigo de WordPress!">
+            <input type="hidden" name="_subject" value="🚀 NOVO LEAD VULCRA - Veio do Artigo de Templates!">
             <input type="text" name="_honey" style="display:none">
 
             <div class="input-group">
@@ -285,10 +244,9 @@
                 <label for="email" class="sr-only">Seu Melhor E-mail</label>
                 <input type="email" id="email" name="email" placeholder="Seu E-mail profissional" required>
             </div>
-            
+
             <div class="input-group">
                 <label class="sr-only">Expectativa de Investimento</label>
-                
                 <div class="custom-select-wrapper" id="custom-select-orcamento">
                     <div class="custom-select-trigger" id="select-trigger">
                         <span class="custom-select-value">Expectativa de Investimento</span>
@@ -307,10 +265,10 @@
 
             <div class="input-group">
                 <label for="mensagem" class="sr-only">Escreva sua mensagem</label>
-                <textarea id="mensagem" name="mensagem" placeholder="Descreva brevemente o seu projeto e a URL do seu site atual..." required></textarea>
+                <textarea id="mensagem" name="mensagem" placeholder="Conte um pouco sobre o seu projeto atual..." required></textarea>
             </div>
             
-            <button type="submit" class="btn-primary" id="btn-enviar" style="width: 100%; border-radius: 12px;">Solicitar Diagnóstico Gratuito</button>
+            <button type="submit" class="btn-primary" id="btn-enviar" style="width: 100%; border-radius: 12px;">Solicitar Engenharia de Produto</button>
         </form>
     </div>
 
@@ -330,7 +288,6 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // SCRIPT DA CAIXA DE SELEÇÃO CUSTOMIZADA
             const selectWrapper = document.getElementById('custom-select-orcamento');
             const selectTrigger = document.getElementById('select-trigger');
             const customOptions = selectWrapper.querySelector('.custom-options');
@@ -366,7 +323,6 @@
                 }
             });
 
-            // SCRIPT DE ENVIO
             document.getElementById("form-orcamento").addEventListener("submit", function(e) {
                 e.preventDefault();
                 var form = this;
@@ -394,7 +350,7 @@
                 }).then(response => response.json())
                   .then(data => {
                       if(data.success) {
-                          btn.innerText = "Diagnóstico solicitado com sucesso! ✓";
+                          btn.innerText = "Solicitação enviada com sucesso! ✓";
                           btn.style.backgroundColor = "#10B981"; 
                           btn.style.opacity = "1";
                           
@@ -417,8 +373,11 @@
                       btn.style.backgroundColor = "#EF4444";
                   });
             });
+        });
+    </script>
 
-            // SCRIPT MENU MOBILE (SANDUÍCHE ESTILOSO VULCRA)
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
             const hamburger = document.getElementById('hamburger');
             const mobileNav = document.getElementById('mobile-nav');
             const mobLinks = mobileNav.querySelectorAll('a');

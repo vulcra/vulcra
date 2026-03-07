@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>O custo oculto do WordPress | Vulcra Journal</title>
+    <title>Mobile-First não é apenas responsivo | Vulcra Journal</title>
     
-    <meta name="description" content="Entenda como a velocidade do seu site e o uso de templates genéricos reduzem sua nota no Google e aumentam o seu custo de aquisição (CAC).">
+    <meta name="description" content="Mais de 80% do tráfego hoje vem de smartphones. Entenda a diferença entre um site que apenas se espreme na tela e uma interface nativa.">
     <meta name="author" content="Vulcra">
     <meta name="robots" content="index, follow"> 
 
@@ -24,7 +24,7 @@
             --white: #ffffff;
             --text-body: #334155;
             
-            /* Cores Google PageSpeed */
+            /* Cor Google PageSpeed */
             --google-green: #0F9D58;
         }
 
@@ -53,12 +53,13 @@
         .nav-link-journal::before { content: ''; position: absolute; top: 0; left: 0; width: 15px; height: 2px; background-color: var(--accent); }
         .nav-link-journal:hover { opacity: 0.6; }
 
-        .btn-outline { border: 1px solid rgba(15, 23, 42, 0.2); color: var(--primary); padding: 10px 24px; border-radius: 50px; text-decoration: none; font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: all 0.3s ease; background-color: var(--bg-color); }
+        .btn-outline { border: 1px solid rgba(15, 23, 42, 0.2); color: var(--primary); padding: 12px 28px; border-radius: 50px; text-decoration: none; font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: all 0.3s ease; background-color: var(--bg-color); }
         .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
         /* MENU MOBILE (SANDUÍCHE) ESTILO VULCRA */
         .hamburger { display: none; background: none; border: none; cursor: pointer; color: var(--primary); z-index: 1001; padding: 10px; }
         .hamburger svg { width: 30px; height: 30px; stroke-width: 2.5; transition: transform 0.3s ease; }
+        .hamburger line { transition: all 0.3s ease; }
         
         .mobile-nav { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: var(--bg-color); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 40px; transform: translateY(-100%); transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1); z-index: 999; }
         .mobile-nav.active { transform: translateY(0); }
@@ -85,19 +86,38 @@
         .article-featured-image img { width: 100%; height: auto; max-height: 500px; object-fit: cover; border-radius: 16px; box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08); }
 
         /* --- ARTICLE CONTENT --- */
-        .article-content { max-width: 750px; margin: 0 auto; padding: 0 5%; color: var(--text-body); font-size: 1.1rem; line-height: 1.8; }
+        .article-content { max-width: 750px; margin: 0 auto; padding: 0 5% 80px; color: var(--text-body); font-size: 1.1rem; line-height: 1.8; }
         .article-content h2 { font-size: 1.8rem; font-weight: 800; color: var(--primary); margin: 50px 0 20px; line-height: 1.3; letter-spacing: -0.5px; }
-        .article-content h3 { font-size: 1.3rem; font-weight: 700; color: var(--primary); margin: 40px 0 15px; }
         .article-content p { margin-bottom: 25px; }
-        
         .article-content blockquote { border-left: 4px solid var(--accent); padding-left: 20px; margin: 40px 0; font-size: 1.3rem; font-weight: 600; color: var(--primary); font-style: italic; line-height: 1.6; background: rgba(249, 115, 22, 0.05); padding: 30px; border-radius: 0 12px 12px 0; }
-        
         .article-content ul { margin: 0 0 30px 20px; padding-left: 20px; }
         .article-content li { margin-bottom: 10px; }
         .article-content strong { color: var(--primary); font-weight: 700; }
 
+        /* --- SHOWCASE DESKTOP E MOBILE (EMPILHADOS) --- */
+        .showcase-container { display: flex; flex-direction: column; gap: 60px; justify-content: center; align-items: center; margin: 60px 0; }
+        
+        /* Película protetora para evitar cliques e interações dentro do Iframe */
+        .iframe-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; background: transparent; cursor: default; }
+
+        /* MOCKUP MOBILE (Sem barra de rolagem) */
+        .showcase-mobile { width: 220px; height: 450px; background: var(--white); border-radius: 30px; border: 8px solid var(--primary); position: relative; overflow: hidden; box-shadow: 0 20px 50px rgba(15,23,42,0.15); flex-shrink: 0; margin: 0 auto; }
+        .showcase-mobile .notch { position: absolute; top: -1px; left: 50%; transform: translateX(-50%); width: 80px; height: 18px; background: var(--primary); border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; z-index: 10; }
+        .showcase-mobile iframe { position: absolute; top: 0; left: 0; width: 400px; height: 900px; transform: scale(0.51); transform-origin: 0 0; border: none; pointer-events: none; }
+        
+        /* MOCKUP DESKTOP (Matemática Perfeita com Aspect Ratio) */
+        .showcase-desktop { width: 100%; max-width: 900px; background: var(--white); border-radius: 12px; border: 1px solid rgba(15,23,42,0.1); overflow: hidden; box-shadow: 0 20px 50px rgba(15,23,42,0.15); }
+        .showcase-browser-bar { background: #1C2331; height: 35px; display: flex; align-items: center; padding: 0 15px; gap: 8px; }
+        .showcase-browser-bar .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .showcase-browser-bar .dot.red { background: #ff5f56; }
+        .showcase-browser-bar .dot.yellow { background: #ffbd2e; }
+        .showcase-browser-bar .dot.green { background: #27c93f; }
+        
+        .showcase-desktop .iframe-box { width: 100%; aspect-ratio: 16 / 9; position: relative; overflow: hidden; background: #fff; }
+        .showcase-desktop iframe { position: absolute; top: 0; left: 0; width: 1280px; height: 720px; transform-origin: top left; border: none; pointer-events: none; }
+
         /* --- PROVA SOCIAL GOOGLE PAGESPEED --- */
-        .proof-card { background: var(--primary); color: white; border-radius: 16px; padding: 40px; margin: 60px 0; display: flex; align-items: center; gap: 40px; box-shadow: 0 20px 50px rgba(15, 23, 42, 0.15); }
+        .proof-card { background: var(--primary); color: white; border-radius: 16px; padding: 40px; margin: 40px 0 60px; display: flex; align-items: center; gap: 40px; box-shadow: 0 20px 50px rgba(15, 23, 42, 0.15); }
         .proof-score { flex-shrink: 0; width: 120px; height: 120px; border-radius: 50%; border: 8px solid var(--google-green); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: 900; color: var(--google-green); font-family: 'Montserrat', sans-serif; position: relative; }
         .proof-text { flex: 1; }
         .proof-text h4 { font-size: 1.4rem; font-weight: 800; margin-bottom: 10px; line-height: 1.2; }
@@ -108,7 +128,7 @@
         .btn-google svg { width: 18px; height: 18px; }
 
         /* --- CTA FORM BOTTOM --- */
-        .article-cta { max-width: 750px; margin: 60px auto 80px; background-color: var(--white); border: 1px solid rgba(15, 23, 42, 0.1); border-radius: 16px; padding: 50px; text-align: center; box-shadow: 0 20px 40px rgba(15, 23, 42, 0.05); }
+        .article-cta { max-width: 750px; margin: 0 auto 80px; background-color: var(--white); border: 1px solid rgba(15, 23, 42, 0.1); border-radius: 16px; padding: 50px; text-align: center; box-shadow: 0 20px 40px rgba(15, 23, 42, 0.05); }
         .article-cta h3 { font-size: 1.8rem; font-weight: 800; color: var(--primary); margin-bottom: 15px; margin-top: 0;}
         .article-cta p { font-size: 1.05rem; margin-bottom: 30px; color: var(--text-body); max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.6; }
         
@@ -152,8 +172,8 @@
         .copyright { color: var(--primary); opacity: 0.4; font-size: 0.9rem; font-weight: 500; margin: 0; }
 
         @media (max-width: 900px) {
-            .header-actions { display: none; } /* Esconde o menu normal */
-            .hamburger { display: block; }    /* Mostra o ícone sanduíche */
+            .header-actions { display: none; } 
+            .hamburger { display: block; }    
         }
 
         @media (max-width: 768px) {
@@ -206,52 +226,70 @@
         </a>
         <div class="article-meta-top">
             <span class="article-category">Engenharia Web</span>
-            <span class="article-date">Março 2024</span>
+            <span class="article-date">Nov 2023</span>
         </div>
-        <h1>O custo oculto do WordPress: Como a velocidade do seu site afeta o seu faturamento</h1>
-        <p class="article-subtitle">A ilusão do "template fácil" pode estar custando metade dos seus leads em anúncios e destruindo o seu ranqueamento orgânico no Google. Entenda a engenharia por trás do problema.</p>
+        <h1>Mobile-First não é "responsivo": É a sobrevivência do seu negócio digital</h1>
+        <p class="article-subtitle">Mais de 80% do tráfego hoje vem de smartphones. Entenda a diferença entre um site que apenas se espreme na tela e uma interface nativamente desenhada para o toque.</p>
     </div>
 
     <div class="article-featured-image">
-        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop" fetchpriority="high" alt="Engenharia Web e Velocidade de Site">
+        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=1200&auto=format&fit=crop" fetchpriority="high" alt="Pessoa utilizando smartphone">
     </div>
 
     <article class="article-content">
-        <p>Se você investe em tráfego pago (Google Ads ou Meta Ads), provavelmente já olhou para os seus relatórios e se perguntou: <em>"Por que tenho 1.000 cliques no anúncio, mas apenas 400 pessoas chegaram na minha Landing Page?"</em></p>
+        <p>Acesse o seu próprio site pelo celular agora. Tente clicar no botão principal usando apenas o seu polegar. Foi fácil? O botão está isolado ou você quase clicou em um link errado ao lado dele? A página carregou na mesma hora ou você ficou olhando para uma tela branca por 3 segundos?</p>
         
-        <p>A resposta na maioria das vezes não está no seu anúncio, e sim na engenharia — ou na falta dela — por trás do seu site. A internet atual não perdoa lentidão, e o principal vilão silencioso dessa história atende pelo nome de <strong>WordPress mal otimizado</strong>.</p>
+        <p>Se a resposta foi frustrante, saiba que é exatamente isso que os seus clientes estão passando todos os dias ao clicar nos seus anúncios de Instagram e Google.</p>
 
-        <h2>A matemática da lentidão</h2>
-        <p>Estudos da Amazon e do Google mostram um dado assustador: <strong>a cada 1 segundo extra no tempo de carregamento de uma página, a conversão cai em média 20%.</strong> Se o seu site demora 4 segundos para abrir em um 4G (o padrão do Brasil), você já perdeu quase metade do seu dinheiro investido em anúncios.</p>
+        <h2>A Mentira do "Design Responsivo"</h2>
+        <p>Quando você contrata um "criador de sites" convencional, ele desenha o seu projeto em um monitor gigante de computador. Só no final do processo, ele aperta um botão na ferramenta dele para "tornar o site responsivo". O que o software faz é simplesmente empilhar as caixas umas sobre as outras para caber na tela do celular.</p>
+
+        <p>O problema é que o contexto muda tudo. Um usuário no computador está sentado, confortável, usando um mouse preciso. O usuário do celular está na rua, segurando o aparelho com uma mão só, no meio de distrações e usando uma conexão móvel. O seu site empilhado não atende a esse cenário.</p>
 
         <blockquote>
-            "O visitante não tem paciência para ver a barra de carregamento do seu site girar. Se ele clicar no seu anúncio e a página ficar branca por 3 segundos, ele volta para o Google e clica no seu concorrente."
+            "Se o seu botão de compra exige que o usuário use as duas mãos ou dê zoom na tela, você não tem um site mobile; você tem um site desktop que encolheu."
         </blockquote>
 
-        <h2>Por que o WordPress de gaveta é uma bomba-relógio?</h2>
-        <p>O WordPress é uma ferramenta fantástica para blogs de notícias, mas quando usado por curiosos para construir Landing Pages de negócios, ele se torna um "Frankenstein" digital. O ciclo é sempre o mesmo:</p>
+        <h2>A Regra da "Zona do Polegar" (Thumb Zone)</h2>
+        <p>Na engenharia de Produto Web (a disciplina que aplicamos na VULCRA), nós não adaptamos para o celular: nós construímos <strong>a partir do celular</strong> (Mobile-First).</p>
 
-        <ul>
-            <li><strong>Excesso de Plugins:</strong> Um plugin para o formulário, outro para o botão de WhatsApp, outro para compressão de imagens. Cada plugin carrega scripts que o usuário tem que baixar no celular antes de ver sua página.</li>
-            <li><strong>Page Builders Pesados:</strong> Ferramentas como Elementor ou WPBakery escrevem um código HTML sujo e gigantesco. Para desenhar um simples botão, eles geram 20 linhas de código inútil.</li>
-            <li><strong>Banco de Dados Lento:</strong> Diferente de um site em HTML estático que entrega a tela instantaneamente, o WordPress precisa fazer dezenas de consultas ao banco de dados a cada visitante novo.</li>
-        </ul>
+        <p>Existe um conceito de UX chamado "Thumb Zone". É o mapeamento de onde o dedo polegar alcança naturalmente na tela do celular sem causar dor ou exigir que o usuário mude a pegada do aparelho. Os botões de ação mais importantes (o "Comprar", o "Fale no WhatsApp", o menu de navegação) devem estar estrategicamente posicionados nestas áreas seguras e ter tamanho suficiente para evitar o *fat-finger error* (o clique acidental).</p>
 
-        <h2>O que o Google realmente vê (Core Web Vitals)</h2>
-        <p>Em 2021, o Google atualizou seu algoritmo para penalizar sites lentos. Eles criaram o <strong>Core Web Vitals</strong>. Se o seu site não passar nesses testes de velocidade de renderização, duas coisas acontecem:</p>
-        <p>1. O seu site desaparece das buscas orgânicas gratuitas.<br>
-        2. O Google Ads cobra o seu clique mais caro, pois ele julga que a experiência do usuário na sua página é ruim.</p>
+        <h2>O Peso Inimigo: Velocidade no 3G/4G</h2>
+        <p>Outro erro clássico do site apenas "responsivo" é carregar a mesma imagem pesada (feita para monitores grandes) no celular, apenas escondendo-a via código. O resultado? O cliente esgota o plano de dados dele tentando abrir a sua Landing Page e desiste antes mesmo dela aparecer.</p>
 
-        <h2>A Engenharia Vulcra: O caminho High-End</h2>
-        <p>Empresas de alto faturamento não operam em templates de US$ 50 comprados prontos. Elas utilizam <strong>Engenharia Web nativa</strong>.</p>
-        
-        <p>Na Vulcra, nós abandonamos construtores visuais pesados. Nossas interfaces são escritas linha a linha em código limpo (HTML, CSS e JS puros) e hospedadas em CDNs globais. O resultado é o que você vê abaixo:</p>
+        <p>Em nossos projetos de engenharia, nós utilizamos carregamento condicional. Se o seu cliente acessar pelo iPhone, o nosso servidor entrega uma imagem 5x mais leve em frações de segundo. Isso não apenas aumenta a sua conversão, como é o principal fator de aprovação orgânica pelo algoritmo do Google.</p>
+
+        <h2>A Prova Real: Engenharia que perfoma em qualquer tela</h2>
+        <p>Não somos teóricos; nós construímos o que pregamos. O ecossistema da VULCRA foi projetado com código nativo e fluidez impecável para as duas realidades, sem abrir mão do design High-End.</p>
+
+        <div class="showcase-container">
+            
+            <div class="showcase-mobile">
+                <div class="notch"></div>
+                <iframe data-src="https://www.vulcra.com.br/" class="lazy-iframe" title="Visão Mobile Vulcra" scrolling="no"></iframe>
+                <div class="iframe-overlay"></div>
+            </div>
+
+            <div class="showcase-desktop">
+                <div class="showcase-browser-bar">
+                    <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+                </div>
+                <div class="iframe-box">
+                    <iframe data-src="https://www.vulcra.com.br/" class="lazy-iframe" title="Visão Desktop Vulcra" scrolling="no"></iframe>
+                    <div class="iframe-overlay"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <p>O resultado dessa infraestrutura limpa é que o Google interpreta o nosso site como um ambiente perfeito para o usuário. Essa é a diferença entre prometer resultado e entregar engenharia de ponta:</p>
 
         <div class="proof-card">
             <div class="proof-score">95+</div>
             <div class="proof-text">
-                <h4>Não acredite apenas em mim. Pergunte ao Google.</h4>
-                <p>Nossa arquitetura de código é auditada pela ferramenta oficial do Google (PageSpeed Insights), alcançando notas de excelência no Mobile que a maioria das agências não consegue entregar.</p>
+                <h4>Excelência técnica atestada pelo Google</h4>
+                <p>Nossa arquitetura de código é auditada pela ferramenta oficial do Google (PageSpeed Insights), alcançando notas de performance no Mobile que a maioria das plataformas prontas não consegue atingir.</p>
                 <a href="https://pagespeed.web.dev/analysis/https-www-vulcra-com-br/mfm7r9hupp?form_factor=mobile" target="_blank" rel="noopener noreferrer" class="btn-google" aria-label="Ver auditoria oficial do Google">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -264,16 +302,14 @@
             </div>
         </div>
 
-        <p>Se você vende serviços High-Ticket, a velocidade e a fluidez do seu site são o equivalente digital de uma recepção com ar-condicionado, café expresso e poltronas de couro. É o básico para cobrar o que você vale.</p>
-
     </article>
 
     <div class="article-cta" id="orcamento">
-        <h3>Pare de perder dinheiro para a tela branca</h3>
-        <p>Descubra como a engenharia da VULCRA pode acelerar as suas vendas reconstruindo a sua presença digital com tecnologia de ponta.</p>
+        <h3>Seu site trava no celular?</h3>
+        <p>Vamos reconstruir sua infraestrutura focando na tela que realmente traz o dinheiro: os smartphones. Solicite uma avaliação do seu projeto atual.</p>
         
         <form class="pricing-form" action="https://formsubmit.co/ajax/contato@vulcra.com.br" method="POST" id="form-orcamento" style="margin-top: 30px; text-align: left;">
-            <input type="hidden" name="_subject" value="🚀 NOVO LEAD VULCRA - Veio do Artigo de WordPress!">
+            <input type="hidden" name="_subject" value="🚀 NOVO LEAD VULCRA - Veio do Artigo Mobile-First!">
             <input type="text" name="_honey" style="display:none">
 
             <div class="input-group">
@@ -285,10 +321,9 @@
                 <label for="email" class="sr-only">Seu Melhor E-mail</label>
                 <input type="email" id="email" name="email" placeholder="Seu E-mail profissional" required>
             </div>
-            
+
             <div class="input-group">
                 <label class="sr-only">Expectativa de Investimento</label>
-                
                 <div class="custom-select-wrapper" id="custom-select-orcamento">
                     <div class="custom-select-trigger" id="select-trigger">
                         <span class="custom-select-value">Expectativa de Investimento</span>
@@ -307,10 +342,10 @@
 
             <div class="input-group">
                 <label for="mensagem" class="sr-only">Escreva sua mensagem</label>
-                <textarea id="mensagem" name="mensagem" placeholder="Descreva brevemente o seu projeto e a URL do seu site atual..." required></textarea>
+                <textarea id="mensagem" name="mensagem" placeholder="Qual o principal problema do seu site mobile hoje?" required></textarea>
             </div>
             
-            <button type="submit" class="btn-primary" id="btn-enviar" style="width: 100%; border-radius: 12px;">Solicitar Diagnóstico Gratuito</button>
+            <button type="submit" class="btn-primary" id="btn-enviar" style="width: 100%; border-radius: 12px;">Solicitar Diagnóstico Mobile</button>
         </form>
     </div>
 
@@ -330,6 +365,47 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            
+            // SCRIPT ALTA PERFORMANCE IFRAMES
+            var lazyIframes = document.querySelectorAll(".lazy-iframe");
+            if ("IntersectionObserver" in window) {
+                var iframeObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            var iframe = entry.target;
+                            iframe.src = iframe.getAttribute("data-src");
+                            iframe.classList.remove("lazy-iframe");
+                            iframeObserver.unobserve(iframe);
+                        }
+                    });
+                }, { rootMargin: "0px 0px 400px 0px" });
+
+                lazyIframes.forEach(function(iframe) {
+                    iframeObserver.observe(iframe);
+                });
+            } else {
+                lazyIframes.forEach(function(iframe) {
+                    iframe.src = iframe.getAttribute("data-src");
+                });
+            }
+
+            // SCRIPT DE ESCALA PERFEITA PARA O MOCKUP DESKTOP
+            const desktopBox = document.querySelector('.showcase-desktop .iframe-box');
+            const desktopIframe = desktopBox.querySelector('iframe');
+            
+            function scaleIframe() {
+                if(desktopBox && desktopIframe) {
+                    const boxWidth = desktopBox.clientWidth;
+                    // A proporção mágica: divide o tamanho atual da caixa pelo tamanho real do site (1280)
+                    const scale = boxWidth / 1280;
+                    desktopIframe.style.transform = `scale(${scale})`;
+                }
+            }
+            
+            window.addEventListener('resize', scaleIframe);
+            // Um pequeno delay garante que a caixa já foi renderizada para medir o tamanho certo
+            setTimeout(scaleIframe, 100); 
+
             // SCRIPT DA CAIXA DE SELEÇÃO CUSTOMIZADA
             const selectWrapper = document.getElementById('custom-select-orcamento');
             const selectTrigger = document.getElementById('select-trigger');
@@ -366,7 +442,7 @@
                 }
             });
 
-            // SCRIPT DE ENVIO
+            // SCRIPT DE ENVIO DO FORMULÁRIO
             document.getElementById("form-orcamento").addEventListener("submit", function(e) {
                 e.preventDefault();
                 var form = this;
@@ -394,7 +470,7 @@
                 }).then(response => response.json())
                   .then(data => {
                       if(data.success) {
-                          btn.innerText = "Diagnóstico solicitado com sucesso! ✓";
+                          btn.innerText = "Solicitação enviada com sucesso! ✓";
                           btn.style.backgroundColor = "#10B981"; 
                           btn.style.opacity = "1";
                           
@@ -417,8 +493,11 @@
                       btn.style.backgroundColor = "#EF4444";
                   });
             });
+        });
+    </script>
 
-            // SCRIPT MENU MOBILE (SANDUÍCHE ESTILOSO VULCRA)
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
             const hamburger = document.getElementById('hamburger');
             const mobileNav = document.getElementById('mobile-nav');
             const mobLinks = mobileNav.querySelectorAll('a');

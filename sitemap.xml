@@ -1,64 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.vulcra.com.br/index.html</loc>
+    <loc>https://www.vulcra.com.br/</loc>
     <priority>1.00</priority>
   </url>
   <url>
-    <loc>https://www.vulcra.com.br/portfolio.html</loc>
+    <loc>https://www.vulcra.com.br/portfolio</loc>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.vulcra.com.br/journal.html</loc>
+    <loc>https://www.vulcra.com.br/journal</loc>
     <priority>0.80</priority>
   </url>
 
   <url>
-    <loc>https://www.vulcra.com.br/artigo-velocidade.html</loc>
+    <loc>https://www.vulcra.com.br/artigo-velocidade</loc>
     <priority>0.64</priority>
   </url>
   <url>
-    <loc>https://www.vulcra.com.br/artigo-cursos.html</loc>
+    <loc>https://www.vulcra.com.br/artigo-cursos</loc>
     <priority>0.64</priority>
   </url>
   <url>
-    <loc>https://www.vulcra.com.br/artigo-arquitetura.html</loc>
+    <loc>https://www.vulcra.com.br/artigo-arquitetura</loc>
     <priority>0.64</priority>
   </url>
   <url>
-    <loc>https://www.vulcra.com.br/artigo-investimentos.html</loc>
+    <loc>https://www.vulcra.com.br/artigo-investimentos</loc>
     <priority>0.64</priority>
   </url>
   <url>
-    <loc>https://www.vulcra.com.br/artigo-psicologia.html</loc>
+    <loc>https://www.vulcra.com.br/artigo-psicologia</loc>
     <priority>0.64</priority>
   </url>
   <url>
-    <loc>https://www.vulcra.com.br/artigo-templates.html</loc>
+    <loc>https://www.vulcra.com.br/artigo-templates</loc>
     <priority>0.64</priority>
   </url>
   <url>
-    <loc>https://www.vulcra.com.br/artigo-b2b.html</loc>
+    <loc>https://www.vulcra.com.br/artigo-b2b</loc>
     <priority>0.64</priority>
   </url>
   <url>
-    <loc>https://www.vulcra.com.br/artigo-mobile.html</loc>
+    <loc>https://www.vulcra.com.br/artigo-mobile</loc>
     <priority>0.64</priority>
   </url>
   <url>
-    <loc>https://www.vulcra.com.br/artigo-autoridade.html</loc>
+    <loc>https://www.vulcra.com.br/artigo-autoridade</loc>
     <priority>0.64</priority>
   </url>
   <url>
-    <loc>https://www.vulcra.com.br/artigo-produto.html</loc>
+    <loc>https://www.vulcra.com.br/artigo-produto</loc>
     <priority>0.64</priority>
   </url>
   <url>
-    <loc>https://www.vulcra.com.br/artigo-vitals.html</loc>
+    <loc>https://www.vulcra.com.br/artigo-vitals</loc>
     <priority>0.64</priority>
   </url>
   <url>
-    <loc>https://www.vulcra.com.br/artigo-jornada.html</loc>
+    <loc>https://www.vulcra.com.br/artigo-jornada</loc>
     <priority>0.64</priority>
   </url>
 </urlset>
